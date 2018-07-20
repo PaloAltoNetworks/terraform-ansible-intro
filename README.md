@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+# Terraform / Ansible Introductory Course
 
-You can use the [editor on GitHub](https://github.com/PaloAltoNetworks/terraform-ansible-intro/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Welcome to this introductory course covering Terraform and Ansible basics.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Goals
 
-### Markdown
+* Learn the basics of Terraform
+* Learn how to use the [panos](https://www.terraform.io/docs/providers/panos/index.html) Terraform provider
+* Learn the basics of Ansible
+* Learn how to use the [ansible modules](http://panwansible.readthedocs.io/en/latest/)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Navigation
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/PaloAltoNetworks/terraform-ansible-intro/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+1. [Introduction](docs/intro.md)
+1. [Setup](docs/setup.md)
+  * [Google Cloud Platform CLI](docs/gcp-cli-setup.md)
+1. Terraform
+  1. [Overview and Terminology](docs/terraform-basics.md)
+1. Ansible
+  1. [Overview and Terminology](docs/ansible-basics.md)
