@@ -124,7 +124,7 @@ resource "panos_zone" "zone1" {
   attributes can be (default is string), and can also be configured to have
   default values.  When using a user variable in your plan files, they are
   referenced with `var` as a prefix: `"${var.hostname}"`.  Terraform looks for
-  variable values in the file `terraform.tfvars`.
+  local variable values in the file `terraform.tfvars`.
   
   Attribute variables are variables that reference other resources or data
   sources within the same plan.  Specifying a resource attribute using an

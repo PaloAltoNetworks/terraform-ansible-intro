@@ -117,10 +117,10 @@ parts of this below.
   execute, and then an indented list of the values you want to pass in to
   that module.
   
-  Knowing what you know about tasks, let’s take a look at that "include_vars"
+  Knowing what you know about tasks, let’s take a look at that "include\_vars"
   task.  At this point, knowing what the format of tasks is, you can now
-  identify "include_vars" as a module invocation (documentation for
-  "include_vars" is
+  identify "include\_vars" as a module invocation (documentation for
+  "include\_vars" is
   [here](https://docs.ansible.com/ansible/latest/modules/include_vars_module.html)). 
   
   So what’s that `no_log` part?  This is simply to keep the authentication
