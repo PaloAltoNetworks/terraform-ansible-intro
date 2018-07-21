@@ -5,8 +5,9 @@
 * Company: [RedHat](https://www.ansible.com/)
 * Integration FCS: January 2015
 * Configuration: YAML (Yet Another Markup Language)
-* Implementation Language: python
+* [Documentation](http://panwansible.readthedocs.io/en/latest/)
 * [GitHub Repo](https://github.com/PaloAltoNetworks/ansible-pan)
+* Implementation Language: python
 
 
 ## Ansible Configuration Overview

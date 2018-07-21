@@ -5,8 +5,9 @@
 * Company:  [HashiCorp](https://www.hashicorp.com/)
 * Integration FCS: January 2018
 * Configuration: HCL (HashiCorp Configuration Language)
-* Implementation Language: golang
+* [Documentation](https://www.terraform.io/docs/providers/panos/index.html)
 * [GitHub Repo](https://github.com/terraform-providers/terraform-provider-panos)
+* Implementation Language: golang
 
 
 ## Terraform Configuration Overview
