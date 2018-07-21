@@ -1,21 +1,21 @@
 # Terraform Lab
 
-Now that you've going through the [guided example](example-terraform.md),
+Now that you've gone through the [guided example](example-terraform.md),
 you're ready to put your Terraform knowledge to use.
+
+[Here is the documentation](https://www.terraform.io/docs/providers/panos/index.html)
+for the provider.
 
 Add the following config to your Terraform plan.  As Terraform concatenates
 all Terraform files together, you can either place additional config in
 new files within the same directory or put everyting in the same file, it
 doesn't matter.
 
-[Here is the documentation](https://www.terraform.io/docs/providers/panos/index.html)
-for the provider.
-
-* the following address object:
+* Add the following address object:
   
   ![Wordpress Server address object](../pics/wordpress.png)
   
-* the following security rules:
+* Add the following security rules:
   
   ![security policy](../pics/security-policy.png)
   
@@ -31,6 +31,12 @@ for the provider.
   
   **Note**:  there are multiple resources you can use to accomplish this,
   feel free to use whichever resource you want to use.
+
+
+## Cleanup
+
+Once you're done, make sure to perform `terraform destroy` to remove the
+config in preparation for the Ansible lab.
 
 
 ## Solutions

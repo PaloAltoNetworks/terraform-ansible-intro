@@ -189,6 +189,9 @@ resource "panos_zone" "ext" {
 }
 ```
 
+
+## Putting It All Together
+
 Your final, full plan file should look something like this:
 
 ```hcl
