@@ -105,8 +105,8 @@ imported for us to set the required authentication credential parameters:
 ```yml
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ "{{" }} ip_address {{ "}}" }}'
-      username: '{{ "{{" }} username {{ }}" }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
       password: '{{ "{{" }} password {{ "}} }}'
 ```
 
