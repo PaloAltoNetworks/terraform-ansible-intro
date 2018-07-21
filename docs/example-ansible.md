@@ -96,7 +96,7 @@ the `panos_interface` module, and we'll use the name "Configure eth1/1:
 
 ```yml
   - name: "Configure eth1/1"
-  panos_interface:
+    panos_interface:
 ```
 
 Next up, let's include the authentication credentials the `include_vars` task
@@ -105,7 +105,7 @@ imported for us to set the required authentication credential parameters:
 ```yml
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ ip_address }}'
+      ip_address: '\{\{ ip_address \}\}'
       username: '{{ username }}'
       password: '{{ password }}'
 ```
