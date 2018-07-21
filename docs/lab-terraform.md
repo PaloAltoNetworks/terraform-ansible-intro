@@ -15,8 +15,6 @@ for the provider.
   
   ![Wordpress Server address object](../pics/wordpress.png)
   
-  * [Address object solution](ao-terraform.md)
-  
 * the following security rules:
   
   ![security policy](../pics/security-policy.png)
@@ -33,5 +31,9 @@ for the provider.
   
   **Note**:  there are multiple resources you can use to accomplish this,
   feel free to use whichever resource you want to use.
-  
-  * [Security rules solution](sp-terraform.md)
+
+
+## Solutions
+
+* [Address object](ao-terraform.md)
+* [Security rules solution](sp-terraform.md)
