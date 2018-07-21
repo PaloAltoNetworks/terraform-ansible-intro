@@ -14,9 +14,9 @@
 
   - name: "Add first security rule"
     panos_security_rule:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       operation: 'add'
       rule_name: 'Wordpress Traffic'
       source_zone: ['L3-untrust']
@@ -28,9 +28,9 @@
 
   - name: "Add second security rule"
     panos_security_rule:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       operation: 'add'
       rule_name: 'Outbound'
       source_zone: ['L3-trust']
@@ -40,9 +40,9 @@
 
   - name: "Add final security rule"
     panos_security_rule:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'

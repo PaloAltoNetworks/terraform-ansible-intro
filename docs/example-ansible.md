@@ -115,9 +115,9 @@ Next, we want to configure ethernet1/1, so let's specify that next:
 ```yml
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/1'
 ```
 
@@ -131,9 +131,9 @@ default is `False`, so let's enable that:
 ```yml
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/1'
       create_default_route: true
 ```
@@ -148,9 +148,9 @@ so let's add these two in to our config:
 ```yml
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
@@ -174,9 +174,9 @@ When you're done, it should look something like this:
 ```yml
   - name: "Configure eth1/2"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
       commit: False
@@ -202,9 +202,9 @@ Your final playbook should look something like this:
 
   - name: "Configure eth1/1"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
@@ -212,9 +212,9 @@ Your final playbook should look something like this:
 
   - name: "Configure eth1/2"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
       commit: False

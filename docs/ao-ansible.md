@@ -14,9 +14,9 @@
 
   - name: "Add address object for wordpress server"
     panos_object:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       operation: 'add'
       addressobject: 'wordpress server'
       address: '10.1.23.45'
