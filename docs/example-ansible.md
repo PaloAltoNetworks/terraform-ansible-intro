@@ -106,8 +106,8 @@ imported for us to set the required authentication credential parameters:
   - name: "Configure eth1/1"
     panos_interface:
       ip_address: '{{ "{{" }} ip_address {{ "}}" }}'
-      username: '{{ "{{" }} username {{ "}}" }}'
-      password: '{{ "{{" }} password {{ "}}" }}'
+      username: '{{ "{{" }} username {{ }}" }}'
+      password: '{{ "{{" }} password {{ "}} }}'
 ```
 
 Next, we want to configure ethernet1/1, so let's specify that next:
