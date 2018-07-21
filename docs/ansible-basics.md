@@ -63,18 +63,18 @@ parts of this below.
 
   - name: "Add interface management profile"
     panos_management_profile:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       name: 'allow ssh'
       ssh: true
       commit: false
 
   - name: "Configure eth1/1 and put it in zone L3-in"
     panos_interface:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: '{{ "{{" }} ip_address {{ "}} }}'
+      username: '{{ "{{" }} username {{ "}} }}'
+      password: '{{ "{{" }} password {{ "}} }}'
       if_name: 'ethernet1/1'
       zone_name: 'L3-in'
       commit: false
