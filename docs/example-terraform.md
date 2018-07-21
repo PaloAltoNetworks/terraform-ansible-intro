@@ -8,8 +8,6 @@ Create the following:
 * ethernet1/1 as DHCP in a zone named "L3-trust"
 * ethernet1/2 as DHCP in a zone named "L3-untrust"
 
-## Documentation
-
 
 ## Basic Config
 
@@ -133,7 +131,7 @@ documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interfac
 we don't see any mention of how to put these interfaces into zones.  However,
 there is a
 [zone resource](https://www.terraform.io/docs/providers/panos/r/zone.html),
-so go there now and take a second to read the documentation.
+so go there now and take a few minutes to read the documentation.
 
 After reading over the documentation, we now know that the zone will be
 referencing the interface, not the other way around.  So let's build our config
