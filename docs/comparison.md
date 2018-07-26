@@ -11,7 +11,7 @@ Both tools have a certain reputation associated with them.  Terraform is known
 more for its power in deployment, while Ansible is known more for its
 flexibility in configuration.  Both products can do both jobs just fine.
 
-Besides their reputations, the most important part is that Palo Alto Networks
+Regardless of their reputations, the most important part is that Palo Alto Networks
 has integrations with both, and either way will get the job done.  It's
 just a matter of preference.
 
@@ -39,11 +39,11 @@ directly from them.  There is also a dedicated Ansible module that just does
 commits, containing support for both the firewall and Panorama.  
 
 So how do you perform commits with Terraform?  Currently, there is no support
-for commits inside the Terraform ecosystem, and they have to be handled 
+for commits inside the Terraform ecosystem, so they have to be handled 
 externally.  Lack of finalizers are
 [a known shortcoming](https://github.com/hashicorp/terraform/issues/6258)
 for Terraform and, once it is addressed, support for it can be added to the
-provider.  In the mean time, if we provide
+provider.  In the mean time, we provide
 [a golang script](https://www.terraform.io/docs/providers/panos/index.html#commits)
 you can use to fill the gap.
 
