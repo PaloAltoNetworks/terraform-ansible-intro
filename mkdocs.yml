@@ -1,0 +1,13 @@
+site_name: SKO19 Terraform & Ansible Intro
+pages:
+  - 'index.md'
+  - Terraform Lab:
+      - Background: 'terraform-background.md'
+      - Lab Activities: 'terraform-lab.md'
+  - Ansible Lab:
+      - Background: 'ansible-background.md'
+      - Lab Activities: 'ansible-lab.md'
+  - 'comparison.md'
+theme:
+    name: null
+    custom_dir: 'rtd'
