@@ -1,4 +1,4 @@
-site_name: SKO2019 Automation Lab
+site_name: SKO19 Terraform & Ansible Intro
 pages:
   - 'index.md'
   - Terraform Lab:
