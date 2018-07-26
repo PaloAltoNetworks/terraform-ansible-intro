@@ -1,4 +1,6 @@
-# Terraform At a Glance
+# Terraform Background
+
+## Terraform At a Glance
 
 * Company:  [HashiCorp](https://www.hashicorp.com/)
 * Integration FCS: January 2018
@@ -7,16 +9,16 @@
 * [GitHub Repo](https://github.com/terraform-providers/terraform-provider-panos)
 * Implementation Language: golang
 
-# Terraform Configuration Overview
+## Configuration Overview
 
-## Many Files, One Configuration
+### Many Files, One Configuration
 
 Terraform allows you to split your configuration into as many files as you
 wish.  Any Terraform file in the current working directory will be loaded and
 concatenated with the others when you tell Terraform to apply your desired
 configuration.
 
-## Local State
+### Local State
 
 Terraform saves the things it has done to a local file, referred to as a
 "state file".  Because state is saved locally, that means that sometimes the
@@ -73,12 +75,12 @@ resource "panos_zone" "zone1" {
 
 ## Terminology
 
-<h3>Plan</h3>
+### Plan
 
 A Terraform **plan** is the sum of all Terraform configuration files
 in a given directory.  These files are generally written in *HCL*.
 
-<h3>Provider</h3>
+### Provider
 
 A **provider** can loosely thought of to be a product (such as the Palo Alto 
 Networks firewall) or a service (such as AWS, Azure, or GCP).  The provider 
@@ -93,7 +95,7 @@ Providers are configured in a provider configuration block (e.g. -
 `provider "panos" {...}`, and a plan can make use of any number of providers,
 all working together.
 
-<h3>Resource</h3>
+### Resource
 
 A **resource** is an individual component that a provider supports 
 create/read/update/delete operations for.
@@ -101,7 +103,7 @@ create/read/update/delete operations for.
 For the Palo Alto Networks firewall, this would be something like
 an ethernet interface, service object, or an interface management profile.
 
-<h3>Data Source</h3>
+### Data Source
 
 A **data source** is like a resource, but read-only.
 
@@ -109,7 +111,7 @@ For example, the `panos` provider has
 [a data source](https://www.terraform.io/docs/providers/panos/d/system_info.html)
 that gives you access to the results of `show system info`.
 
-<h3>Attribute</h3>
+### Attribute
 
 An **attribute** is a single parameter that exists in either a resource or a 
 data source.  Individual attributes are specific to the resource itself, as to 
@@ -124,7 +126,7 @@ Attributes can have a few different types:
 * *Boolean*: `true`, `false`
 * *Map*: `{"key": "value"}` (**Note**: some maps may have more complex values)
 
-<h3>Variables</h3>
+### Variables
 
 Terraform plans can have *variables* to allow for more flexibility.  These 
 variables come in two flavors:  user variables and attribute variables.  
@@ -151,7 +153,6 @@ adding the universal parameter "depends\_on" within the dependent
 resource.  The second way, using attribute variables, is performed by
 referencing a resource or data source attribute as a variable:
 `"${panos_management_profile.ssh.name}"`
-
 
 ## Common Commands
 

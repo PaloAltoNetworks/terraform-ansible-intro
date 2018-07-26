@@ -1,15 +1,15 @@
-<h1>Terraform Lab Activities</h1>
+# Terraform Lab Activities
 
 ## Task 1 - Basic Networking Config
 
 Create a new empty directory called `terraform-lab` to work in.  We'll use it
 for all of our Terraform files.
 
-Open a text editor like **vim**, **emacs**, or **nano** and create the file 
+Open a text editor like **vim**, **emacs**, or **nano** and create the file
 `sko2019.tf`.  We will place our Terraform plan in here.
 
 Start by defining the provider config, which will use the `panos` provider.
-Replace the IP address used in **hostname** with the address of your lab 
+Replace the IP address used in **hostname** with the address of your lab
 firewall, and change the **username** and **password** fields to the values
 you have used.
 
@@ -21,7 +21,7 @@ provider "panos" {
 }
 ```
 
-<h3>Network Interfaces</h3>
+### Network Interfaces
 
 Next, create the interfaces.  Here are screenshots of the interfaces we need to
 create:
@@ -30,7 +30,7 @@ create:
 
 ![ethernet1/2](img/eth2.png)
 
-Add the following configuration to `sko2019.tf`.  Note that the **ethernet1/2** 
+Add the following configuration to `sko2019.tf`.  Note that the **ethernet1/2**
 interface omits the option to create the default route via DHCP.
 
 ```hcl
@@ -50,13 +50,13 @@ resource "panos_ethernet_interface" "eth2" {
 }
 ```
 
-Refer to the [provider 
-documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html) 
+Refer to the [provider
+documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html)
 for ethernet interfaces for more info if you need.
 
-<h3>Zones</h3>
+### Zones
 
-Next, create zones for the interfaces we just added.  Here are screenshots of 
+Next, create zones for the interfaces we just added.  Here are screenshots of
 the zones we need to create:
 
 ![L3-trust](img/l3-trust.png)
@@ -81,11 +81,11 @@ resource "panos_zone" "ext" {
 }
 ```
 
-Refer to the [provider 
+Refer to the [provider
 documentation](https://www.terraform.io/docs/providers/panos/r/zone.html) for
 zones if you need.
 
-<h3>Apply the Terraform Plan</h3>
+### Apply the Terraform Plan
 
 Your final, full `sko2019.tf` file should look something like this:
 
@@ -124,8 +124,8 @@ resource "panos_zone" "ext" {
 }
 ```
 
-Let's apply the config to our firewall.  You need to run `terraform init` first 
-to download all the providers we need, and then check your config with 
+Let's apply the config to our firewall.  You need to run `terraform init` first
+to download all the providers we need, and then check your config with
 `terraform plan`:
 
 ```bash
@@ -143,6 +143,8 @@ Log in to the GUI of your firewall and verify that the configuration matches
 what you want.  Note that because of the way Terraform currently functions, the
 changes have only been made to the candidate configuration and have **not**
 been committed.
+
+---
 
 ## Task 2 - Objects and Security Rule Creation
 
@@ -162,8 +164,8 @@ resource "panos_address_object" "wp" {
 }
 ```
 
-Refer to the [provider 
-documentation](https://www.terraform.io/docs/providers/panos/r/address_object.html) 
+Refer to the [provider
+documentation](https://www.terraform.io/docs/providers/panos/r/address_object.html)
 for address objects if you need.
 
 Now, here is a screenshot of security rules that we need to create:
@@ -171,7 +173,7 @@ Now, here is a screenshot of security rules that we need to create:
 ![Security Policy](img/security-policy.png)
 
 Add the following to `sko2019.tf`.  Just like with the networking config, zones
-and objects are referenced by name, so that Terraform knows they need to be 
+and objects are referenced by name, so that Terraform knows they need to be
 created before our security rules.
 
 ```hcl
@@ -218,7 +220,9 @@ resource "panos_security_rule_group" "policy" {
 }
 ```
 
-Let's apply the config to our firewall.  We don't need to run `terraform init` 
+### Apply the Terraform Plan
+
+Let's apply the config to our firewall.  We don't need to run `terraform init`
 again, so just check your config with `terraform plan`:
 
 ```bash
@@ -232,8 +236,10 @@ $ terraform apply
 ```
 
 Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Again, the changes have only been made to the candidate 
+what you want.  Again, the changes have only been made to the candidate
 configuration and have **not** been committed.
+
+---
 
 ## Task 3 - Cleanup
 

@@ -1,4 +1,6 @@
-# Ansible At a Glance
+# Ansible Background
+
+## Ansible At a Glance
 
 * Company: [RedHat](https://www.ansible.com/)
 * Integration FCS: January 2015
@@ -8,7 +10,7 @@
 * Implementation Language: python
 
 
-## Ansible Configuration Overview
+## Configuration Overview
 
 ### Playbooks
 
@@ -36,7 +38,6 @@ module is probably the best example of this to date, as it not only creates
 interfaces, but can also create zones, place the interface into that zone,
 then finally put the interface into a virtual router.  That same workflow in
 Terraform would require three separate resources using dependencies.
-
 
 ## Example Ansible Configuration
 
@@ -76,10 +77,9 @@ parts of this below.
       commit: false
 ```
 
-
 ## Terminology
 
-<h3>Hosts</h3>
+### Hosts
 
 Ansible executes actions against an inventory.  If you’re going to run Ansible 
 in production, you’ll probably want to use the inventory file to organize your 
@@ -91,14 +91,14 @@ use variables instead.
 If you desire, you can read more about Ansible inventory
 [here](http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
 
-<h3>Connection</h3>
+### Connection
 
 Typically Ansible will ssh to a remote machine and perform commands as the 
 specified user account.  However, we don't want this for the Palo Alto Networks 
 Ansible modules, as the modules connect to our API.  Thus this should be set to 
 "local" as we want Ansible to initiate the connection locally.
 
-<h3>Gather Facts</h3>
+### Gather Facts
 
 Ansible facts are just information about remote nodes.  In our case, we aren’t 
 going to use facts for anything, so we’re disabling them to ensure that our 
@@ -108,7 +108,7 @@ disabled in production).
 If you want to read more about facts, you can find that info
 [here](https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html#term-facts).
 
-<h3>Roles</h3>
+### Roles
 
 Let’s discuss the "PaloAltoNetworks.paloaltonetworks" role that our playbook 
 is using.  Ansible comes with various Palo Alto Networks packages when you 
@@ -119,7 +119,7 @@ our playbook means that Ansible will use the role’s code (the newest released
 code) for the Ansible plays instead of the older code that's merged upstream 
 with Ansible.
 
-<h3>Tasks</h3>
+### Tasks
 
 Each playbook contains a list of tasks to perform.  These are executed in 
 order, one at a time against the inventory.  Each task will have a "name", 

@@ -1,4 +1,4 @@
-<h1>Ansible Lab Activities</h1>
+# Ansible Lab Activities
 
 ## Task 1 - Lab Setup
 
@@ -11,13 +11,15 @@ Then, install the Palo Alto Networks Ansible Galaxy role:
 $ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 ```
 
+---
+
 ## Task 2 - Basic Network Config
 
 Open a text editor like **vim**, **emacs**, or **nano** and create the file
-`inventory`.  This file contains a list of hosts that Ansible will communicate 
+`inventory`.  This file contains a list of hosts that Ansible will communicate
 with during execution.
 
-Add the following to the file `inventory`, **replacing** the IP address with 
+Add the following to the file `inventory`, **replacing** the IP address with
 the address of your lab firewall.
 
 ```yml
@@ -25,8 +27,8 @@ the address of your lab firewall.
 127.0.0.1
 ```
 
-Next, create the file `fw_creds.yml`.  Replace the IP address used in 
-**ip_address** with the address of your lab  firewall, and change the 
+Next, create the file `fw_creds.yml`.  Replace the IP address used in
+**ip_address** with the address of your lab  firewall, and change the
 **username** and **password** fields to the values you have used.
 
 ```yml
@@ -35,10 +37,10 @@ username: 'admin'
 password: 'admin'
 ```
 
-Now, create the file `network.yml`.  This will be the playbook that holds the 
+Now, create the file `network.yml`.  This will be the playbook that holds the
 low level networking config for our firewall.
 
-Each playbook needs the following header information to pull in the variables 
+Each playbook needs the following header information to pull in the variables
 we just defined.  Add the following to `network.yml`:
 
 ```yml
@@ -56,10 +58,10 @@ we just defined.  Add the following to `network.yml`:
     no_log: 'yes'
 ```
 
-<h3>Network Interfaces & Zones</h3>
+### Network Interfaces & Zones
 
 We're going to create the exact same configuration with Ansible as we did with
-Terraform.  Here are screenshots of the network interfaces and zones we need to 
+Terraform.  Here are screenshots of the network interfaces and zones we need to
 create:
 
 ![eth1/1](img/eth1.png)
@@ -98,16 +100,16 @@ Add the following to `network.yml`:
       commit: False
 ```
 
-Refer to the [module 
+Refer to the [module
 documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html)
 for ethernet interfaces if you need.
 
 Note that Ansible is a little different from Terraform.  We have to specify the
-**ip_address**, **username**, and **password** each time because each module 
+**ip_address**, **username**, and **password** each time because each module
 executes independently.  Also, we don't have to create the zones as a separate
 step because they will be created for us if they don't exist.
 
-<h3>Run the Playbook</h3>
+### Run the Playbook
 
 Your final, full `network.yml` playbook should look like this:
 
@@ -152,18 +154,20 @@ $ ansible-playbook -i inventory network.yml
 ```
 
 Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Because we specified `commit: False` for each module call in 
-our playbook, the changes have only been made to the candidate configuration 
+what you want.  Because we specified `commit: False` for each module call in
+our playbook, the changes have only been made to the candidate configuration
 and have **not** been committed.
 
-If you get errors, indentation is most likely the problem.  Once you fix any 
-errors, run the playbook again and the firewall should now have your desired 
+If you get errors, indentation is most likely the problem.  Once you fix any
+errors, run the playbook again and the firewall should now have your desired
 config.
+
+---
 
 ## Task 3 - Objects and Security Rule Creation
 
-Now we will create the same address object and security rules as in the 
-Terraform portion.  Create a new file `rules.yml`, and copy in the header 
+Now we will create the same address object and security rules as in the
+Terraform portion.  Create a new file `rules.yml`, and copy in the header
 information from the network config steps:
 
 ```yml
@@ -200,7 +204,7 @@ Add the following to `rules.yml`:
       commit: false
 ```
 
-Refer to the [module 
+Refer to the [module
 documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_object_module.html)
 for address objects if you need.
 
@@ -248,7 +252,7 @@ Add the following to `rules.yml`:
       commit: false
 ```
 
-<h3>Run the Playbook</h3>
+### Run the Playbook
 
 Your final, full `rules.yml` playbook should look like this:
 

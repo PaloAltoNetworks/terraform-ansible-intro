@@ -1,10 +1,9 @@
-# Comparing The Two
+# Comparing Terraform and Ansible
 
 At this point, you've now used both Ansible and Terraform to configure a
 Palo Alto Networks firewall.  Though you've used these two tools to deploy
 the same configuration, they differ in some important ways.  Let's discuss
 some of those differences now.
-
 
 ## Reputation
 
@@ -16,8 +15,7 @@ Besides their reputations, the most important part is that Palo Alto Networks
 has integrations with both, and either way will get the job done.  It's
 just a matter of preference.
 
-
-## Idempotency
+## Idempotence
 
 The concept of idempotent operations (in a web server context) means that
 the success of the request is not linked to how many times it is
@@ -32,7 +30,6 @@ configured like Y."
 
 Having said all this, adding idempotent behavior to the Ansible modules will
 get added to the Palo Alto Networks modules in the future.
-
 
 ## Commits
 
@@ -51,14 +48,13 @@ provider.  In the mean time, if you’re using CLI Terraform, then we provide
 [a golang script](https://www.terraform.io/docs/providers/panos/index.html#commits)
 that you can use to fill the gap.
 
-
 ## Operational Commands
 
-Ansible currently has a "panos\_op" module allows users to run arbitrary
+Ansible currently has a *panos\_op* module allows users to run arbitrary
 operational commands.  An operational command could be something that just
-shows some part of the configuration, but it can also change configuration. 
+shows some part of the configuration, but it can also change configuration.
 Since Ansible doesn't store state, it doesn't care what the invocation of
-the "panos\_op" module results in.
+the *panos\_op* module results in.
 
 This is a different story in Terraform.  The basic flow of Terraform is that
 there is a read operation that determines if a create, update, or delete needs
@@ -68,13 +64,13 @@ operational command makes a configuration change, and should only be executed
 once?  This uncertainty is why support for operational commands in Terraform
 is not currently in place.
 
-
 ## Facts / Data Sources
 
 Terraform may not have support for arbitrary operational commands, but it does
-have a data source right now that you can retrieve specific parts of `show
-system info` from the firewall / Panorama and then use that in your plan file.
+have a data source right now that you can retrieve specific parts of
+`show system info` from the firewall or Panorama and then use that in your
+plan file.
 
 This same thing is called "facts" in Ansible.  Some of our Ansible modules have
 support for an additional operation, `find`, that acts in some ways like this,
-but support for this is still being investigated / developed.
+but support for this is still being investigated or developed.

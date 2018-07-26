@@ -1,11 +1,13 @@
 site_name: SKO2019 Automation Lab
 pages:
-  - Introduction & Setup: 'index.md'
+  - 'index.md'
   - Terraform Lab:
       - Background: 'terraform-background.md'
       - Lab Activities: 'terraform-lab.md'
   - Ansible Lab:
       - Background: 'ansible-background.md'
       - Lab Activities: 'ansible-lab.md'
-  - Comparison of Terraform and Ansible: 'comparison.md'
-theme: readthedocs
+  - 'comparison.md'
+theme:
+    name: null
+    custom_dir: 'rtd'
