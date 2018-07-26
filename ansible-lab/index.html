@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Activities - SKO19 Terraform & Ansible Intro</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Activities";
+    var mkdocs_page_input_path = "ansible-lab.md";
+    var mkdocs_page_url = "/ansible-lab/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> SKO19 Terraform & Ansible Intro</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">SKO19 Terraform & Ansible Intro</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Terraform Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../terraform-background/">Background</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../terraform-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Ansible Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ansible-background/">Background</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Lab Activities</a>
+    <ul class="subnav">
+            
+
+
+    
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#task-1-lab-setup">Task 1 - Lab Setup</a></li>
+        
+            <li><a class="toctree-l4" href="#task-2-basic-network-config">Task 2 - Basic Network Config</a></li>
+        
+            <li><a class="toctree-l4" href="#task-3-objects-and-security-rule-creation">Task 3 - Objects and Security Rule Creation</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Comparison</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">SKO19 Terraform & Ansible Intro</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Ansible Lab &raquo;</li>
+        
+      
+    
+    <li>Lab Activities</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="ansible-lab-activities">Ansible Lab Activities</h1>
+<h2 id="task-1-lab-setup">Task 1 - Lab Setup</h2>
+<p>Create a new empty directory called <code>ansible-lab</code> to work in.  We'll use it for
+all of our Ansible files.</p>
+<p>Then, install the Palo Alto Networks Ansible Galaxy role:</p>
+<pre><code class="bash">$ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
+</code></pre>
+
+<hr />
+<h2 id="task-2-basic-network-config">Task 2 - Basic Network Config</h2>
+<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file
+<code>inventory</code>.  This file contains a list of hosts that Ansible will communicate
+with during execution.</p>
+<p>Add the following to the file <code>inventory</code>, <strong>replacing</strong> the IP address with
+the address of your lab firewall.</p>
+<pre><code class="yml">[fw]
+127.0.0.1
+</code></pre>
+
+<p>Next, create the file <code>fw_creds.yml</code>.  Replace the IP address used in
+<strong>ip_address</strong> with the address of your lab  firewall, and change the
+<strong>username</strong> and <strong>password</strong> fields to the values you have used.</p>
+<pre><code class="yml">ip_address: '127.0.0.1'
+username: 'admin'
+password: 'admin'
+</code></pre>
+
+<p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the
+low level networking config for our firewall.</p>
+<p>Each playbook needs the following header information to pull in the variables
+we just defined.  Add the following to <code>network.yml</code>:</p>
+<pre><code class="yml">- name: SKO2019 Ansible Playbook
+  hosts: fw
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+  - name: Grab auth creds
+    include_vars: 'fw_creds.yml'
+    no_log: 'yes'
+</code></pre>
+
+<h3 id="network-interfaces-zones">Network Interfaces &amp; Zones</h3>
+<p>We're going to create the exact same configuration with Ansible as we did with
+Terraform.  Here are screenshots of the network interfaces and zones we need to
+create:</p>
+<p><img alt="eth1/1" src="../img/eth1.png" /></p>
+<p><img alt="eth1/2" src="../img/eth2.png" /></p>
+<p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
+<p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
+<p>Add the following to <code>network.yml</code>:</p>
+<pre><code class="yml">  tasks:
+  - name: Grab auth creds
+    include_vars: 'fw_creds.yml'
+    no_log: 'yes'
+
+  - name: &quot;Configure eth1/1&quot;
+    panos_interface:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      if_name: 'ethernet1/1'
+      create_default_route: true
+      zone_name: 'L3-trust'
+      commit: False
+
+  - name: &quot;Configure eth1/2&quot;
+    panos_interface:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      if_name: 'ethernet1/2'
+      zone_name: 'L3-untrust'
+      commit: False
+</code></pre>
+
+<p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html">module
+documentation</a>
+for ethernet interfaces if you need.</p>
+<p>Note that Ansible is a little different from Terraform.  We have to specify the
+<strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module
+executes independently.  Also, we don't have to create the zones as a separate
+step because they will be created for us if they don't exist.</p>
+<h3 id="run-the-playbook">Run the Playbook</h3>
+<p>Your final, full <code>network.yml</code> playbook should look like this:</p>
+<pre><code class="yml">- name: SKO2019 Ansible Playbook
+  hosts: fw
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+  - name: Grab auth creds
+    include_vars: 'fw_creds.yml'
+    no_log: 'yes'
+
+  - name: &quot;Configure eth1/1&quot;
+    panos_interface:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      if_name: 'ethernet1/1'
+      create_default_route: true
+      zone_name: 'L3-trust'
+      commit: False
+
+  - name: &quot;Configure eth1/2&quot;
+    panos_interface:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      if_name: 'ethernet1/2'
+      zone_name: 'L3-untrust'
+      commit: False
+</code></pre>
+
+<p>Run your playbook with the following command:</p>
+<pre><code class="bash">$ ansible-playbook -i inventory network.yml
+</code></pre>
+
+<p>Log in to the GUI of your firewall and verify that the configuration matches
+what you want.  Because we specified <code>commit: False</code> for each module call in
+our playbook, the changes have only been made to the candidate configuration
+and have <strong>not</strong> been committed.</p>
+<p>If you get errors, indentation is most likely the problem.  Once you fix any
+errors, run the playbook again and the firewall should now have your desired
+config.</p>
+<hr />
+<h2 id="task-3-objects-and-security-rule-creation">Task 3 - Objects and Security Rule Creation</h2>
+<p>Now we will create the same address object and security rules as in the
+Terraform portion.  Create a new file <code>rules.yml</code>, and copy in the header
+information from the network config steps:</p>
+<pre><code class="yml">- name: SKO2019 Ansible Playbook
+  hosts: fw
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+  - name: Grab auth creds
+    include_vars: 'fw_creds.yml'
+    no_log: 'yes'
+</code></pre>
+
+<p>Here is the address object we need to create:</p>
+<p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
+<p>Add the following to <code>rules.yml</code>:</p>
+<pre><code class="yml">  - name: &quot;Add address object for wordpress server&quot;
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      addressobject: 'wordpress server'
+      address: '10.1.23.45'
+      description: 'Internal server'
+      commit: false
+</code></pre>
+
+<p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_object_module.html">module
+documentation</a>
+for address objects if you need.</p>
+<p>Here are the security rules we need to create:</p>
+<p><img alt="Security Policy" src="../img/security-policy.png" /></p>
+<p>Add the following to <code>rules.yml</code>:</p>
+<pre><code class="yml">  - name: &quot;Add Wordpress Traffic rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Wordpress Traffic'
+      source_zone: ['L3-untrust']
+      destination_zone: ['L3-trust']
+      destination_ip: ['wordpress server']
+      application: ['web-browsing']
+      action: 'allow'
+      commit: false
+
+  - name: &quot;Add Outbound rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Outbound'
+      source_zone: ['L3-trust']
+      destination_zone: ['L3-untrust']
+      action: 'allow'
+      commit: false
+
+  - name: &quot;Add Default Deny rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Default Deny'
+      action: 'deny'
+      commit: false
+</code></pre>
+
+<h3 id="run-the-playbook_1">Run the Playbook</h3>
+<p>Your final, full <code>rules.yml</code> playbook should look like this:</p>
+<pre><code class="yml">- name: SKO2019 Ansible Playbook
+  hosts: fw
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+  - name: Grab auth creds
+    include_vars: 'fw_creds.yml'
+    no_log: 'yes'
+
+  - name: &quot;Add address object for wordpress server&quot;
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      addressobject: 'wordpress server'
+      address: '10.1.23.45'
+      description: 'Internal server'
+      commit: false
+
+  - name: &quot;Add Wordpress Traffic rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Wordpress Traffic'
+      source_zone: ['L3-untrust']
+      destination_zone: ['L3-trust']
+      destination_ip: ['wordpress server']
+      application: ['web-browsing']
+      action: 'allow'
+      commit: false
+
+  - name: &quot;Add Outbound rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Outbound'
+      source_zone: ['L3-trust']
+      destination_zone: ['L3-untrust']
+      action: 'allow'
+      commit: false
+
+  - name: &quot;Add Default Deny rule&quot;
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Default Deny'
+      action: 'deny'
+      commit: false
+</code></pre>
+
+<p>Run your playbook with the following command:</p>
+<pre><code class="bash">$ ansible-playbook -i inventory rules.yml
+</code></pre>
+
+<p>Log in to the GUI of your firewall and verify that the configuration matches
+what you want.  Remember that your changes haven't been committed, and if you 
+get errors, indentation is most likely the problem.</p>
+<p>You're done with the Ansible portion of the lab.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../comparison/" class="btn btn-neutral float-right" title="Comparison">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ansible-background/" class="btn btn-neutral" title="Background"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ansible-background/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../comparison/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

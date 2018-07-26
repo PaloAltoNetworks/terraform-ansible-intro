@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Comparing Terraform and Ansible - SKO19 Terraform & Ansible Intro</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Comparing Terraform and Ansible";
+    var mkdocs_page_input_path = "comparison.md";
+    var mkdocs_page_url = "/comparison/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> SKO19 Terraform & Ansible Intro</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">SKO19 Terraform & Ansible Intro</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Terraform Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../terraform-background/">Background</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../terraform-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Ansible Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ansible-background/">Background</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ansible-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Comparing Terraform and Ansible</a>
+    <ul class="subnav">
+            
+
+
+    
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#reputation">Reputation</a></li>
+        
+            <li><a class="toctree-l3" href="#idempotence">Idempotence</a></li>
+        
+            <li><a class="toctree-l3" href="#commits">Commits</a></li>
+        
+            <li><a class="toctree-l3" href="#operational-commands">Operational Commands</a></li>
+        
+            <li><a class="toctree-l3" href="#facts-data-sources">Facts / Data Sources</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">SKO19 Terraform & Ansible Intro</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Comparing Terraform and Ansible</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="comparing-terraform-and-ansible">Comparing Terraform and Ansible</h1>
+<p>At this point, you've now used both Ansible and Terraform to configure a
+Palo Alto Networks firewall.  Though you've used these two tools to deploy
+the same configuration, they differ in some important ways.  Let's discuss
+some of those differences now.</p>
+<h2 id="reputation">Reputation</h2>
+<p>Both tools have a certain reputation associated with them.  Terraform is known
+more for its power in deployment, while Ansible is known more for its
+flexibility in configuration.  Both products can do both jobs just fine.</p>
+<p>Besides their reputations, the most important part is that Palo Alto Networks
+has integrations with both, and either way will get the job done.  It's
+just a matter of preference.</p>
+<h2 id="idempotence">Idempotence</h2>
+<p>Both Terraform and Ansible support <a href="https://en.wikipedia.org/wiki/Idempotence"><em>idempotent</em></a>
+operations.  Saying that an operation is idempotent means that applying it
+multiple times will not change the result.  This is important for automation
+tools because they can be run to change configuration <strong>and</strong> also to verify
+that the configuration actually matches what you want.  You can run
+<code>terraform apply</code> continuously for hours, and if your configuration matches
+what is defined in the plan, it won't actually change anything.</p>
+<p>However, the Palo Alto Networks Ansible modules do not currently support
+idempotent operation.  Most of the modules have an <strong>operation</strong> field which
+can be <em>add</em>, <em>update</em> or <em>delete</em>.  Running the same playbook over again will
+cause a failure, because you can't add objects over top of themselves, or
+delete ones that don't exist.  Supporting idempotent operations will be added
+to these modules in the future.</p>
+<h2 id="commits">Commits</h2>
+<p>As you've probably noticed, a lot of the Ansible modules allow you to commit
+directly from them.  There is also a dedicated Ansible module that just does
+commits, containing support for both the firewall and Panorama.  </p>
+<p>So how do you perform commits with Terraform?  Currently, there is no support
+for commits inside the Terraform ecosystem, and they have to be handled 
+externally.  Lack of finalizers are
+<a href="https://github.com/hashicorp/terraform/issues/6258">a known shortcoming</a>
+for Terraform and, once it is addressed, support for it can be added to the
+provider.  In the mean time, if we provide
+<a href="https://www.terraform.io/docs/providers/panos/index.html#commits">a golang script</a>
+you can use to fill the gap.</p>
+<h2 id="operational-commands">Operational Commands</h2>
+<p>Ansible currently has a <em>panos_op</em> module allows users to run arbitrary
+operational commands.  An operational command could be something that just
+shows some part of the configuration, but it can also change configuration.
+Since Ansible doesn't store state, it doesn't care what the invocation of
+the <em>panos_op</em> module results in.</p>
+<p>This is a different story in Terraform.  The basic flow of Terraform is that
+there is a read operation that determines if a create, update, or delete needs
+to take place.  But operational commands as a whole don't fit as neatly into
+this paradigm.  What if the operational command is just a read?  What if the
+operational command makes a configuration change, and should only be executed
+once?  This uncertainty is why support for operational commands in Terraform
+is not currently in place.</p>
+<h2 id="facts-data-sources">Facts / Data Sources</h2>
+<p>Terraform may not have support for arbitrary operational commands, but it does
+have a data source right now that you can retrieve specific parts of
+<code>show system info</code> from the firewall or Panorama and then use that in your
+plan file.</p>
+<p>This same thing is called "facts" in Ansible.  Some of our Ansible modules have
+support for an additional operation, <code>find</code>, that acts in some ways like this,
+but support for this is still being investigated or developed.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../ansible-lab/" class="btn btn-neutral" title="Lab Activities"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ansible-lab/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

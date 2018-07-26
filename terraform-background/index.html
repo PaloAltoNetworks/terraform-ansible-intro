@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Background - SKO19 Terraform & Ansible Intro</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Background";
+    var mkdocs_page_input_path = "terraform-background.md";
+    var mkdocs_page_url = "/terraform-background/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> SKO19 Terraform & Ansible Intro</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">SKO19 Terraform & Ansible Intro</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Terraform Lab</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Background</a>
+    <ul class="subnav">
+            
+
+
+    
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#terraform-at-a-glance">Terraform At a Glance</a></li>
+        
+            <li><a class="toctree-l4" href="#configuration-overview">Configuration Overview</a></li>
+        
+            <li><a class="toctree-l4" href="#example-terraform-configuration">Example Terraform Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#terminology">Terminology</a></li>
+        
+            <li><a class="toctree-l4" href="#dependencies">Dependencies</a></li>
+        
+            <li><a class="toctree-l4" href="#common-commands">Common Commands</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../terraform-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Ansible Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ansible-background/">Background</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ansible-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Comparison</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">SKO19 Terraform & Ansible Intro</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Terraform Lab &raquo;</li>
+        
+      
+    
+    <li>Background</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="terraform-background">Terraform Background</h1>
+<h2 id="terraform-at-a-glance">Terraform At a Glance</h2>
+<ul>
+<li>Company:  <a href="https://www.hashicorp.com/">HashiCorp</a></li>
+<li>Integration FCS: January 2018</li>
+<li>Configuration: HCL (HashiCorp Configuration Language)</li>
+<li><a href="https://www.terraform.io/docs/providers/panos/index.html">Documentation</a></li>
+<li><a href="https://github.com/terraform-providers/terraform-provider-panos">GitHub Repo</a></li>
+<li>Implementation Language: golang</li>
+</ul>
+<h2 id="configuration-overview">Configuration Overview</h2>
+<h3 id="many-files-one-configuration">Many Files, One Configuration</h3>
+<p>Terraform allows you to split your configuration into as many files as you
+wish.  Any Terraform file in the current working directory will be loaded and
+concatenated with the others when you tell Terraform to apply your desired
+configuration.</p>
+<h3 id="local-state">Local State</h3>
+<p>Terraform saves the things it has done to a local file, referred to as a
+"state file".  Because state is saved locally, that means that sometimes the
+local state will differ from what's actually configured on the firewall.</p>
+<p>This is actually not a big deal, as many of Terraform's commands do a Read
+operation to check the actual state against what's saved locally.  Any
+changes that are found are then saved to the local state automatically.</p>
+<h2 id="example-terraform-configuration">Example Terraform Configuration</h2>
+<p>Here's an example of a Terraform configuration file.  We will discuss the
+parts of this config below.</p>
+<pre><code class="hcl">variable &quot;hostname&quot; {
+    default = &quot;127.0.0.1&quot;
+}
+
+variable &quot;username&quot; {
+    default = &quot;admin&quot;
+}
+
+variable &quot;password&quot; {
+    default = &quot;admin&quot;
+}
+
+provider &quot;panos&quot; {
+    hostname = &quot;${var.hostname}&quot;
+    username = &quot;${var.username}&quot;
+    password = &quot;${var.password}&quot;
+}
+
+resource &quot;panos_management_profile&quot; &quot;ssh&quot; {
+    name = &quot;allow ssh&quot;
+    ssh = true
+}
+
+resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
+    name = &quot;ethernet1/1&quot;
+    vsys = &quot;vsys1&quot;
+    mode = &quot;layer3&quot;
+    enable_dhcp = true
+    management_profile = &quot;${panos_management_profile.ssh.name}&quot;
+}
+
+resource &quot;panos_zone&quot; &quot;zone1&quot; {
+    name = &quot;L3-in&quot;
+    mode = &quot;layer3&quot;
+    interfaces = [&quot;ethernet1/1&quot;]
+    depends_on = [&quot;panos_ethernet_interface.eth1&quot;]
+}
+</code></pre>
+
+<h2 id="terminology">Terminology</h2>
+<h3 id="plan">Plan</h3>
+<p>A Terraform <strong>plan</strong> is the sum of all Terraform configuration files
+in a given directory.  These files are generally written in <em>HCL</em>.</p>
+<h3 id="provider">Provider</h3>
+<p>A <strong>provider</strong> can loosely thought of to be a product (such as the Palo Alto 
+Networks firewall) or a service (such as AWS, Azure, or GCP).  The provider 
+understands the underlying API to the product or service, making individual 
+parts of those things available as <em>resources</em>.</p>
+<p>Most providers require some kind of configuration in order to use.  For the
+<code>panos</code> provider, this is the authentication credentials of the firewall or
+Panorama that you want to configure.</p>
+<p>Providers are configured in a provider configuration block (e.g. -
+<code>provider "panos" {...}</code>, and a plan can make use of any number of providers,
+all working together.</p>
+<h3 id="resource">Resource</h3>
+<p>A <strong>resource</strong> is an individual component that a provider supports 
+create/read/update/delete operations for.</p>
+<p>For the Palo Alto Networks firewall, this would be something like
+an ethernet interface, service object, or an interface management profile.</p>
+<h3 id="data-source">Data Source</h3>
+<p>A <strong>data source</strong> is like a resource, but read-only.</p>
+<p>For example, the <code>panos</code> provider has
+<a href="https://www.terraform.io/docs/providers/panos/d/system_info.html">a data source</a>
+that gives you access to the results of <code>show system info</code>.</p>
+<h3 id="attribute">Attribute</h3>
+<p>An <strong>attribute</strong> is a single parameter that exists in either a resource or a 
+data source.  Individual attributes are specific to the resource itself, as to 
+what type it is, if it's required or optional, has a default value, or if 
+changing it would require the whole resource to be recreated or not.</p>
+<p>Attributes can have a few different types:</p>
+<ul>
+<li><em>String</em>:  <code>"foo"</code>, <code>"bar"</code></li>
+<li><em>Number</em>: <code>7</code>, <code>"42"</code> (quoting numbers is fine in HCL)</li>
+<li><em>List</em>: <code>["item1", "item2"]</code></li>
+<li><em>Boolean</em>: <code>true</code>, <code>false</code></li>
+<li><em>Map</em>: <code>{"key": "value"}</code> (<strong>Note</strong>: some maps may have more complex values)</li>
+</ul>
+<h3 id="variables">Variables</h3>
+<p>Terraform plans can have <em>variables</em> to allow for more flexibility.  These 
+variables come in two flavors:  user variables and attribute variables.<br />
+Whenever you want to use variables (or any other Terraform interpolation), 
+you'll be enclosing it in curly braces with a leading dollar sign:  <code>"${...}"</code></p>
+<p>User variables are variables that are defined in the Terraform plan file
+with the <code>variable</code> keyword.  These can be any of the types of values that
+attributes can be (default is string), and can also be configured to have
+default values.  When using a user variable in your plan files, they are
+referenced with <code>var</code> as a prefix: <code>"${var.hostname}"</code>.  Terraform looks for
+local variable values in the file <code>terraform.tfvars</code>.</p>
+<p>Attribute variables are variables that reference other resources or data
+sources within the same plan.  Specifying a resource attribute using an
+attribute variable creates an implicit dependency, covered below.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>There are two ways to tell Terraform that resource "A" needs to be created
+before resource "B":  the universal <em>depends_on</em> resource parameter or an
+attribute variable.  The first way, using <em>depends_on</em>, is performed by
+adding the universal parameter "depends_on" within the dependent
+resource.  The second way, using attribute variables, is performed by
+referencing a resource or data source attribute as a variable:
+<code>"${panos_management_profile.ssh.name}"</code></p>
+<h2 id="common-commands">Common Commands</h2>
+<p>The Terraform binary has many different CLI arguments that it supports.  We'll
+discuss only a few of them here:</p>
+<pre><code class="bash">$ terraform init
+</code></pre>
+
+<p><code>terraform init</code> initializes the current directory based off of the local plan files, 
+downloading any missing provider binaries.</p>
+<pre><code class="bash">$ terraform plan
+</code></pre>
+
+<p><code>terraform plan</code> refreshes provider/resource states and reports what changes 
+need to take place.</p>
+<pre><code class="bash">$ terraform apply
+</code></pre>
+
+<p><code>terraform apply</code> refreshes provider/resource states and makes any needed 
+changes to the resources.</p>
+<pre><code class="bash">$ terraform destroy
+</code></pre>
+
+<p><code>terraform destroy</code> refreshes provider/resource states and removes all 
+resources that Terraform created.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../terraform-lab/" class="btn btn-neutral float-right" title="Lab Activities">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="SKO19 Terraform & Ansible Intro"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../terraform-lab/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

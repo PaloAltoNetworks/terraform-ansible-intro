@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Activities - SKO19 Terraform & Ansible Intro</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Activities";
+    var mkdocs_page_input_path = "terraform-lab.md";
+    var mkdocs_page_url = "/terraform-lab/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> SKO19 Terraform & Ansible Intro</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">SKO19 Terraform & Ansible Intro</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Terraform Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../terraform-background/">Background</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Lab Activities</a>
+    <ul class="subnav">
+            
+
+
+    
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#task-1-basic-networking-config">Task 1 - Basic Networking Config</a></li>
+        
+            <li><a class="toctree-l4" href="#task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</a></li>
+        
+            <li><a class="toctree-l4" href="#task-3-cleanup">Task 3 - Cleanup</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Ansible Lab</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ansible-background/">Background</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ansible-lab/">Lab Activities</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Comparison</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">SKO19 Terraform & Ansible Intro</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Terraform Lab &raquo;</li>
+        
+      
+    
+    <li>Lab Activities</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="terraform-lab-activities">Terraform Lab Activities</h1>
+<h2 id="task-1-basic-networking-config">Task 1 - Basic Networking Config</h2>
+<p>Create a new empty directory called <code>terraform-lab</code> to work in.  We'll use it
+for all of our Terraform files.</p>
+<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file
+<code>sko2019.tf</code>.  We will place our Terraform plan in here.</p>
+<p>Start by defining the provider config, which will use the <code>panos</code> provider.
+Replace the IP address used in <strong>hostname</strong> with the address of your lab
+firewall, and change the <strong>username</strong> and <strong>password</strong> fields to the values
+you have used.</p>
+<pre><code class="hcl">provider &quot;panos&quot; {
+    hostname = &quot;127.0.0.1&quot;
+    username = &quot;admin&quot;
+    password = &quot;admin&quot;
+}
+</code></pre>
+
+<h3 id="network-interfaces">Network Interfaces</h3>
+<p>Next, create the interfaces.  Here are screenshots of the interfaces we need to
+create:</p>
+<p><img alt="ethernet1/1" src="../img/eth1.png" /></p>
+<p><img alt="ethernet1/2" src="../img/eth2.png" /></p>
+<p>Add the following configuration to <code>sko2019.tf</code>.  Note that the <strong>ethernet1/2</strong>
+interface omits the option to create the default route via DHCP.</p>
+<pre><code class="hcl">resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
+    name = &quot;ethernet1/1&quot;
+    vsys = &quot;vsys1&quot;
+    mode = &quot;layer3&quot;
+    enable_dhcp = true
+    create_dhcp_default_route = true
+}
+
+resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
+    name = &quot;ethernet1/2&quot;
+    vsys = &quot;vsys1&quot;
+    mode = &quot;layer3&quot;
+    enable_dhcp = true
+}
+</code></pre>
+
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider
+documentation</a>
+for ethernet interfaces for more info if you need.</p>
+<h3 id="zones">Zones</h3>
+<p>Next, create zones for the interfaces we just added.  Here are screenshots of
+the zones we need to create:</p>
+<p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
+<p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
+<p>Add the following configuration to <code>sko2019.tf</code>.  The interfaces are referenced
+by name, so that Terraform automatically knows that the interfaces need to be
+created before the zones themselves.</p>
+<pre><code class="hcl">resource &quot;panos_zone&quot; &quot;int&quot; {
+    name = &quot;L3-trust&quot;
+    mode = &quot;layer3&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;]
+}
+
+resource &quot;panos_zone&quot; &quot;ext&quot; {
+    name = &quot;L3-untrust&quot;
+    mode = &quot;layer3&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth2.name}&quot;]
+}
+</code></pre>
+
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/zone.html">provider
+documentation</a> for
+zones if you need.</p>
+<h3 id="apply-the-terraform-plan">Apply the Terraform Plan</h3>
+<p>Your final, full <code>sko2019.tf</code> file should look something like this:</p>
+<pre><code class="hcl">provider &quot;panos&quot; {
+    hostname = &quot;127.0.0.1&quot;
+    username = &quot;admin&quot;
+    password = &quot;admin&quot;
+}
+
+resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
+    name = &quot;ethernet1/1&quot;
+    vsys = &quot;vsys1&quot;
+    mode = &quot;layer3&quot;
+    enable_dhcp = true
+    create_dhcp_default_route = true
+}
+
+resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
+    name = &quot;ethernet1/2&quot;
+    vsys = &quot;vsys1&quot;
+    mode = &quot;layer3&quot;
+    enable_dhcp = true
+}
+
+resource &quot;panos_zone&quot; &quot;int&quot; {
+    name = &quot;L3-trust&quot;
+    mode = &quot;layer3&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;]
+}
+
+resource &quot;panos_zone&quot; &quot;ext&quot; {
+    name = &quot;L3-untrust&quot;
+    mode = &quot;layer3&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth2.name}&quot;]
+}
+</code></pre>
+
+<p>Let's apply the config to our firewall.  You need to run <code>terraform init</code> first
+to download all the providers we need, and then check your config with
+<code>terraform plan</code>:</p>
+<pre><code class="bash">$ terraform init
+$ terraform plan
+</code></pre>
+
+<p>If there are no errors, go ahead and push your config updates the firewall:</p>
+<pre><code class="bash">$ terraform apply
+</code></pre>
+
+<p>Log in to the GUI of your firewall and verify that the configuration matches
+what you want.  Note that because of the way Terraform currently functions, the
+changes have only been made to the candidate configuration and have <strong>not</strong>
+been committed.</p>
+<hr />
+<h2 id="task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</h2>
+<p>Next, we will create an address object and some security rules.</p>
+<p>Here is a screenshot of an address object we need to create:</p>
+<p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
+<p>Add the following to <code>sko2019.tf</code>:</p>
+<pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
+    name = &quot;wordpress server&quot;
+    description = &quot;Internal server&quot;
+    value = &quot;10.1.23.45&quot;
+}
+</code></pre>
+
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider
+documentation</a>
+for address objects if you need.</p>
+<p>Now, here is a screenshot of security rules that we need to create:</p>
+<p><img alt="Security Policy" src="../img/security-policy.png" /></p>
+<p>Add the following to <code>sko2019.tf</code>.  Just like with the networking config, zones
+and objects are referenced by name, so that Terraform knows they need to be
+created before our security rules.</p>
+<pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
+    rule {
+        name = &quot;Wordpress Traffic&quot;
+        source_zones = [&quot;${panos_zone.ext.name}&quot;]
+        source_addresses = [&quot;any&quot;]
+        source_users = [&quot;any&quot;]
+        hip_profiles = [&quot;any&quot;]
+        destination_zones = [&quot;${panos_zone.int.name}&quot;]
+        destination_addresses = [&quot;any&quot;]
+        applications = [&quot;web-browsing&quot;]
+        services = [&quot;application-default&quot;]
+        categories = [&quot;any&quot;]
+        action = &quot;allow&quot;
+    }
+    rule {
+        name = &quot;Outbound&quot;
+        source_zones = [&quot;${panos_zone.int.name}&quot;]
+        source_addresses = [&quot;any&quot;]
+        source_users = [&quot;any&quot;]
+        hip_profiles = [&quot;any&quot;]
+        destination_zones = [&quot;${panos_zone.ext.name}&quot;]
+        destination_addresses = [&quot;any&quot;]
+        applications = [&quot;any&quot;]
+        services = [&quot;application-default&quot;]
+        categories = [&quot;any&quot;]
+        action = &quot;allow&quot;
+    }
+    rule {
+        name = &quot;Default Deny&quot;
+        source_zones = [&quot;any&quot;]
+        source_addresses = [&quot;any&quot;]
+        source_users = [&quot;any&quot;]
+        hip_profiles = [&quot;any&quot;]
+        destination_zones = [&quot;any&quot;]
+        destination_addresses = [&quot;any&quot;]
+        applications = [&quot;any&quot;]
+        services = [&quot;application-default&quot;]
+        categories = [&quot;any&quot;]
+        action = &quot;deny&quot;
+    }
+}
+</code></pre>
+
+<h3 id="apply-the-terraform-plan_1">Apply the Terraform Plan</h3>
+<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code>
+again, so just check your config with <code>terraform plan</code>:</p>
+<pre><code class="bash">$ terraform plan
+</code></pre>
+
+<p>If there are no errors, go ahead and push your config updates the firewall:</p>
+<pre><code class="bash">$ terraform apply
+</code></pre>
+
+<p>Log in to the GUI of your firewall and verify that the configuration matches
+what you want.  Again, the changes have only been made to the candidate
+configuration and have <strong>not</strong> been committed.</p>
+<hr />
+<h2 id="task-3-cleanup">Task 3 - Cleanup</h2>
+<p>Terraform will clean up our config for us with the <code>terraform destroy</code> command.
+Run it to prepare for the Ansible portion of the lab:</p>
+<pre><code class="bash">$ terraform destroy
+</code></pre>
+
+<p>You're done with the Terraform portion of the lab.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ansible-background/" class="btn btn-neutral float-right" title="Background">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../terraform-background/" class="btn btn-neutral" title="Background"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../terraform-background/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ansible-background/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
