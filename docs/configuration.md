@@ -16,11 +16,11 @@ In this activity you will:
 ## Install Terraform and Ansible
 1. Download the lab repository to your home directory.
 
-        $ git clone https://github.com/PaloAltoNetworks/terraform_ansible_intro
+        $ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro
 
 2. Change into the lab directoryu and run the lab configuration script.  This will install the Terraform binary and the Ansible package.
 
-        $ cd sko19-automation-lab
+        $ cd terraform-ansible-intro
         $ ./labconfig.sh
 
 3. Test to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the `/usr/local/bin` directory.
