@@ -14,7 +14,7 @@ In this activity you will:
 
 1. Navigate to the Qwiklabs URL in your web browser
 
-        https://paloaltonetworks.quiklabs.com
+        https://paloaltonetworks.qwiklab.com
 
 2. Sign up for a Qwiklabs account (if you don't have one already).
 3. Log in with your Qwiklabs credentials.
