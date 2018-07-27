@@ -31,6 +31,3 @@ output "gcp_zone" {
     value = "${google_compute_instance.panos.zone}"
 }
 
-output "panos_password" {
-    value = "${random_string.password.result}"
-}

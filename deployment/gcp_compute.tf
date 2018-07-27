@@ -68,21 +68,3 @@ resource "google_compute_firewall" "mgt" {
     source_ranges = ["0.0.0.0/0"]
 }
 
-resource "random_string" "password" {
-    length = 20
-    upper = true
-    lower = true
-    number = false
-    special = false
-}
-
-/*
-resource "null_resource" "gcp_fwinit" {
-    triggers {
-        key = "${google_compute_instance.panos.network_interface.0.access_config.0.nat_ip}"
-    }
-    provisioner "local-exec" {
-        command = "/home/ec2-user/util/fw_init.sh ${google_compute_instance.panos.network_interface.0.access_config.0.nat_ip} ${var.panos_username} ${random_string.password.result} /home/ec2-user/.ssh/id_rsa"
-    }
-}
-*/

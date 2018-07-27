@@ -26,13 +26,13 @@ variable "gcp_project_id" {
 }
 
 variable "gcp_region" {
-  description = "Default to Oregon region"
+  description = "Default to the Montréal, Quebec region"
   type = "string"
-  default = "us-west1"
+  default = "northamerica-northeast1"
 }
 
 variable "gcp_credentials_file" {
-  description = "Locate the GCP credentials .json file"
+  description = "Path to the GCP credentials JSON file"
   type = "string"
   default = ""
 }

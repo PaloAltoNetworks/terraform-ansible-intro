@@ -17,10 +17,10 @@
 
 # Download and extract Terraform utility in the deployment directory.
 function getTerraform() {
-  # Places terraform in ~/bin dir.
+  # Places terraform in /usr/local/bin dir.
   local T_VERSION='0.11.7/terraform_0.11.7_linux_amd64'
   local T_URL="https://releases.hashicorp.com/terraform/${T_VERSION}.zip"
-  local T_DIR=~/bin
+  local T_DIR=/usr/local/bin
   local T_ZIP="${T_DIR}/terraform.zip"
   local T_EXE="${T_DIR}/terraform"
 
@@ -28,22 +28,17 @@ function getTerraform() {
 
   if [ -e ${T_EXE} ]; then
     echo "${T_EXE} already exists. Exiting."
-    echo ''
-    echo "To adjust your path: export PATH=${T_DIR}:\${PATH}"
     return 0
   fi
 
-  mkdir -p ${T_DIR}
   pushd ${T_DIR} > /dev/null
-  curl -o "${T_ZIP}" "${T_URL}"
-  unzip -q "${T_ZIP}"
-  rm "${T_ZIP}"
+  sudo curl -o "${T_ZIP}" "${T_URL}"
+  sudo unzip -q "${T_ZIP}"
+  sudo rm "${T_ZIP}"
   popd > /dev/null
 
   if [ -e ${T_EXE} ]; then
     echo "Successfully retrieved ${T_EXE}."
-    echo ''
-    echo "To adjust your path: export PATH=${T_DIR}:\${PATH}"
   else
     echo "Could not retrieve ${T_EXE}."
   fi
@@ -66,7 +61,6 @@ function getAnsible() {
 
   if [ -e ${A_EXE} ]; then
     echo "Successfully installed ${A_EXE}."
-    echo ""
   else
     echo "Could not retrieve ${A_EXE}."
   fi
