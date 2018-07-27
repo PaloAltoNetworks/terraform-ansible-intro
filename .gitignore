@@ -105,3 +105,16 @@ venv.bak/
 
 # skip vim files
 *.swp
+
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# GCP credential files
+*.json
