@@ -73,6 +73,18 @@
 
     
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#define-the-terraform-plan-variables">Define the Terraform plan variables</a></li>
+        
+            <li><a class="toctree-l4" href="#initialize-the-terraform-providers">Initialize the Terraform providers</a></li>
+        
+            <li><a class="toctree-l4" href="#begin-the-terraform-deployment">Begin the Terraform deployment</a></li>
+        
+            <li><a class="toctree-l4" href="#set-the-firewall-administrator-password">Set the firewall administrator password</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
@@ -151,36 +163,101 @@
             <div class="section">
               
                 <h1 id="deployment">Deployment</h1>
+<p>In this activity you will:</p>
 <ul>
+<li>Define the Terraform plan variables</li>
+<li>Initialize the Terraform providers</li>
+<li>Deploy the VM-Series firewall</li>
+<li>Configure an administrative password</li>
+</ul>
+<h2 id="define-the-terraform-plan-variables">Define the Terraform plan variables</h2>
+<ol>
 <li>
-<p>Set the Terraform deployment variables</p>
+<p>Change into the <code>deployment</code> directory.</p>
 <pre><code>$ cd deployment
-$ vim gcp_variables.tf
 </code></pre>
 </li>
 <li>
-<p>Initialize the Terraform providers</p>
-<pre><code>$ terraform init
+<p>Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.</p>
+<pre><code>$ vi gcp_variables.tf
 </code></pre>
 </li>
 <li>
-<p>Begin the Terraform deployment</p>
+<p>Replace the default values for <code>gcp_project_id</code>, <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code>.</p>
+<pre><code>variable "gcp_project_id" {
+  description = "GCP Project ID"
+  type = "string"
+  default = ""
+}
+
+variable "gcp_region" {
+  description = "Default to the Montréal, Quebec region"
+  type = "string"
+  default = "northamerica-northeast1"
+}
+
+variable "gcp_credentials_file" {
+  description = "Path to the GCP credentials JSON file"
+  type = "string"
+  default = ""
+}
+
+variable "gcp_ssh_key" {
+  description = "Path to the SSH public key file"
+  type = "string"
+  default = ""
+}
+</code></pre>
+</li>
+<li>
+<p>Save the file and exit the text editor.</p>
+</li>
+</ol>
+<h2 id="initialize-the-terraform-providers">Initialize the Terraform providers</h2>
+<ol>
+<li>Type the following command to initialize any Terraform providers specified in the plan files.<pre><code>$ terraform init
+</code></pre>
+</li>
+</ol>
+<h2 id="begin-the-terraform-deployment">Begin the Terraform deployment</h2>
+<ol>
+<li>
+<p>Type the following command to perform a dry-run of the Terraform plan and gather its state data.</p>
 <pre><code>$ terraform plan
-$ terraform apply
 </code></pre>
 </li>
 <li>
-<p>Set the firewall administrator password</p>
-<pre><code>admin&gt; ssh admin@&lt;ADDRESS&gt;
-admin\# configure
-admin\# set mgt-config users admin password
-admin\# set password
-admin\# commit
-admin\# exit
+<p>Type the following command to execute the Terraform plan.  You can append <code>--auto-approve</code> to the command in order to avoid the confirmation step.</p>
+<pre><code>$ terraform apply
+</code></pre>
+</li>
+</ol>
+<h2 id="set-the-firewall-administrator-password">Set the firewall administrator password</h2>
+<ol>
+<li>
+<p>Use the <code>gcloud compute</code> command to get the hostname of the VM-Series firewall instance.</p>
+<pre><code>$ gcloud compute instances list
+</code></pre>
+</li>
+<li>
+<p>SSH into the firewall using the hostname of the instance.</p>
+<pre><code>$ ssh admin@&lt;HOSTNAME&gt;
+</code></pre>
+</li>
+<li>
+<p>Set the administrative password for the VM-Series firewall.</p>
+<pre><code>admin&gt; configure
+admin# set mgt-config users admin password
+admin# set password
+admin# commit
+admin# exit
 admin&gt; exit
 </code></pre>
 </li>
-</ul>
+<li>
+<p>You are now ready to begin the Terraform portion of the lab.</p>
+</li>
+</ol>
               
             </div>
           </div>
