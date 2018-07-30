@@ -15,7 +15,7 @@ The following are NOT goals of this lab:
 ## Requirements
 
 * A laptop with Internet connectivity
-* A standards-compliant web browser (Google Chrome, Apple Safari, or Mozilla Firefox)
+* A standards-compliant web browser (Google Chrome recommended)
 * Proficiency with a Linux text editor (e.g., vim, nano, emacs, etc.)
 
 ## About This Lab
