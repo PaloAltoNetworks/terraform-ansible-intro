@@ -5,76 +5,102 @@ In this activity you will:
 * Define the Terraform plan variables
 * Initialize the Terraform providers
 * Deploy the VM-Series firewall
-* Configure an administrative password
+* Update the SSH configs
+* Set the firewall administrative password
 
 ## Define the Terraform plan variables
 
 1. Change into the `deployment` directory.
 
-        $ cd deployment
+```html
+$ cd deployment
+```
 
 2. Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.
 
-        $ vi gcp_variables.tf
+```html
+$ vi gcp_variables.tf
+```
 
 3. Replace the default values for `gcp_project_id`, `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key`.
 
-        variable "gcp_project_id" {
-          description = "GCP Project ID"
-          type = "string"
-          default = ""
-        }
+```yml
+variable "gcp_project_id" {
+  description = "The GCP Project ID"
+  type = "string"
+  default = ""
+}
 
-        variable "gcp_region" {
-          description = "Default to the Montréal, Quebec region"
-          type = "string"
-          default = "northamerica-northeast1"
-        }
+variable "gcp_region" {
+  description = "The Montréal, Quebec GCP region"
+  type = "string"
+  default = "northamerica-northeast1"
+}
 
-        variable "gcp_credentials_file" {
-          description = "Path to the GCP credentials JSON file"
-          type = "string"
-          default = ""
-        }
+variable "gcp_credentials_file" {
+  description = "Full file path to the JSON credentials file"
+  type = "string"
+  default = ""
+}
 
-        variable "gcp_ssh_key" {
-          description = "Path to the SSH public key file"
-          type = "string"
-          default = ""
-        }
+variable "gcp_ssh_key" {
+  description = "Full file path to the SSH public key file"
+  type = "string"
+  default = ""
+}
+```
 
 4. Save the file and exit the text editor.
 
 ## Initialize the Terraform providers
 1. Type the following command to initialize any Terraform providers specified in the plan files.
 
-        $ terraform init
+```html
+$ terraform init
+```
 
-## Begin the Terraform deployment
+## Deploy the VM-Series firewall
 1. Type the following command to perform a dry-run of the Terraform plan and gather its state data.
 
-        $ terraform plan
+```html
+$ terraform plan
+```
 
 2. Type the following command to execute the Terraform plan.  You can append `--auto-approve` to the command in order to avoid the confirmation step.
 
-        $ terraform apply
+```html
+$ terraform apply
+```
+
+## Update the SSK key
+1. Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
+
+```html
+$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
+```
 
 ## Set the firewall administrator password
 1. Use the `gcloud compute` command to get the hostname of the VM-Series firewall instance.
 
-        $ gcloud compute instances list
+```html
+$ gcloud compute instances list
+```
 
 2. SSH into the firewall using the hostname of the instance.
 
-        $ ssh admin@<HOSTNAME>
+```html
+$ ssh admin@<HOSTNAME>
+```
 
 3. Set the administrative password for the VM-Series firewall.
 
-        admin> configure
-        admin# set mgt-config users admin password
-        admin# set password
-        admin# commit
-        admin# exit
-        admin> exit
+```html
+admin> configure
+admin# set mgt-config users admin password
+admin# set password
+admin# commit
+admin# exit
+admin> exit
+```
 
 4. You are now ready to begin the Terraform portion of the lab.
