@@ -51,7 +51,7 @@ function getAnsible() {
     return 0
   fi
 
-  echo -n " Installing Ansible ..."
+  echo -n "Installing Ansible ..."
   sudo apt-get -y update &> setup.log
   sudo apt-get -y install software-properties-common &> setup.log
   sudo apt-add-repository ppa:ansible/ansible -y &> setup.log
@@ -66,6 +66,5 @@ function getAnsible() {
 }
 
 # Main program
-getAnsible
 getTerraform
-
+getAnsible

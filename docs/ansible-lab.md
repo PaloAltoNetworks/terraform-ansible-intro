@@ -2,8 +2,11 @@
 
 ## Task 1 - Lab Setup
 
-Create a new empty directory called `ansible-lab` to work in.  We'll use it for
-all of our Ansible files.
+Change into the `ansible` directory.  We'll use it for all of our Ansible files.
+
+```bash
+$ cd ../ansible
+```
 
 Then, install the Palo Alto Networks Ansible Galaxy role:
 
@@ -325,7 +328,7 @@ $ ansible-playbook -i inventory rules.yml
 ```
 
 Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Remember that your changes haven't been committed, and if you 
+what you want.  Remember that your changes haven't been committed, and if you
 get errors, indentation is most likely the problem.
 
 You're done with the Ansible portion of the lab.

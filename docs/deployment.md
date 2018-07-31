@@ -10,19 +10,19 @@ In this activity you will:
 
 ## Define the Terraform plan variables
 
-1. Change into the `deployment` directory.
+Change into the `deployment` directory.
 
-```html
+```bash
 $ cd deployment
 ```
 
-2. Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.
+Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.
 
-```html
+```bash
 $ vi gcp_variables.tf
 ```
 
-3. Replace the default values for `gcp_project_id`, `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key`.
+Replace the default values for variables `gcp_project_id`, `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key`.
 
 ```yml
 variable "gcp_project_id" {
@@ -50,49 +50,49 @@ variable "gcp_ssh_key" {
 }
 ```
 
-4. Save the file and exit the text editor.
+Save the file and exit the text editor.
 
 ## Initialize the Terraform providers
-1. Type the following command to initialize any Terraform providers specified in the plan files.
+Type the following command to initialize any Terraform providers specified in the plan files.
 
-```html
+```bash
 $ terraform init
 ```
 
 ## Deploy the VM-Series firewall
-1. Type the following command to perform a dry-run of the Terraform plan and gather its state data.
+Type the following command to perform a dry-run of the Terraform plan and gather its state data.
 
-```html
+```bash
 $ terraform plan
 ```
 
-2. Type the following command to execute the Terraform plan.  You can append `--auto-approve` to the command in order to avoid the confirmation step.
+Type the following command to execute the Terraform plan.  You can append `--auto-approve` to the command in order to avoid the confirmation step.
 
-```html
+```bash
 $ terraform apply
 ```
 
-## Update the SSK key
-1. Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
+## Update the SSK config
+Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
 
-```html
+```bash
 $ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
 ```
 
 ## Set the firewall administrator password
-1. Use the `gcloud compute` command to get the hostname of the VM-Series firewall instance.
+Use the `gcloud compute` command to get the hostname of the VM-Series firewall instance.
 
-```html
+```bash
 $ gcloud compute instances list
 ```
 
-2. SSH into the firewall using the hostname of the instance.
+SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few moments for the firewall to finish booting up.
 
-```html
-$ ssh admin@<HOSTNAME>
+```bash
+$ ssh admin@<INSTANCE>.<ZONE>.<REGION>
 ```
 
-3. Set the administrative password for the VM-Series firewall.
+Set the administrative password for the VM-Series firewall.
 
 ```html
 admin> configure
