@@ -34,17 +34,25 @@ $ terraform --version
 $ ansible --version
 ```
 
-## Configure the Google Cloud SDK
-Use the following `gcloud config` command to select the Qwiklabs project identifier.  If you had multiple projects this would ensure subsequent `gcloud` commands are scoped to this specific project.
+## Verify the Google Cloud SDK configuration
+Use the following `gcloud config` command to ensure you are using the Qwiklabs account and project identifier.
 
 ```bash
-$ gcloud config set project <PROJECT>
+$ gcloud config list
 ```
 
-Confirm the project selection was successful.
+Confirm that the `account` and `project` are the same as those provided by Qwiklabs.
+
+Use the following command to change the account (if needed).
 
 ```bash
-$ gcloud config get-value project
+$ gcloud auth login <QWIKLABS_USERNAME>
+```
+
+Use the following command to change the project (if needed).
+
+```bash
+$ gcloud config set project <QWIKLABS_PROJECT>
 ```
 
 ## Enable the Compute Engine API

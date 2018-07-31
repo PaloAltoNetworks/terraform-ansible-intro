@@ -32,13 +32,13 @@ variable "gcp_region" {
 }
 
 variable "gcp_credentials_file" {
-  description = "Full file path to the JSON credentials file"
+  description = "Full path to the JSON credentials file"
   type = "string"
   default = ""
 }
 
 variable "gcp_ssh_key" {
-    description = "Full file path to the SSH public key file"
+    description = "Full path to the SSH public key file"
     type = "string"
     default = ""
 }
