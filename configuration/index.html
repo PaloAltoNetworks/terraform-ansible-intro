@@ -71,7 +71,7 @@
         
             <li><a class="toctree-l4" href="#install-terraform-and-ansible">Install Terraform and Ansible</a></li>
         
-            <li><a class="toctree-l4" href="#configure-the-google-cloud-sdk">Configure the Google Cloud SDK</a></li>
+            <li><a class="toctree-l4" href="#verify-the-google-cloud-sdk-configuration">Verify the Google Cloud SDK configuration</a></li>
         
             <li><a class="toctree-l4" href="#enable-the-compute-engine-api">Enable the Compute Engine API</a></li>
         
@@ -189,13 +189,18 @@ $ ./setup
 $ ansible --version
 </code></pre>
 
-<h2 id="configure-the-google-cloud-sdk">Configure the Google Cloud SDK</h2>
-<p>Use the following <code>gcloud config</code> command to select the Qwiklabs project identifier.  If you had multiple projects this would ensure subsequent <code>gcloud</code> commands are scoped to this specific project.</p>
-<pre><code class="bash">$ gcloud config set project &lt;PROJECT&gt;
+<h2 id="verify-the-google-cloud-sdk-configuration">Verify the Google Cloud SDK configuration</h2>
+<p>Use the following <code>gcloud config</code> command to ensure you are using the Qwiklabs account and project identifier.</p>
+<pre><code class="bash">$ gcloud config list
 </code></pre>
 
-<p>Confirm the project selection was successful.</p>
-<pre><code class="bash">$ gcloud config get-value project
+<p>Confirm that the <code>account</code> and <code>project</code> are the same as those provided by Qwiklabs.</p>
+<p>Use the following command to change the account (if needed).</p>
+<pre><code class="bash">$ gcloud auth login &lt;QWIKLABS_USERNAME&gt;
+</code></pre>
+
+<p>Use the following command to change the project (if needed).</p>
+<pre><code class="bash">$ gcloud config set project &lt;QWIKLABS_PROJECT&gt;
 </code></pre>
 
 <h2 id="enable-the-compute-engine-api">Enable the Compute Engine API</h2>
