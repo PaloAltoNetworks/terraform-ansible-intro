@@ -2,47 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/getting-started/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/configuration/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/deployment/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/terraform-background/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/terraform-lab/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/ansible-background/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/ansible-lab/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/comparison/</loc>
-     <lastmod>2018-07-30</lastmod>
+     <lastmod>2018-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

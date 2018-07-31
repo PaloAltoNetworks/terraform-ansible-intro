@@ -160,8 +160,10 @@
               
                 <h1 id="ansible-lab-activities">Ansible Lab Activities</h1>
 <h2 id="task-1-lab-setup">Task 1 - Lab Setup</h2>
-<p>Create a new empty directory called <code>ansible-lab</code> to work in.  We'll use it for
-all of our Ansible files.</p>
+<p>Change into the <code>ansible</code> directory.  We'll use it for all of our Ansible files.</p>
+<pre><code class="bash">$ cd ../ansible
+</code></pre>
+
 <p>Then, install the Palo Alto Networks Ansible Galaxy role:</p>
 <pre><code class="bash">$ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 </code></pre>
@@ -435,7 +437,7 @@ for address objects if you need.</p>
 </code></pre>
 
 <p>Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Remember that your changes haven't been committed, and if you 
+what you want.  Remember that your changes haven't been committed, and if you
 get errors, indentation is most likely the problem.</p>
 <p>You're done with the Ansible portion of the lab.</p>
               

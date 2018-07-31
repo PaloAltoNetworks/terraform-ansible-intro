@@ -77,7 +77,9 @@
         
             <li><a class="toctree-l4" href="#initialize-the-terraform-providers">Initialize the Terraform providers</a></li>
         
-            <li><a class="toctree-l4" href="#begin-the-terraform-deployment">Begin the Terraform deployment</a></li>
+            <li><a class="toctree-l4" href="#deploy-the-vm-series-firewall">Deploy the VM-Series firewall</a></li>
+        
+            <li><a class="toctree-l4" href="#update-the-ssk-config">Update the SSK config</a></li>
         
             <li><a class="toctree-l4" href="#set-the-firewall-administrator-password">Set the firewall administrator password</a></li>
         
@@ -166,95 +168,84 @@
 <li>Define the Terraform plan variables</li>
 <li>Initialize the Terraform providers</li>
 <li>Deploy the VM-Series firewall</li>
-<li>Configure an administrative password</li>
+<li>Update the SSH configs</li>
+<li>Set the firewall administrative password</li>
 </ul>
 <h2 id="define-the-terraform-plan-variables">Define the Terraform plan variables</h2>
-<ol>
-<li>
 <p>Change into the <code>deployment</code> directory.</p>
-<pre><code>$ cd deployment
+<pre><code class="bash">$ cd deployment
 </code></pre>
-</li>
-<li>
+
 <p>Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.</p>
-<pre><code>$ vi gcp_variables.tf
+<pre><code class="bash">$ vi gcp_variables.tf
 </code></pre>
-</li>
-<li>
-<p>Replace the default values for <code>gcp_project_id</code>, <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code>.</p>
-<pre><code>variable "gcp_project_id" {
-  description = "GCP Project ID"
-  type = "string"
-  default = ""
+
+<p>Replace the default values for variables <code>gcp_project_id</code>, <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code>.</p>
+<pre><code class="yml">variable &quot;gcp_project_id&quot; {
+  description = &quot;The GCP Project ID&quot;
+  type = &quot;string&quot;
+  default = &quot;&quot;
 }
 
-variable "gcp_region" {
-  description = "Default to the Montréal, Quebec region"
-  type = "string"
-  default = "northamerica-northeast1"
+variable &quot;gcp_region&quot; {
+  description = &quot;The Montréal, Quebec GCP region&quot;
+  type = &quot;string&quot;
+  default = &quot;northamerica-northeast1&quot;
 }
 
-variable "gcp_credentials_file" {
-  description = "Path to the GCP credentials JSON file"
-  type = "string"
-  default = ""
+variable &quot;gcp_credentials_file&quot; {
+  description = &quot;Full file path to the JSON credentials file&quot;
+  type = &quot;string&quot;
+  default = &quot;&quot;
 }
 
-variable "gcp_ssh_key" {
-  description = "Path to the SSH public key file"
-  type = "string"
-  default = ""
+variable &quot;gcp_ssh_key&quot; {
+  description = &quot;Full file path to the SSH public key file&quot;
+  type = &quot;string&quot;
+  default = &quot;&quot;
 }
 </code></pre>
-</li>
-<li>
+
 <p>Save the file and exit the text editor.</p>
-</li>
-</ol>
 <h2 id="initialize-the-terraform-providers">Initialize the Terraform providers</h2>
-<ol>
-<li>Type the following command to initialize any Terraform providers specified in the plan files.<pre><code>$ terraform init
+<p>Type the following command to initialize any Terraform providers specified in the plan files.</p>
+<pre><code class="bash">$ terraform init
 </code></pre>
-</li>
-</ol>
-<h2 id="begin-the-terraform-deployment">Begin the Terraform deployment</h2>
-<ol>
-<li>
+
+<h2 id="deploy-the-vm-series-firewall">Deploy the VM-Series firewall</h2>
 <p>Type the following command to perform a dry-run of the Terraform plan and gather its state data.</p>
-<pre><code>$ terraform plan
+<pre><code class="bash">$ terraform plan
 </code></pre>
-</li>
-<li>
+
 <p>Type the following command to execute the Terraform plan.  You can append <code>--auto-approve</code> to the command in order to avoid the confirmation step.</p>
-<pre><code>$ terraform apply
+<pre><code class="bash">$ terraform apply
 </code></pre>
-</li>
-</ol>
+
+<h2 id="update-the-ssk-config">Update the SSK config</h2>
+<p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
+<pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
+</code></pre>
+
 <h2 id="set-the-firewall-administrator-password">Set the firewall administrator password</h2>
-<ol>
-<li>
 <p>Use the <code>gcloud compute</code> command to get the hostname of the VM-Series firewall instance.</p>
-<pre><code>$ gcloud compute instances list
+<pre><code class="bash">$ gcloud compute instances list
 </code></pre>
-</li>
-<li>
-<p>SSH into the firewall using the hostname of the instance.</p>
-<pre><code>$ ssh admin@&lt;HOSTNAME&gt;
+
+<p>SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few moments for the firewall to finish booting up.</p>
+<pre><code class="bash">$ ssh admin@&lt;INSTANCE&gt;.&lt;ZONE&gt;.&lt;REGION&gt;
 </code></pre>
-</li>
-<li>
+
 <p>Set the administrative password for the VM-Series firewall.</p>
-<pre><code>admin&gt; configure
+<pre><code class="html">admin&gt; configure
 admin# set mgt-config users admin password
 admin# set password
 admin# commit
 admin# exit
 admin&gt; exit
 </code></pre>
-</li>
-<li>
-<p>You are now ready to begin the Terraform portion of the lab.</p>
-</li>
+
+<ol>
+<li>You are now ready to begin the Terraform portion of the lab.</li>
 </ol>
               
             </div>

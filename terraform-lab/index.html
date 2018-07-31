@@ -160,13 +160,12 @@
               
                 <h1 id="terraform-lab-activities">Terraform Lab Activities</h1>
 <h2 id="task-1-basic-networking-config">Task 1 - Basic Networking Config</h2>
-<p>Create a new empty directory called <code>terraform-lab</code> to work in.  We'll use it
-for all of our Terraform files.</p>
-<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file
-<code>sko2019.tf</code>.  We will place our Terraform plan in here.</p>
-<p>Start by defining the provider config, which will use the <code>panos</code> provider.
-Replace the IP address used in <strong>hostname</strong> with the address of your lab
-firewall, and change the <strong>username</strong> and <strong>password</strong> fields to the values
+<p>Change into the <code>terraform</code> directory.  We'll use it for all of our Terraform files.</p>
+<pre><code class="bash">$ cd ../terraform
+</code></pre>
+
+<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file <code>sko2019.tf</code>.  We will place our Terraform plan in here.</p>
+<p>Start by defining the provider config, which will use the <code>panos</code> provider. Replace the IP address used in <strong>hostname</strong> with the address of your lab firewall, and change the <strong>username</strong> and <strong>password</strong> fields to the values
 you have used.</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
     hostname = &quot;127.0.0.1&quot;
@@ -176,12 +175,10 @@ you have used.</p>
 </code></pre>
 
 <h3 id="network-interfaces">Network Interfaces</h3>
-<p>Next, create the interfaces.  Here are screenshots of the interfaces we need to
-create:</p>
+<p>Next, create the interfaces.  Here are screenshots of the interfaces we need to create:</p>
 <p><img alt="ethernet1/1" src="../img/eth1.png" /></p>
 <p><img alt="ethernet1/2" src="../img/eth2.png" /></p>
-<p>Add the following configuration to <code>sko2019.tf</code>.  Note that the <strong>ethernet1/2</strong>
-interface omits the option to create the default route via DHCP.</p>
+<p>Add the following configuration to <code>sko2019.tf</code>.  Note that the <strong>ethernet1/2</strong> interface omits the option to create the default route via DHCP.</p>
 <pre><code class="hcl">resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
     name = &quot;ethernet1/1&quot;
     vsys = &quot;vsys1&quot;
@@ -198,17 +195,12 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 }
 </code></pre>
 
-<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider
-documentation</a>
-for ethernet interfaces for more info if you need.</p>
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider documentation</a> for ethernet interfaces for more info if you need.</p>
 <h3 id="zones">Zones</h3>
-<p>Next, create zones for the interfaces we just added.  Here are screenshots of
-the zones we need to create:</p>
+<p>Next, create zones for the interfaces we just added.  Here are screenshots of the zones we need to create:</p>
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
-<p>Add the following configuration to <code>sko2019.tf</code>.  The interfaces are referenced
-by name, so that Terraform automatically knows that the interfaces need to be
-created before the zones themselves.</p>
+<p>Add the following configuration to <code>sko2019.tf</code>.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.</p>
 <pre><code class="hcl">resource &quot;panos_zone&quot; &quot;int&quot; {
     name = &quot;L3-trust&quot;
     mode = &quot;layer3&quot;
@@ -223,8 +215,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 </code></pre>
 
 <p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/zone.html">provider
-documentation</a> for
-zones if you need.</p>
+documentation</a> for zones if you need.</p>
 <h3 id="apply-the-terraform-plan">Apply the Terraform Plan</h3>
 <p>Your final, full <code>sko2019.tf</code> file should look something like this:</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
@@ -261,9 +252,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 }
 </code></pre>
 
-<p>Let's apply the config to our firewall.  You need to run <code>terraform init</code> first
-to download all the providers we need, and then check your config with
-<code>terraform plan</code>:</p>
+<p>Let's apply the config to our firewall.  You need to run <code>terraform init</code> first to download all the providers we need, and then check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform init
 $ terraform plan
 </code></pre>
@@ -272,14 +261,10 @@ $ terraform plan
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Note that because of the way Terraform currently functions, the
-changes have only been made to the candidate configuration and have <strong>not</strong>
-been committed.</p>
+<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Note that because of the way Terraform currently functions, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
 <hr />
 <h2 id="task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</h2>
-<p>Next, we will create an address object and some security rules.</p>
-<p>Here is a screenshot of an address object we need to create:</p>
+<p>Next, we will create an address object and some security rules. Here is a screenshot of an address object we need to create:</p>
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
 <p>Add the following to <code>sko2019.tf</code>:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
@@ -289,14 +274,10 @@ been committed.</p>
 }
 </code></pre>
 
-<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider
-documentation</a>
-for address objects if you need.</p>
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider documentation</a> for address objects if you need.</p>
 <p>Now, here is a screenshot of security rules that we need to create:</p>
 <p><img alt="Security Policy" src="../img/security-policy.png" /></p>
-<p>Add the following to <code>sko2019.tf</code>.  Just like with the networking config, zones
-and objects are referenced by name, so that Terraform knows they need to be
-created before our security rules.</p>
+<p>Add the following to <code>sko2019.tf</code>.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
         name = &quot;Wordpress Traffic&quot;
@@ -341,8 +322,7 @@ created before our security rules.</p>
 </code></pre>
 
 <h3 id="apply-the-terraform-plan_1">Apply the Terraform Plan</h3>
-<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code>
-again, so just check your config with <code>terraform plan</code>:</p>
+<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code> again, so just check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform plan
 </code></pre>
 
@@ -350,13 +330,10 @@ again, so just check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Again, the changes have only been made to the candidate
-configuration and have <strong>not</strong> been committed.</p>
+<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
 <hr />
 <h2 id="task-3-cleanup">Task 3 - Cleanup</h2>
-<p>Terraform will clean up our config for us with the <code>terraform destroy</code> command.
-Run it to prepare for the Ansible portion of the lab:</p>
+<p>Terraform will clean up our config for us with the <code>terraform destroy</code> command. Run it to prepare for the Ansible portion of the lab:</p>
 <pre><code class="bash">$ terraform destroy
 </code></pre>
 

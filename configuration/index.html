@@ -175,76 +175,56 @@
 <p><strong>NOTE:</strong>  All of the commands listed within this activity should be executed within the Google Cloud Shell - <strong>not on your laptop</strong>.</p>
 <hr />
 <h2 id="install-terraform-and-ansible">Install Terraform and Ansible</h2>
-<ol>
-<li>
 <p>Download the lab repository to your home directory.</p>
-<pre><code>$ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro
+<pre><code class="bash">$ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro
 </code></pre>
-</li>
-<li>
+
 <p>Change into the lab directoryu and run the lab configuration script.  This will install the Terraform binary and the Ansible package.</p>
-<pre><code>$ cd terraform-ansible-intro
-$ ./labconfig.sh
+<pre><code class="bash">$ cd terraform-ansible-intro
+$ ./setup
 </code></pre>
-</li>
-<li>
+
 <p>Test to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the <code>/usr/local/bin</code> directory.</p>
-<pre><code>$ terraform --version
+<pre><code class="bash">$ terraform --version
 $ ansible --version
 </code></pre>
-</li>
-</ol>
+
 <h2 id="configure-the-google-cloud-sdk">Configure the Google Cloud SDK</h2>
-<ol>
-<li>
 <p>Use the following <code>gcloud config</code> command to select the Qwiklabs project identifier.  If you had multiple projects this would ensure subsequent <code>gcloud</code> commands are scoped to this specific project.</p>
-<pre><code>$ gcloud config set project &lt;PROJECT&gt;
+<pre><code class="bash">$ gcloud config set project &lt;PROJECT&gt;
 </code></pre>
-</li>
-<li>
+
 <p>Confirm the project selection was successful.</p>
-<pre><code>$ gcloud config get-value project
+<pre><code class="bash">$ gcloud config get-value project
 </code></pre>
-</li>
-</ol>
+
 <h2 id="enable-the-compute-engine-api">Enable the Compute Engine API</h2>
-<ol>
-<li>Use the following <code>gcloud services</code> command to enable the Compute Engine API.  This API will be used by Terraform to deploy the VM-Series instance.<pre><code>$ gcloud services enable compute.googleapis.com
+<p>Use the following <code>gcloud services</code> command to enable the Compute Engine API.  This API will be used by Terraform to deploy the VM-Series instance.</p>
+<pre><code class="bash">$ gcloud services enable compute.googleapis.com
 </code></pre>
-</li>
-</ol>
+
 <h2 id="configure-api-credentials">Configure API credentials</h2>
-<ol>
-<li>
 <p>Use the following <code>gcloud iam</code> command to list the default service accounts.</p>
-<pre><code>$ gcloud iam service-accounts list
+<pre><code class="bash">$ gcloud iam service-accounts list
 </code></pre>
-</li>
-<li>
-<p>Locate the Compute Engine default service account and its email address.</p>
-</li>
-<li>Use the following <code>gcloud iam</code> command to download the credentials for the Compute Engine default service account.<pre><code>$ gcloud iam service-accounts keys create gcp_compute_key.json --iam-account &lt;EMAIL_ADDRESS&gt;
+
+<p>Use the following <code>gcloud iam</code> command to download the credentials for the Compute Engine default service account using the email address associated with the service account.</p>
+<pre><code class="bash">$ gcloud iam service-accounts keys create gcp_compute_key.json --iam-account &lt;EMAIL_ADDRESS&gt;
 </code></pre>
-</li>
-</ol>
+
+<p>Verify the JSON credentials file was successfully created.</p>
+<pre><code class="bash">cat gcp_compute_key.json
+</code></pre>
+
 <h2 id="configure-ssh-credentials">Configure SSH credentials</h2>
-<ol>
-<li>
 <p>Create an SSH key with an empty passphrase and save it in the <code>~/.ssh</code> directory.</p>
-<pre><code>$ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/sko19_ssh_key
+<pre><code class="bash">$ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/sko19_ssh_key
 </code></pre>
-</li>
-<li>
+
 <p>Ensure the file permissions for the SSH key are secure.</p>
-<pre><code>$ chmod 400 ~/.ssh/sko19_ssh_key
+<pre><code class="bash">$ chmod 400 ~/.ssh/sko19_ssh_key
 </code></pre>
-</li>
-<li>
-<p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
-<pre><code>$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
-</code></pre>
-</li>
-</ol>
+
 <hr />
 <p><strong>NOTE:</strong> GCP has the ability to manage all of its own SSH keys and propagate them automatically to projects and instances.  However, the VM-Series is only able to make use of a single SSH key.  Rather than leverage GCP's SSH key management process, we've created our own SSH key and configured the Compute Engine to use our key exclusively.  When we deploy the VM-Series in the next activity we'll instruct the instance to also use the SSH key we've created.</p>
 <hr />
