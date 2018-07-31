@@ -3,6 +3,8 @@
 ## Task 1 - Lab Setup
 
 Change into the `ansible` directory.  We'll use it for all of our Ansible files.
+In this lab, we'll be doing the same configuration as we did in Terraform
+to give you a sense of completing the same steps with each tool.
 
 ```bash
 $ cd ../ansible
@@ -78,11 +80,6 @@ create:
 Add the following to `network.yml`:
 
 ```yml
-  tasks:
-  - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
-    no_log: 'yes'
-
   - name: "Configure eth1/1"
     panos_interface:
       ip_address: '{{ ip_address }}'
@@ -204,7 +201,6 @@ Add the following to `rules.yml`:
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 ```
 
 Refer to the [module
@@ -282,7 +278,6 @@ Your final, full `rules.yml` playbook should look like this:
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 
   - name: "Add Wordpress Traffic rule"
     panos_security_rule:
