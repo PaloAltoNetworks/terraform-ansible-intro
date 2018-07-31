@@ -26,13 +26,13 @@ Replace the default values for variables `gcp_project_id`, `gcp_region`, `gcp_cr
 
 ```yml
 variable "gcp_project_id" {
-  description = "The GCP Project ID"
+  description = "GCP Project ID"
   type = "string"
   default = ""
 }
 
 variable "gcp_region" {
-  description = "The Montréal, Quebec GCP region"
+  description = "Montréal, Quebec GCP region"
   type = "string"
   default = "northamerica-northeast1"
 }

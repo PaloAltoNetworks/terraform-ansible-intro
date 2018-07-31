@@ -61,7 +61,7 @@ Use the following `gcloud iam` command to list the default service accounts.
 $ gcloud iam service-accounts list
 ```
 
-Use the following `gcloud iam` command to download the credentials for the Compute Engine default service account using the email address associated with the service account.
+Use the following `gcloud iam` command to download the credentials for the Compute Engine default service account using it associated email address.
 
 ```bash
 $ gcloud iam service-accounts keys create gcp_compute_key.json --iam-account <EMAIL_ADDRESS>

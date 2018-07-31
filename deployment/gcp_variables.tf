@@ -26,19 +26,19 @@ variable "gcp_project_id" {
 }
 
 variable "gcp_region" {
-  description = "Default to the Montréal, Quebec region"
+  description = "Montréal, Quebec region"
   type = "string"
   default = "northamerica-northeast1"
 }
 
 variable "gcp_credentials_file" {
-  description = "Path to the GCP credentials JSON file"
+  description = "Full file path to the JSON credentials file"
   type = "string"
   default = ""
 }
 
 variable "gcp_ssh_key" {
-    description = "Path to the SSH public key file"
+    description = "Full file path to the SSH public key file"
     type = "string"
     default = ""
 }

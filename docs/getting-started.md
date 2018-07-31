@@ -52,7 +52,7 @@ Click __Accept__ on the logon banner page to accept the Terms of Service.
 Since this is a temporary lab account you can skip adding account recovery options by clicking __Done__.
 ![Recovery options](img/recovery.png)
 
-elect your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__.
+Select your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__.
 ![Updated ToS](img/updated-tos.png)
 
 ## Launch Google Cloud Shell
