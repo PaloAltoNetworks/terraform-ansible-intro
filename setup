@@ -24,23 +24,21 @@ function getTerraform() {
   local T_ZIP="${T_DIR}/terraform.zip"
   local T_EXE="${T_DIR}/terraform"
 
-  echo "Downloading and installing Terraform binary..."
-
   if [ -e ${T_EXE} ]; then
     echo "${T_EXE} already exists. Exiting."
     return 0
   fi
-
+  echo -n "Installing Terraform ..."
   pushd ${T_DIR} > /dev/null
-  sudo curl -o "${T_ZIP}" "${T_URL}"
+  sudo curl -s -o "${T_ZIP}" "${T_URL}"
   sudo unzip -q "${T_ZIP}"
   sudo rm "${T_ZIP}"
   popd > /dev/null
 
   if [ -e ${T_EXE} ]; then
-    echo "Successfully retrieved ${T_EXE}."
+    echo " Done"
   else
-    echo "Could not retrieve ${T_EXE}."
+    echo " Could not retrieve ${T_EXE}."
   fi
 }
 
@@ -53,6 +51,7 @@ function getAnsible() {
     return 0
   fi
 
+  echo -n " Installing Ansible ..."
   sudo apt-get -y update &> setup.log
   sudo apt-get -y install software-properties-common &> setup.log
   sudo apt-add-repository ppa:ansible/ansible -y &> setup.log
@@ -60,9 +59,9 @@ function getAnsible() {
   sudo apt-get -y install ansible &> setup.log
 
   if [ -e ${A_EXE} ]; then
-    echo "Successfully installed ${A_EXE}."
+    echo " Done"
   else
-    echo "Could not retrieve ${A_EXE}."
+    echo " Could not retrieve ${A_EXE}."
   fi
 }
 
