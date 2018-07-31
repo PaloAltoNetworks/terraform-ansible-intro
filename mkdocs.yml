@@ -1,4 +1,4 @@
-site_name: SKO19 Terraform & Ansible Intro
+site_name: Terraform & Ansible Intro
 pages:
   - Introduction: 'index.md'
   - Setup:
@@ -13,5 +13,4 @@ pages:
       - Lab Activities: 'ansible-lab.md'
   - 'comparison.md'
 theme:
-    name: null
-    custom_dir: 'rtd'
+    name: readthedocs

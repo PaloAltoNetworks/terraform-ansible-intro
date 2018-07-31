@@ -21,7 +21,7 @@ In this activity you will:
 2. Change into the lab directoryu and run the lab configuration script.  This will install the Terraform binary and the Ansible package.
 
         $ cd terraform-ansible-intro
-        $ ./labconfig.sh
+        $ ./setup
 
 3. Test to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the `/usr/local/bin` directory.
 
