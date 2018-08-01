@@ -357,17 +357,17 @@
         },
         {
             "location": "/clean-up/",
-            "text": "Clean Up\n\n\nIn this activity you will:\n\n\n\n\nDestroy the deployment\n\n\n\n\nDestroy the Deployment\n\n\nWhen deploying infrastructure in the public cloud it is important to tear it down when it is no longer needed.  Otherwise you will end up paying for services that are no longer needed.\n\n\nChange into the \ndeployment\n directory.\n\n\n$ cd ../deployment\n\n\n\n\nTell Terraform to destroy the contents of its plan files.\n\n\n$ terraform destroy\n\n\n\n\n\n\nNOTE:\n Qwiklabs would normally handle this for you once the lab is completed but the process is illustrated here as a helpful reminder.",
+            "text": "Clean Up\n\n\nIn this activity you will:\n\n\n\n\nDestroy the lab deployment\n\n\n\n\nDestroy the Deployment\n\n\nWhen deploying infrastructure in the public cloud it is important to tear it down when it is no longer needed.  Otherwise you will end up paying for services that are no longer needed. We'll need to go back to the deployment directory and use Terraform to destroy the VM-Series instance we deployed at the start of the lab.\n\n\nChange into the \ndeployment\n directory.\n\n\n$ cd ../deployment\n\n\n\n\nTell Terraform to destroy the contents of its plan files.\n\n\n$ terraform destroy\n\n\n\n\n\n\nNOTE:\n Qwiklabs would normally handle this for you once the lab is completed but the process is illustrated here as a helpful reminder. Also note that this \nterraform destroy\n command is specific to the deployment rather than the one we did in the \nTerraform Lab\n, which destroyed our firewall configs.",
             "title": "Clean Up"
         },
         {
             "location": "/clean-up/#clean-up",
-            "text": "In this activity you will:   Destroy the deployment",
+            "text": "In this activity you will:   Destroy the lab deployment",
             "title": "Clean Up"
         },
         {
             "location": "/clean-up/#destroy-the-deployment",
-            "text": "When deploying infrastructure in the public cloud it is important to tear it down when it is no longer needed.  Otherwise you will end up paying for services that are no longer needed.  Change into the  deployment  directory.  $ cd ../deployment  Tell Terraform to destroy the contents of its plan files.  $ terraform destroy   NOTE:  Qwiklabs would normally handle this for you once the lab is completed but the process is illustrated here as a helpful reminder.",
+            "text": "When deploying infrastructure in the public cloud it is important to tear it down when it is no longer needed.  Otherwise you will end up paying for services that are no longer needed. We'll need to go back to the deployment directory and use Terraform to destroy the VM-Series instance we deployed at the start of the lab.  Change into the  deployment  directory.  $ cd ../deployment  Tell Terraform to destroy the contents of its plan files.  $ terraform destroy   NOTE:  Qwiklabs would normally handle this for you once the lab is completed but the process is illustrated here as a helpful reminder. Also note that this  terraform destroy  command is specific to the deployment rather than the one we did in the  Terraform Lab , which destroyed our firewall configs.",
             "title": "Destroy the Deployment"
         },
         {
