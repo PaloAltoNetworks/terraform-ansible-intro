@@ -36,10 +36,10 @@ to these modules in the future.
 
 As you've probably noticed, a lot of the Ansible modules allow you to commit
 directly from them.  There is also a dedicated Ansible module that just does
-commits, containing support for both the firewall and Panorama.  
+commits, containing support for both the firewall and Panorama.
 
 So how do you perform commits with Terraform?  Currently, there is no support
-for commits inside the Terraform ecosystem, so they have to be handled 
+for commits inside the Terraform ecosystem, so they have to be handled
 externally.  Lack of finalizers are
 [a known shortcoming](https://github.com/hashicorp/terraform/issues/6258)
 for Terraform and, once it is addressed, support for it can be added to the
@@ -73,3 +73,19 @@ plan file.
 This same thing is called "facts" in Ansible.  Some of our Ansible modules have
 support for an additional operation, `find`, that acts in some ways like this,
 but support for this is still being investigated or developed.
+
+## Further Reading
+
+* Terraform
+    * [Terraform Documentation](https://www.terraform.io/docs/index.html)
+
+    * [Terraform panos Provider](https://www.terraform.io/docs/providers/panos/index.html)
+
+    * [Terraform: Up & Running](https://www.terraformupandrunning.com)
+
+* Ansible
+    * [Ansible Docs](https://docs.ansible.com)
+
+    * [ansible-pan](https://panwansible.readthedocs.io/en/latest/index.html)
+
+    * [Ansible: Up & Running](http://www.ansiblebook.com)

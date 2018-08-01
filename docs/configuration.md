@@ -20,39 +20,18 @@ Download the lab repository to your home directory.
 $ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro
 ```
 
-Change into the lab directoryu and run the lab configuration script.  This will install the Terraform binary and the Ansible package.
+Change into the lab directory and run the lab configuration script.  This will install the Terraform binary and the Ansible package.
 
 ```bash
 $ cd terraform-ansible-intro
 $ ./setup
 ```
 
-Test to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the `/usr/local/bin` directory.
+Run the commands below to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the `/usr/local/bin` directory.
 
 ```bash
 $ terraform --version
 $ ansible --version
-```
-
-## Verify the Google Cloud SDK configuration
-Use the following `gcloud config` command to ensure you are using the Qwiklabs account and project identifier.
-
-```bash
-$ gcloud config list
-```
-
-Confirm that the `account` and `project` are the same as those provided by Qwiklabs.
-
-Use the following command to change the account (if needed).
-
-```bash
-$ gcloud auth login <QWIKLABS_USERNAME>
-```
-
-Use the following command to change the project (if needed).
-
-```bash
-$ gcloud config set project <QWIKLABS_PROJECT>
 ```
 
 ## Enable the Compute Engine API
@@ -69,7 +48,7 @@ Use the following `gcloud iam` command to list the default service accounts.
 $ gcloud iam service-accounts list
 ```
 
-Use the following `gcloud iam` command to download the credentials for the Compute Engine default service account using it associated email address.
+Use the following `gcloud iam` command to download the credentials for the __Compute Engine default service account__ using its associated email address (displayed in the output of the previous command).
 
 ```bash
 $ gcloud iam service-accounts keys create gcp_compute_key.json --iam-account <EMAIL_ADDRESS>
@@ -78,7 +57,7 @@ $ gcloud iam service-accounts keys create gcp_compute_key.json --iam-account <EM
 Verify the JSON credentials file was successfully created.
 
 ```bash
-cat gcp_compute_key.json
+$ cat gcp_compute_key.json
 ```
 
 ## Configure SSH credentials

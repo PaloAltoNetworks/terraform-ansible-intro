@@ -18,33 +18,26 @@ $ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 
 ## Task 2 - Basic Network Config
 
-Open a text editor like **vim**, **emacs**, or **nano** and create the file
-`inventory`.  This file contains a list of hosts that Ansible will communicate
-with during execution.
+Using a text editor such as **vim**, **emacs**, or **nano** edit the file called `inventory`.  This file will contains a list of hosts that Ansible will communicate with during execution.
 
-Add the following to the file `inventory`, **replacing** the IP address with
-the address of your lab firewall.
+Replace the value `127.0.0.1` with the external IP address of your VM-Series instance.
 
 ```yml
 [fw]
 127.0.0.1
 ```
 
-Next, create the file `fw_creds.yml`.  Replace the IP address used in
-**ip_address** with the address of your lab  firewall, and change the
-**username** and **password** fields to the values you have used.
+Next, create the file `fw_vars.yml` and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.
 
 ```yml
-ip_address: '127.0.0.1'
-username: 'admin'
-password: 'admin'
+ip_address: ''
+username: ''
+password: ''
 ```
 
-Now, create the file `network.yml`.  This will be the playbook that holds the
-low level networking config for our firewall.
+Now, create the file `network.yml`.  This will be the playbook that holds the low level networking config for our firewall.
 
-Each playbook needs the following header information to pull in the variables
-we just defined.  Add the following to `network.yml`:
+Each playbook needs the following header information to pull in the variables we just defined.  Add the following to `network.yml`:
 
 ```yml
 - name: SKO2019 Ansible Playbook
@@ -57,15 +50,13 @@ we just defined.  Add the following to `network.yml`:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 ```
 
 ### Network Interfaces & Zones
 
-We're going to create the exact same configuration with Ansible as we did with
-Terraform.  Here are screenshots of the network interfaces and zones we need to
-create:
+We're going to create the exact same configuration with Ansible as we did with Terraform.  Here are screenshots of the network interfaces and zones we need to create:
 
 ![eth1/1](img/eth1.png)
 
@@ -80,7 +71,7 @@ Add the following to `network.yml`:
 ```yml
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: "Configure eth1/1"
@@ -107,10 +98,7 @@ Refer to the [module
 documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html)
 for ethernet interfaces if you need.
 
-Note that Ansible is a little different from Terraform.  We have to specify the
-**ip_address**, **username**, and **password** each time because each module
-executes independently.  Also, we don't have to create the zones as a separate
-step because they will be created for us if they don't exist.
+Note that Ansible is a little different from Terraform.  We have to specify the **ip_address**, **username**, and **password** each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.
 
 ### Run the Playbook
 
@@ -127,7 +115,7 @@ Your final, full `network.yml` playbook should look like this:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: "Configure eth1/1"
@@ -156,22 +144,15 @@ Run your playbook with the following command:
 $ ansible-playbook -i inventory network.yml
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Because we specified `commit: False` for each module call in
-our playbook, the changes have only been made to the candidate configuration
-and have **not** been committed.
+Log in to the GUI of your firewall and verify that the configuration matches what you want.  Because we specified `commit: False` for each module call in our playbook, the changes have only been made to the candidate configuration and have **not** been committed.
 
-If you get errors, indentation is most likely the problem.  Once you fix any
-errors, run the playbook again and the firewall should now have your desired
-config.
+If you get errors, indentation is most likely the problem.  Once you fix any errors, run the playbook again and the firewall should now have your desired config.
 
 ---
 
 ## Task 3 - Objects and Security Rule Creation
 
-Now we will create the same address object and security rules as in the
-Terraform portion.  Create a new file `rules.yml`, and copy in the header
-information from the network config steps:
+Now we will create the same address object and security rules as in the Terraform portion.  Create a new file `rules.yml`, and copy in the header information from the network config steps:
 
 ```yml
 - name: SKO2019 Ansible Playbook
@@ -184,7 +165,7 @@ information from the network config steps:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 ```
 
@@ -270,7 +251,7 @@ Your final, full `rules.yml` playbook should look like this:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: "Add address object for wordpress server"
@@ -327,8 +308,6 @@ Run your playbook with the following command:
 $ ansible-playbook -i inventory rules.yml
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Remember that your changes haven't been committed, and if you
-get errors, indentation is most likely the problem.
+Log in to the GUI of your firewall and verify that the configuration matches what you want.  Remember that your changes haven't been committed, and if you get errors, indentation is most likely the problem.
 
 You're done with the Ansible portion of the lab.

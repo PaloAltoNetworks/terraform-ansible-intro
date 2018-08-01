@@ -11,6 +11,7 @@ pages:
   - Ansible Lab:
       - Background: 'ansible-background.md'
       - Lab Activities: 'ansible-lab.md'
-  - 'comparison.md'
+  - Clean Up: 'clean-up.md'
+  - Conclusion: 'comparison.md'
 theme:
     name: readthedocs

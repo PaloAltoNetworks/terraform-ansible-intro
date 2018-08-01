@@ -8,16 +8,37 @@ Change into the `terraform` directory.  We'll use it for all of our Terraform fi
 $ cd ../terraform
 ```
 
-Open a text editor like **vim**, **emacs**, or **nano** and create the file `sko2019.tf`.  We will place our Terraform plan in here.
+Open the file `panos_variables.tf` in a text editor such as **vim**, **emacs**, or **nano** and replace the default values of the varaibles `panos_hostname`, `panos_username`, and `panos_password` with the appropriate values from your VM-Series instance.
 
-Start by defining the provider config, which will use the `panos` provider. Replace the IP address used in **hostname** with the address of your lab firewall, and change the **username** and **password** fields to the values
-you have used.
+```yml
+variable "panos_hostname" {
+  description = "Hostname of the VM-Series instance"
+  type = "string"
+  default = ""
+}
+
+variable "panos_username" {
+  description = "Username of the VM-Series administrator"
+  type = "string"
+  default = "northamerica-northeast1"
+}
+
+variable "panos_password" {
+  description = "Password of the VM-Series administrator"
+  type = "string"
+  default = ""
+}
+```
+
+Using your text editor create the file `panos_plan.tf`.  We will place our Terraform plan in this file.
+
+Start by defining the provider config, which will use the `panos` provider. Note that the hostname, username, and password fields refer to the variables we defined in the `panos_variables.tf` file.
 
 ```hcl
 provider "panos" {
-    hostname = "127.0.0.1"
-    username = "admin"
-    password = "admin"
+    hostname = "${var.panos_hostname}"
+    username = "${var.panos_username}"
+    password = "${var.panos_password}"
 }
 ```
 
@@ -29,7 +50,7 @@ Next, create the interfaces.  Here are screenshots of the interfaces we need to 
 
 ![ethernet1/2](img/eth2.png)
 
-Add the following configuration to `sko2019.tf`.  Note that the **ethernet1/2** interface omits the option to create the default route via DHCP.
+Add the following configuration to `panos_plan.tf`.  Note that the **ethernet1/2** interface omits the option to create the default route via DHCP.
 
 ```hcl
 resource "panos_ethernet_interface" "eth1" {
@@ -58,7 +79,7 @@ Next, create zones for the interfaces we just added.  Here are screenshots of th
 
 ![L3-untrust](img/l3-untrust.png)
 
-Add the following configuration to `sko2019.tf`.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.
+Add the following configuration to `panos_plan.tf`.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.
 
 ```hcl
 resource "panos_zone" "int" {
@@ -79,7 +100,7 @@ documentation](https://www.terraform.io/docs/providers/panos/r/zone.html) for zo
 
 ### Apply the Terraform Plan
 
-Your final, full `sko2019.tf` file should look something like this:
+Your final, full `panos_plan.tf` file should look something like this:
 
 ```hcl
 provider "panos" {
@@ -139,7 +160,7 @@ Next, we will create an address object and some security rules. Here is a screen
 
 ![Wordpress Server](img/wordpress.png)
 
-Add the following to `sko2019.tf`:
+Add the following to `panos_plan.tf`:
 
 ```hcl
 resource "panos_address_object" "wp" {
@@ -155,7 +176,7 @@ Now, here is a screenshot of security rules that we need to create:
 
 ![Security Policy](img/security-policy.png)
 
-Add the following to `sko2019.tf`.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.
+Add the following to `panos_plan.tf`.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.
 
 ```hcl
 resource "panos_security_rule_group" "policy" {

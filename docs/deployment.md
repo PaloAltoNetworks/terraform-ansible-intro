@@ -22,7 +22,7 @@ Edit the file containing the Terraform variables.  These variable will be refere
 $ vi gcp_variables.tf
 ```
 
-Replace the default values for variables `gcp_project_id`, `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key`.
+Replace the default value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have have been pre-populated.
 
 ```yml
 variable "gcp_project_id" {
@@ -40,13 +40,13 @@ variable "gcp_region" {
 variable "gcp_credentials_file" {
   description = "Full path to the JSON credentials file"
   type = "string"
-  default = ""
+  default = "../gcp_compute_key.json"
 }
 
 variable "gcp_ssh_key" {
   description = "Full path to the SSH public key file"
   type = "string"
-  default = ""
+  default = "../../.ssh/sko19_ssh_key.pub"
 }
 ```
 
@@ -71,6 +71,7 @@ Type the following command to execute the Terraform plan.  You can append `--aut
 ```bash
 $ terraform apply
 ```
+Copy and paste the output fields from the plan into a note or document on your laptop.  You will need this information later.
 
 ## Update the SSK config
 Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
@@ -89,18 +90,24 @@ $ gcloud compute instances list
 SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few moments for the firewall to finish booting up.
 
 ```bash
-$ ssh admin@<INSTANCE>.<ZONE>.<REGION>
+$ ssh admin@<INSTANCE>.<ZONE>.<PROJECT>
 ```
 
-Set the administrative password for the VM-Series firewall.
+---
+**NOTE:** If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted.  Hit Control-C and try again after a few moments.  Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
+
+---
+
+Once successfully logged in and presented with a CLI prompt you must set the administrative password for the VM-Series firewall.
 
 ```html
-admin> configure
-admin# set mgt-config users admin password
-admin# set password
-admin# commit
-admin# exit
-admin> exit
+admin@PA-VM> configure
+admin@PA-VM# set mgt-config users admin password
+admin@PA-VM# commit
+admin@PA-VM# exit
+admin@PA-VM> exit
 ```
+
+Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address displayed in the `terraform apply` output.
 
 You are now ready to begin the Terraform portion of the lab.

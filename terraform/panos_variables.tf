@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Palo Alto Networks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,24 @@
 
 
 /*
- * Terraform output variables for GCP.
+ * Terraform variable declarations for the VM-Series instance.
  */
 
-output "Hostname"  {
-    value = "${google_compute_instance.panos.instance_id}"
+variable "panos_hostname" {
+  description = "Hostname of the VM-Series instance"
+  type = "string"
+  default = ""
 }
 
-output "External IP" {
-    value = "${google_compute_instance.panos.network_interface.0.access_config.0.nat_ip}"
+variable "panos_username" {
+  description = "Username of the VM-Series administrator"
+  type = "string"
+  default = "northamerica-northeast1"
 }
 
-output "Zone" {
-    value = "${google_compute_instance.panos.zone}"
+variable "panos_password" {
+  description = "Password of the VM-Series administrator"
+  type = "string"
+  default = ""
 }
 
-output "Project" {
-    value = "${var.gcp_project}"
-}

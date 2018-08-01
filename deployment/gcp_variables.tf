@@ -34,11 +34,11 @@ variable "gcp_region" {
 variable "gcp_credentials_file" {
   description = "Full path to the JSON credentials file"
   type = "string"
-  default = ""
+  default = "../gcp_compute_key.json"
 }
 
 variable "gcp_ssh_key" {
     description = "Full path to the SSH public key file"
     type = "string"
-    default = ""
+    default = "../../.ssh/sko19_ssh_key.pub"
 }

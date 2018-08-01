@@ -53,10 +53,10 @@ function getAnsible() {
 
   echo -n "Installing Ansible ..."
   sudo apt-get -y update &> setup.log
-  sudo apt-get -y install software-properties-common &> setup.log
-  sudo apt-add-repository ppa:ansible/ansible -y &> setup.log
-  sudo apt-get -y update &> setup.log
-  sudo apt-get -y install ansible &> setup.log
+  sudo apt-get -y install software-properties-common &>> setup.log
+  sudo apt-add-repository ppa:ansible/ansible -y &>> setup.log
+  sudo apt-get -y update &>> setup.log
+  sudo apt-get -y install ansible &>> setup.log
 
   if [ -e ${A_EXE} ]; then
     echo " Done"
@@ -65,6 +65,14 @@ function getAnsible() {
   fi
 }
 
+# Install Python libraries.
+function getPyLibs() {
+  echo -n "Installing Python libraries ..."
+  sudo pip install pandevice xmltodict &>> setup.log
+  echo " Done"
+}
+
 # Main program
 getTerraform
 getAnsible
+getPyLibs
