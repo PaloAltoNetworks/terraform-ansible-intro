@@ -187,7 +187,7 @@
 127.0.0.1
 </code></pre>
 
-<p>Next, create the file <code>fw_vars.yml</code> and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.</p>
+<p>Next, create the file <code>vars.yml</code> and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.</p>
 <pre><code class="yml">ip_address: ''
 username: ''
 password: ''
@@ -205,7 +205,7 @@ password: ''
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 </code></pre>
 
@@ -218,7 +218,7 @@ password: ''
 <p>Add the following to <code>network.yml</code>:</p>
 <pre><code class="yml">  tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: &quot;Configure eth1/1&quot;
@@ -257,7 +257,7 @@ for ethernet interfaces if you need.</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: &quot;Configure eth1/1&quot;
@@ -299,7 +299,7 @@ for ethernet interfaces if you need.</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 </code></pre>
 
@@ -373,7 +373,7 @@ for address objects if you need.</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: &quot;Add address object for wordpress server&quot;

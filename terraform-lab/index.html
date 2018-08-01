@@ -296,7 +296,7 @@ $ terraform plan
 <h2 id="task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</h2>
 <p>Next, we will create an address object and some security rules. Here is a screenshot of an address object we need to create:</p>
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
-<p>Add the following to <code>panos_plan.tf</code>:</p>
+<p>Add the following to the bottom of the <code>panos_plan.tf</code> file:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
     name = &quot;wordpress server&quot;
     description = &quot;Internal server&quot;
@@ -307,7 +307,7 @@ $ terraform plan
 <p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider documentation</a> for address objects if you need.</p>
 <p>Now, here is a screenshot of security rules that we need to create:</p>
 <p><img alt="Security Policy" src="../img/security-policy.png" /></p>
-<p>Add the following to <code>panos_plan.tf</code>.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
+<p>Add the following to the bottom of your <code>panos_plan.tf</code> file.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
         name = &quot;Wordpress Traffic&quot;
@@ -352,7 +352,7 @@ $ terraform plan
 </code></pre>
 
 <h3 id="apply-the-terraform-plan_1">Apply the Terraform Plan</h3>
-<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code> again, so just check your config with <code>terraform plan</code>:</p>
+<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code> again since the provider has already been initialized, so just check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform plan
 </code></pre>
 
