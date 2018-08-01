@@ -242,7 +242,7 @@ If there are no errors, go ahead and push your config updates the firewall:
 $ terraform apply
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have **not** been committed.
+Switch browser tabs to the web UI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have **not** been committed.
 
 ---
 
@@ -254,4 +254,6 @@ Terraform will clean up our config for us with the `terraform destroy` command. 
 $ terraform destroy
 ```
 
-You're done with the Terraform portion of the lab.
+Confirm in the firewall UI that the security rules, objects, and network configs we've created have been removed.
+
+You're now done with the Terraform portion of the lab.
