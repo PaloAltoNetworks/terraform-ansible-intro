@@ -266,7 +266,6 @@ for ethernet interfaces if you need.</p>
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
-      commit: False
 
   - name: &quot;Configure eth1/2&quot;
     panos_interface:
@@ -275,7 +274,6 @@ for ethernet interfaces if you need.</p>
       password: '{{ password }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
-      commit: False
 </code></pre>
 
 <p>Run your playbook with the following command:</p>
@@ -333,7 +331,6 @@ for address objects if you need.</p>
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
-      commit: false
 
   - name: &quot;Add Outbound rule&quot;
     panos_security_rule:
@@ -380,7 +377,6 @@ for address objects if you need.</p>
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 
   - name: &quot;Add Wordpress Traffic rule&quot;
     panos_security_rule:
@@ -394,7 +390,6 @@ for address objects if you need.</p>
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
-      commit: false
 
   - name: &quot;Add Outbound rule&quot;
     panos_security_rule:
@@ -406,7 +401,6 @@ for address objects if you need.</p>
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
-      commit: false
 
   - name: &quot;Add Default Deny rule&quot;
     panos_security_rule:
@@ -416,7 +410,6 @@ for address objects if you need.</p>
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
-      commit: false
 </code></pre>
 
 <p>Run your playbook with the following command:</p>
