@@ -59,6 +59,10 @@ Each playbook needs the following header information to pull in the variables we
     include_vars: 'vars.yml'
     no_log: 'yes'
 ```
+---
+**NOTE:** Ansible configuration files utilize a format known as YAML (Yet Another Markup Language). Spacing is *very* important when editing YAML files.  Please be sure when copying and pasting to include all spacing as well.  All of the task names and parameters should line up properly.
+
+---
 
 ### Network Interfaces & Zones
 
@@ -186,7 +190,6 @@ Add the following to `rules.yml`:
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 ```
 
 Refer to the [module
@@ -224,7 +227,6 @@ Add the following to `rules.yml`:
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
-      commit: false
 
   - name: "Add Default Deny rule"
     panos_security_rule:
@@ -234,7 +236,6 @@ Add the following to `rules.yml`:
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
-      commit: false
 ```
 
 ### Run the Playbook
