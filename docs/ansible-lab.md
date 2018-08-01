@@ -75,11 +75,6 @@ We're going to create the exact same configuration with Ansible as we did with T
 Add the following to `network.yml`:
 
 ```yml
-  tasks:
-  - name: Grab auth creds
-    include_vars: 'vars.yml'
-    no_log: 'yes'
-
   - name: "Configure eth1/1"
     panos_interface:
       ip_address: '{{ ip_address }}'
