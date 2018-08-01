@@ -239,9 +239,7 @@ password: ''
       commit: False
 </code></pre>
 
-<p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html">module
-documentation</a>
-for ethernet interfaces if you need.</p>
+<p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html">module documentation</a> for ethernet interfaces if you need.</p>
 <p>Note that Ansible is a little different from Terraform.  We have to specify the <strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.</p>
 <h3 id="run-the-playbook">Run the Playbook</h3>
 <p>Your final, full <code>network.yml</code> playbook should look like this:</p>
@@ -266,6 +264,7 @@ for ethernet interfaces if you need.</p>
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
+      commit: False
 
   - name: &quot;Configure eth1/2&quot;
     panos_interface:
@@ -274,6 +273,7 @@ for ethernet interfaces if you need.</p>
       password: '{{ password }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
+      commit: False
 </code></pre>
 
 <p>Run your playbook with the following command:</p>
@@ -331,6 +331,7 @@ for address objects if you need.</p>
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
+      commit: False
 
   - name: &quot;Add Outbound rule&quot;
     panos_security_rule:
@@ -342,6 +343,7 @@ for address objects if you need.</p>
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
+      commit: False
 
   - name: &quot;Add Default Deny rule&quot;
     panos_security_rule:
@@ -351,6 +353,7 @@ for address objects if you need.</p>
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
+      commit: False
 </code></pre>
 
 <h3 id="run-the-playbook_1">Run the Playbook</h3>
@@ -390,6 +393,7 @@ for address objects if you need.</p>
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
+      commit: False
 
   - name: &quot;Add Outbound rule&quot;
     panos_security_rule:
@@ -401,6 +405,7 @@ for address objects if you need.</p>
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
+      commit: False
 
   - name: &quot;Add Default Deny rule&quot;
     panos_security_rule:
@@ -410,6 +415,7 @@ for address objects if you need.</p>
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
+      commit: False
 </code></pre>
 
 <p>Run your playbook with the following command:</p>
