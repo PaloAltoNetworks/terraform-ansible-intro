@@ -216,12 +216,7 @@ password: ''
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
 <p>Add the following to <code>network.yml</code>:</p>
-<pre><code class="yml">  tasks:
-  - name: Grab auth creds
-    include_vars: 'vars.yml'
-    no_log: 'yes'
-
-  - name: &quot;Configure eth1/1&quot;
+<pre><code class="yml">  - name: &quot;Configure eth1/1&quot;
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
