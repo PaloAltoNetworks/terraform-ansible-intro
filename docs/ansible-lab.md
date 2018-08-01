@@ -99,9 +99,7 @@ Add the following to `network.yml`:
       commit: False
 ```
 
-Refer to the [module
-documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html)
-for ethernet interfaces if you need.
+Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html) for ethernet interfaces if you need.
 
 Note that Ansible is a little different from Terraform.  We have to specify the **ip_address**, **username**, and **password** each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.
 
@@ -131,6 +129,7 @@ Your final, full `network.yml` playbook should look like this:
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
+      commit: False
 
   - name: "Configure eth1/2"
     panos_interface:
@@ -139,6 +138,7 @@ Your final, full `network.yml` playbook should look like this:
       password: '{{ password }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
+      commit: False
 ```
 
 Run your playbook with the following command:
@@ -213,6 +213,7 @@ Add the following to `rules.yml`:
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
+      commit: False
 
   - name: "Add Outbound rule"
     panos_security_rule:
@@ -224,6 +225,7 @@ Add the following to `rules.yml`:
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
+      commit: False
 
   - name: "Add Default Deny rule"
     panos_security_rule:
@@ -233,6 +235,7 @@ Add the following to `rules.yml`:
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
+      commit: False
 ```
 
 ### Run the Playbook
@@ -275,6 +278,7 @@ Your final, full `rules.yml` playbook should look like this:
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
+      commit: False
 
   - name: "Add Outbound rule"
     panos_security_rule:
@@ -286,6 +290,7 @@ Your final, full `rules.yml` playbook should look like this:
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
+      commit: False
 
   - name: "Add Default Deny rule"
     panos_security_rule:
@@ -295,6 +300,7 @@ Your final, full `rules.yml` playbook should look like this:
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
+      commit: False
 ```
 
 Run your playbook with the following command:
