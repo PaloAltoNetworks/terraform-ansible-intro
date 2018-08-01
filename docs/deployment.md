@@ -94,7 +94,7 @@ $ ssh admin@<INSTANCE>.<ZONE>.<PROJECT>
 ```
 
 ---
-**NOTE:** If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted.  Hit Control-C and try again after a few moments.  Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
+**NOTE:** If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted yet.  Hit **Control-C** and wait few moments before trying again.  Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
 
 ---
 

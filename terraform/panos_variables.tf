@@ -28,7 +28,7 @@ variable "panos_hostname" {
 variable "panos_username" {
   description = "Username of the VM-Series administrator"
   type = "string"
-  default = "northamerica-northeast1"
+  default = "admin"
 }
 
 variable "panos_password" {
