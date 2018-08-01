@@ -18,7 +18,7 @@ Open the file `panos_variables.tf` in a text editor such as **vim**, **emacs**, 
 
 ```yml
 variable "panos_hostname" {
-  description = "Hostname of the VM-Series instance"
+  description = "The external IP address of the VM-Series instance"
   type = "string"
   default = ""
 }
@@ -26,7 +26,7 @@ variable "panos_hostname" {
 variable "panos_username" {
   description = "Username of the VM-Series administrator"
   type = "string"
-  default = "northamerica-northeast1"
+  default = ""
 }
 
 variable "panos_password" {
@@ -110,9 +110,9 @@ Your final, full `panos_plan.tf` file should look something like this:
 
 ```hcl
 provider "panos" {
-    hostname = "127.0.0.1"
-    username = "admin"
-    password = "admin"
+    hostname = "${var.panos_hostname}"
+    username = "${var.panos_username}"
+    password = "${var.panos_password}"
 }
 
 resource "panos_ethernet_interface" "eth1" {

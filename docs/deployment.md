@@ -22,7 +22,7 @@ Edit the file containing the Terraform variables.  These variable will be refere
 $ vi gcp_variables.tf
 ```
 
-Replace the default value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have have been pre-populated.
+Replace the default value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated.
 
 ```yml
 variable "gcp_project_id" {
@@ -66,12 +66,12 @@ Type the following command to perform a dry-run of the Terraform plan and gather
 $ terraform plan
 ```
 
-Type the following command to execute the Terraform plan.  You can append `--auto-approve` to the command in order to avoid the confirmation step.
+Type the following command to execute the Terraform plan.  You can append `--auto-approve` to the command in order to avoid the confirmation step.  This will deploy the VM-Series instance in GCP.  This will take a few moments to complete.
 
 ```bash
 $ terraform apply
 ```
-Copy and paste the output fields from the plan into a note or document on your laptop.  You will need this information later.
+Copy and paste the output fields (in green) into a note or document on your laptop.  You will need this information later.
 
 ## Update the SSK config
 Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
@@ -108,6 +108,6 @@ admin@PA-VM# exit
 admin@PA-VM> exit
 ```
 
-Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address displayed in the `terraform apply` output.
+Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address of the VM-Series instance.
 
 You are now ready to begin the Terraform portion of the lab.

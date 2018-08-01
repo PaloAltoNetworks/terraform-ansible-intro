@@ -20,7 +20,7 @@
  */
 
 variable "panos_hostname" {
-  description = "Hostname of the VM-Series instance"
+  description = "The external IP address of the VM-Series instance"
   type = "string"
   default = ""
 }
@@ -28,7 +28,7 @@ variable "panos_hostname" {
 variable "panos_username" {
   description = "Username of the VM-Series administrator"
   type = "string"
-  default = "admin"
+  default = ""
 }
 
 variable "panos_password" {

@@ -27,7 +27,7 @@ $ cd terraform-ansible-intro
 $ ./setup
 ```
 
-Run the commands below to ensure the Terraform and Ansible binaries are properly installed.  Both executables should be located in the `/usr/local/bin` directory.
+Run the commands below to ensure the Terraform and Ansible binaries are properly installed.  Both commands should display the current version of each executable.
 
 ```bash
 $ terraform --version
