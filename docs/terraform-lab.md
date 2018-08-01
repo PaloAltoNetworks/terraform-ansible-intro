@@ -1,5 +1,11 @@
 # Terraform Lab Activities
 
+In this activity you will:
+
+* Perform basic network configuration
+* Create objects and security rules
+* Clean up the firewall configs
+
 ## Task 1 - Basic Networking Config
 
 Change into the `terraform` directory.  We'll use it for all of our Terraform files.

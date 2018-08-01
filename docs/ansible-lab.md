@@ -1,5 +1,11 @@
 # Ansible Lab Activities
 
+In this activity you will:
+
+* Set up the initial configuration files
+* Perform basic network configuration
+* Create objects and security rules
+
 ## Task 1 - Lab Setup
 
 Change into the `ansible` directory.  We'll use it for all of our Ansible files.
