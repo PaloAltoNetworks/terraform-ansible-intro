@@ -131,7 +131,6 @@ Your final, full `network.yml` playbook should look like this:
       if_name: 'ethernet1/1'
       create_default_route: true
       zone_name: 'L3-trust'
-      commit: False
 
   - name: "Configure eth1/2"
     panos_interface:
@@ -140,7 +139,6 @@ Your final, full `network.yml` playbook should look like this:
       password: '{{ password }}'
       if_name: 'ethernet1/2'
       zone_name: 'L3-untrust'
-      commit: False
 ```
 
 Run your playbook with the following command:
@@ -215,7 +213,6 @@ Add the following to `rules.yml`:
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
-      commit: false
 
   - name: "Add Outbound rule"
     panos_security_rule:
@@ -265,7 +262,6 @@ Your final, full `rules.yml` playbook should look like this:
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 
   - name: "Add Wordpress Traffic rule"
     panos_security_rule:
@@ -279,7 +275,6 @@ Your final, full `rules.yml` playbook should look like this:
       destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
-      commit: false
 
   - name: "Add Outbound rule"
     panos_security_rule:
@@ -291,7 +286,6 @@ Your final, full `rules.yml` playbook should look like this:
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
-      commit: false
 
   - name: "Add Default Deny rule"
     panos_security_rule:
@@ -301,7 +295,6 @@ Your final, full `rules.yml` playbook should look like this:
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
-      commit: false
 ```
 
 Run your playbook with the following command:
