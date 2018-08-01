@@ -33,7 +33,7 @@ Replace the value `127.0.0.1` with the external IP address of your VM-Series ins
 127.0.0.1
 ```
 
-Next, create the file `fw_vars.yml` and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.
+Next, create the file `vars.yml` and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.
 
 ```yml
 ip_address: ''
@@ -56,7 +56,7 @@ Each playbook needs the following header information to pull in the variables we
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 ```
 
@@ -77,7 +77,7 @@ Add the following to `network.yml`:
 ```yml
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: "Configure eth1/1"
@@ -121,7 +121,7 @@ Your final, full `network.yml` playbook should look like this:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: "Configure eth1/1"
@@ -171,7 +171,7 @@ Now we will create the same address object and security rules as in the Terrafor
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 ```
 
@@ -257,7 +257,7 @@ Your final, full `rules.yml` playbook should look like this:
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_vars.yml'
+    include_vars: 'vars.yml'
     no_log: 'yes'
 
   - name: "Add address object for wordpress server"

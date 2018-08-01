@@ -166,7 +166,7 @@ Next, we will create an address object and some security rules. Here is a screen
 
 ![Wordpress Server](img/wordpress.png)
 
-Add the following to `panos_plan.tf`:
+Add the following to the bottom of the `panos_plan.tf` file:
 
 ```hcl
 resource "panos_address_object" "wp" {
@@ -182,7 +182,7 @@ Now, here is a screenshot of security rules that we need to create:
 
 ![Security Policy](img/security-policy.png)
 
-Add the following to `panos_plan.tf`.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.
+Add the following to the bottom of your `panos_plan.tf` file.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.
 
 ```hcl
 resource "panos_security_rule_group" "policy" {
@@ -230,7 +230,7 @@ resource "panos_security_rule_group" "policy" {
 
 ### Apply the Terraform Plan
 
-Let's apply the config to our firewall.  We don't need to run `terraform init` again, so just check your config with `terraform plan`:
+Let's apply the config to our firewall.  We don't need to run `terraform init` again since the provider has already been initialized, so just check your config with `terraform plan`:
 
 ```bash
 $ terraform plan
