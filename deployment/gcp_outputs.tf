@@ -32,5 +32,5 @@ output "Zone" {
 }
 
 output "Project" {
-    value = "${var.gcp_project}"
+    value = "${var.gcp_project_id}"
 }

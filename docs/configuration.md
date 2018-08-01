@@ -20,7 +20,7 @@ Download the lab repository to your home directory.
 $ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro
 ```
 
-Change into the lab directory and run the lab configuration script.  This will install the Terraform binary and the Ansible package.
+Change into the lab directory and run the lab configuration script.  This will install the Terraform binary and the Ansible package.  This may take a few minutes to complete.
 
 ```bash
 $ cd terraform-ansible-intro
