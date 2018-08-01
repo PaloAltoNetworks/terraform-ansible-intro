@@ -177,7 +177,7 @@
 
 <p>Open the file <code>panos_variables.tf</code> in a text editor such as <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and replace the default values of the varaibles <code>panos_hostname</code>, <code>panos_username</code>, and <code>panos_password</code> with the appropriate values from your VM-Series instance.</p>
 <pre><code class="yml">variable &quot;panos_hostname&quot; {
-  description = &quot;Hostname of the VM-Series instance&quot;
+  description = &quot;The external IP address of the VM-Series instance&quot;
   type = &quot;string&quot;
   default = &quot;&quot;
 }
@@ -185,7 +185,7 @@
 variable &quot;panos_username&quot; {
   description = &quot;Username of the VM-Series administrator&quot;
   type = &quot;string&quot;
-  default = &quot;northamerica-northeast1&quot;
+  default = &quot;&quot;
 }
 
 variable &quot;panos_password&quot; {
@@ -249,9 +249,9 @@ documentation</a> for zones if you need.</p>
 <h3 id="apply-the-terraform-plan">Apply the Terraform Plan</h3>
 <p>Your final, full <code>panos_plan.tf</code> file should look something like this:</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
-    hostname = &quot;127.0.0.1&quot;
-    username = &quot;admin&quot;
-    password = &quot;admin&quot;
+    hostname = &quot;${var.panos_hostname}&quot;
+    username = &quot;${var.panos_username}&quot;
+    password = &quot;${var.panos_password}&quot;
 }
 
 resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {

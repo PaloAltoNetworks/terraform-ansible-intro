@@ -185,7 +185,7 @@
 <pre><code class="bash">$ vi gcp_variables.tf
 </code></pre>
 
-<p>Replace the default value for the variable <code>gcp_project_id</code> with the GCP Project ID displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have have been pre-populated.</p>
+<p>Replace the default value for the variable <code>gcp_project_id</code> with the GCP Project ID displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have been pre-populated.</p>
 <pre><code class="yml">variable &quot;gcp_project_id&quot; {
   description = &quot;GCP Project ID&quot;
   type = &quot;string&quot;
@@ -222,11 +222,11 @@ variable &quot;gcp_ssh_key&quot; {
 <pre><code class="bash">$ terraform plan
 </code></pre>
 
-<p>Type the following command to execute the Terraform plan.  You can append <code>--auto-approve</code> to the command in order to avoid the confirmation step.</p>
+<p>Type the following command to execute the Terraform plan.  You can append <code>--auto-approve</code> to the command in order to avoid the confirmation step.  This will deploy the VM-Series instance in GCP.  This will take a few moments to complete.</p>
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Copy and paste the output fields from the plan into a note or document on your laptop.  You will need this information later.</p>
+<p>Copy and paste the output fields (in green) into a note or document on your laptop.  You will need this information later.</p>
 <h2 id="update-the-ssk-config">Update the SSK config</h2>
 <p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
 <pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
@@ -252,7 +252,7 @@ admin@PA-VM# exit
 admin@PA-VM&gt; exit
 </code></pre>
 
-<p>Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address displayed in the <code>terraform apply</code> output.</p>
+<p>Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address of the VM-Series instance.</p>
 <p>You are now ready to begin the Terraform portion of the lab.</p>
               
             </div>
