@@ -209,6 +209,9 @@ password: ''
     no_log: 'yes'
 </code></pre>
 
+<hr />
+<p><strong>NOTE:</strong> Ansible configuration files utilize a format known as YAML (Yet Another Markup Language). Spacing is <em>very</em> important when editing YAML files.  Please be sure when copying and pasting to include all spacing as well.  All of the task names and parameters should line up properly.</p>
+<hr />
 <h3 id="network-interfaces-zones">Network Interfaces &amp; Zones</h3>
 <p>We're going to create the exact same configuration with Ansible as we did with Terraform.  Here are screenshots of the network interfaces and zones we need to create:</p>
 <p><img alt="eth1/1" src="../img/eth1.png" /></p>
@@ -310,7 +313,6 @@ for ethernet interfaces if you need.</p>
       addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
-      commit: false
 </code></pre>
 
 <p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_object_module.html">module
@@ -343,7 +345,6 @@ for address objects if you need.</p>
       source_zone: ['L3-trust']
       destination_zone: ['L3-untrust']
       action: 'allow'
-      commit: false
 
   - name: &quot;Add Default Deny rule&quot;
     panos_security_rule:
@@ -353,7 +354,6 @@ for address objects if you need.</p>
       operation: 'add'
       rule_name: 'Default Deny'
       action: 'deny'
-      commit: false
 </code></pre>
 
 <h3 id="run-the-playbook_1">Run the Playbook</h3>
