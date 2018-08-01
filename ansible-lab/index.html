@@ -119,7 +119,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../comparison/">Comparison</a>
+    <a class="" href="../clean-up/">Clean Up</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Conclusion</a>
 	    </li>
           
         </ul>
@@ -170,27 +175,20 @@
 
 <hr />
 <h2 id="task-2-basic-network-config">Task 2 - Basic Network Config</h2>
-<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file
-<code>inventory</code>.  This file contains a list of hosts that Ansible will communicate
-with during execution.</p>
-<p>Add the following to the file <code>inventory</code>, <strong>replacing</strong> the IP address with
-the address of your lab firewall.</p>
+<p>Using a text editor such as <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> edit the file called <code>inventory</code>.  This file will contains a list of hosts that Ansible will communicate with during execution.</p>
+<p>Replace the value <code>127.0.0.1</code> with the external IP address of your VM-Series instance.</p>
 <pre><code class="yml">[fw]
 127.0.0.1
 </code></pre>
 
-<p>Next, create the file <code>fw_creds.yml</code>.  Replace the IP address used in
-<strong>ip_address</strong> with the address of your lab  firewall, and change the
-<strong>username</strong> and <strong>password</strong> fields to the values you have used.</p>
-<pre><code class="yml">ip_address: '127.0.0.1'
-username: 'admin'
-password: 'admin'
+<p>Next, create the file <code>fw_vars.yml</code> and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.</p>
+<pre><code class="yml">ip_address: ''
+username: ''
+password: ''
 </code></pre>
 
-<p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the
-low level networking config for our firewall.</p>
-<p>Each playbook needs the following header information to pull in the variables
-we just defined.  Add the following to <code>network.yml</code>:</p>
+<p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the low level networking config for our firewall.</p>
+<p>Each playbook needs the following header information to pull in the variables we just defined.  Add the following to <code>network.yml</code>:</p>
 <pre><code class="yml">- name: SKO2019 Ansible Playbook
   hosts: fw
   connection: local
@@ -201,14 +199,12 @@ we just defined.  Add the following to <code>network.yml</code>:</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 </code></pre>
 
 <h3 id="network-interfaces-zones">Network Interfaces &amp; Zones</h3>
-<p>We're going to create the exact same configuration with Ansible as we did with
-Terraform.  Here are screenshots of the network interfaces and zones we need to
-create:</p>
+<p>We're going to create the exact same configuration with Ansible as we did with Terraform.  Here are screenshots of the network interfaces and zones we need to create:</p>
 <p><img alt="eth1/1" src="../img/eth1.png" /></p>
 <p><img alt="eth1/2" src="../img/eth2.png" /></p>
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
@@ -216,7 +212,7 @@ create:</p>
 <p>Add the following to <code>network.yml</code>:</p>
 <pre><code class="yml">  tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: &quot;Configure eth1/1&quot;
@@ -242,10 +238,7 @@ create:</p>
 <p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html">module
 documentation</a>
 for ethernet interfaces if you need.</p>
-<p>Note that Ansible is a little different from Terraform.  We have to specify the
-<strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module
-executes independently.  Also, we don't have to create the zones as a separate
-step because they will be created for us if they don't exist.</p>
+<p>Note that Ansible is a little different from Terraform.  We have to specify the <strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.</p>
 <h3 id="run-the-playbook">Run the Playbook</h3>
 <p>Your final, full <code>network.yml</code> playbook should look like this:</p>
 <pre><code class="yml">- name: SKO2019 Ansible Playbook
@@ -258,7 +251,7 @@ step because they will be created for us if they don't exist.</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: &quot;Configure eth1/1&quot;
@@ -285,18 +278,11 @@ step because they will be created for us if they don't exist.</p>
 <pre><code class="bash">$ ansible-playbook -i inventory network.yml
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Because we specified <code>commit: False</code> for each module call in
-our playbook, the changes have only been made to the candidate configuration
-and have <strong>not</strong> been committed.</p>
-<p>If you get errors, indentation is most likely the problem.  Once you fix any
-errors, run the playbook again and the firewall should now have your desired
-config.</p>
+<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Because we specified <code>commit: False</code> for each module call in our playbook, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
+<p>If you get errors, indentation is most likely the problem.  Once you fix any errors, run the playbook again and the firewall should now have your desired config.</p>
 <hr />
 <h2 id="task-3-objects-and-security-rule-creation">Task 3 - Objects and Security Rule Creation</h2>
-<p>Now we will create the same address object and security rules as in the
-Terraform portion.  Create a new file <code>rules.yml</code>, and copy in the header
-information from the network config steps:</p>
+<p>Now we will create the same address object and security rules as in the Terraform portion.  Create a new file <code>rules.yml</code>, and copy in the header information from the network config steps:</p>
 <pre><code class="yml">- name: SKO2019 Ansible Playbook
   hosts: fw
   connection: local
@@ -307,7 +293,7 @@ information from the network config steps:</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 </code></pre>
 
@@ -381,7 +367,7 @@ for address objects if you need.</p>
 
   tasks:
   - name: Grab auth creds
-    include_vars: 'fw_creds.yml'
+    include_vars: 'fw_vars.yml'
     no_log: 'yes'
 
   - name: &quot;Add address object for wordpress server&quot;
@@ -436,9 +422,7 @@ for address objects if you need.</p>
 <pre><code class="bash">$ ansible-playbook -i inventory rules.yml
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches
-what you want.  Remember that your changes haven't been committed, and if you
-get errors, indentation is most likely the problem.</p>
+<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Remember that your changes haven't been committed, and if you get errors, indentation is most likely the problem.</p>
 <p>You're done with the Ansible portion of the lab.</p>
               
             </div>
@@ -447,7 +431,7 @@ get errors, indentation is most likely the problem.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../comparison/" class="btn btn-neutral float-right" title="Comparison">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../clean-up/" class="btn btn-neutral float-right" title="Clean Up">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../ansible-background/" class="btn btn-neutral" title="Background"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -479,7 +463,7 @@ get errors, indentation is most likely the problem.</p>
         <span><a href="../ansible-background/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../comparison/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../clean-up/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

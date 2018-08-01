@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Comparing Terraform and Ansible - Terraform & Ansible Intro</title>
+  <title>Conclusion - Terraform & Ansible Intro</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Comparing Terraform and Ansible";
+    var mkdocs_page_name = "Conclusion";
     var mkdocs_page_input_path = "comparison.md";
     var mkdocs_page_url = "/comparison/";
   </script>
@@ -101,9 +101,14 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../clean-up/">Clean Up</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Comparing Terraform and Ansible</a>
+    <a class="current" href="./">Conclusion</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#comparing-terraform-and-ansible">Comparing Terraform and Ansible</a></li>
@@ -119,6 +124,8 @@
             <li><a class="toctree-l3" href="#operational-commands">Operational Commands</a></li>
         
             <li><a class="toctree-l3" href="#facts-data-sources">Facts / Data Sources</a></li>
+        
+            <li><a class="toctree-l3" href="#further-reading">Further Reading</a></li>
         
         </ul>
     
@@ -148,7 +155,7 @@
     
       
     
-    <li>Comparing Terraform and Ansible</li>
+    <li>Conclusion</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -187,9 +194,9 @@ to these modules in the future.</p>
 <h2 id="commits">Commits</h2>
 <p>As you've probably noticed, a lot of the Ansible modules allow you to commit
 directly from them.  There is also a dedicated Ansible module that just does
-commits, containing support for both the firewall and Panorama.  </p>
+commits, containing support for both the firewall and Panorama.</p>
 <p>So how do you perform commits with Terraform?  Currently, there is no support
-for commits inside the Terraform ecosystem, so they have to be handled 
+for commits inside the Terraform ecosystem, so they have to be handled
 externally.  Lack of finalizers are
 <a href="https://github.com/hashicorp/terraform/issues/6258">a known shortcoming</a>
 for Terraform and, once it is addressed, support for it can be added to the
@@ -217,6 +224,37 @@ plan file.</p>
 <p>This same thing is called "facts" in Ansible.  Some of our Ansible modules have
 support for an additional operation, <code>find</code>, that acts in some ways like this,
 but support for this is still being investigated or developed.</p>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>
+<p>Terraform</p>
+<ul>
+<li>
+<p><a href="https://www.terraform.io/docs/index.html">Terraform Documentation</a></p>
+</li>
+<li>
+<p><a href="https://www.terraform.io/docs/providers/panos/index.html">Terraform panos Provider</a></p>
+</li>
+<li>
+<p><a href="https://www.terraformupandrunning.com">Terraform: Up &amp; Running</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Ansible</p>
+<ul>
+<li>
+<p><a href="https://docs.ansible.com">Ansible Docs</a></p>
+</li>
+<li>
+<p><a href="https://panwansible.readthedocs.io/en/latest/index.html">ansible-pan</a></p>
+</li>
+<li>
+<p><a href="http://www.ansiblebook.com">Ansible: Up &amp; Running</a></p>
+</li>
+</ul>
+</li>
+</ul>
               
             </div>
           </div>
@@ -225,7 +263,7 @@ but support for this is still being investigated or developed.</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../ansible-lab/" class="btn btn-neutral" title="Lab Activities"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../clean-up/" class="btn btn-neutral" title="Clean Up"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -251,7 +289,7 @@ but support for this is still being investigated or developed.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../ansible-lab/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../clean-up/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
     </span>

@@ -119,7 +119,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../comparison/">Comparison</a>
+    <a class="" href="../clean-up/">Clean Up</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Conclusion</a>
 	    </li>
           
         </ul>
@@ -164,13 +169,32 @@
 <pre><code class="bash">$ cd ../terraform
 </code></pre>
 
-<p>Open a text editor like <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and create the file <code>sko2019.tf</code>.  We will place our Terraform plan in here.</p>
-<p>Start by defining the provider config, which will use the <code>panos</code> provider. Replace the IP address used in <strong>hostname</strong> with the address of your lab firewall, and change the <strong>username</strong> and <strong>password</strong> fields to the values
-you have used.</p>
+<p>Open the file <code>panos_variables.tf</code> in a text editor such as <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and replace the default values of the varaibles <code>panos_hostname</code>, <code>panos_username</code>, and <code>panos_password</code> with the appropriate values from your VM-Series instance.</p>
+<pre><code class="yml">variable &quot;panos_hostname&quot; {
+  description = &quot;Hostname of the VM-Series instance&quot;
+  type = &quot;string&quot;
+  default = &quot;&quot;
+}
+
+variable &quot;panos_username&quot; {
+  description = &quot;Username of the VM-Series administrator&quot;
+  type = &quot;string&quot;
+  default = &quot;northamerica-northeast1&quot;
+}
+
+variable &quot;panos_password&quot; {
+  description = &quot;Password of the VM-Series administrator&quot;
+  type = &quot;string&quot;
+  default = &quot;&quot;
+}
+</code></pre>
+
+<p>Using your text editor create the file <code>panos_plan.tf</code>.  We will place our Terraform plan in this file.</p>
+<p>Start by defining the provider config, which will use the <code>panos</code> provider. Note that the hostname, username, and password fields refer to the variables we defined in the <code>panos_variables.tf</code> file.</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
-    hostname = &quot;127.0.0.1&quot;
-    username = &quot;admin&quot;
-    password = &quot;admin&quot;
+    hostname = &quot;${var.panos_hostname}&quot;
+    username = &quot;${var.panos_username}&quot;
+    password = &quot;${var.panos_password}&quot;
 }
 </code></pre>
 
@@ -178,7 +202,7 @@ you have used.</p>
 <p>Next, create the interfaces.  Here are screenshots of the interfaces we need to create:</p>
 <p><img alt="ethernet1/1" src="../img/eth1.png" /></p>
 <p><img alt="ethernet1/2" src="../img/eth2.png" /></p>
-<p>Add the following configuration to <code>sko2019.tf</code>.  Note that the <strong>ethernet1/2</strong> interface omits the option to create the default route via DHCP.</p>
+<p>Add the following configuration to <code>panos_plan.tf</code>.  Note that the <strong>ethernet1/2</strong> interface omits the option to create the default route via DHCP.</p>
 <pre><code class="hcl">resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
     name = &quot;ethernet1/1&quot;
     vsys = &quot;vsys1&quot;
@@ -200,7 +224,7 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 <p>Next, create zones for the interfaces we just added.  Here are screenshots of the zones we need to create:</p>
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
-<p>Add the following configuration to <code>sko2019.tf</code>.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.</p>
+<p>Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.</p>
 <pre><code class="hcl">resource &quot;panos_zone&quot; &quot;int&quot; {
     name = &quot;L3-trust&quot;
     mode = &quot;layer3&quot;
@@ -217,7 +241,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 <p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/zone.html">provider
 documentation</a> for zones if you need.</p>
 <h3 id="apply-the-terraform-plan">Apply the Terraform Plan</h3>
-<p>Your final, full <code>sko2019.tf</code> file should look something like this:</p>
+<p>Your final, full <code>panos_plan.tf</code> file should look something like this:</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
     hostname = &quot;127.0.0.1&quot;
     username = &quot;admin&quot;
@@ -266,7 +290,7 @@ $ terraform plan
 <h2 id="task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</h2>
 <p>Next, we will create an address object and some security rules. Here is a screenshot of an address object we need to create:</p>
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
-<p>Add the following to <code>sko2019.tf</code>:</p>
+<p>Add the following to <code>panos_plan.tf</code>:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
     name = &quot;wordpress server&quot;
     description = &quot;Internal server&quot;
@@ -277,7 +301,7 @@ $ terraform plan
 <p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider documentation</a> for address objects if you need.</p>
 <p>Now, here is a screenshot of security rules that we need to create:</p>
 <p><img alt="Security Policy" src="../img/security-policy.png" /></p>
-<p>Add the following to <code>sko2019.tf</code>.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
+<p>Add the following to <code>panos_plan.tf</code>.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
         name = &quot;Wordpress Traffic&quot;

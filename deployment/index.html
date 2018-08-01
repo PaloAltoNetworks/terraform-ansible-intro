@@ -123,7 +123,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../comparison/">Comparison</a>
+    <a class="" href="../clean-up/">Clean Up</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../comparison/">Conclusion</a>
 	    </li>
           
         </ul>
@@ -180,7 +185,7 @@
 <pre><code class="bash">$ vi gcp_variables.tf
 </code></pre>
 
-<p>Replace the default values for variables <code>gcp_project_id</code>, <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code>.</p>
+<p>Replace the default value for the variable <code>gcp_project_id</code> with the GCP Project ID displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have have been pre-populated.</p>
 <pre><code class="yml">variable &quot;gcp_project_id&quot; {
   description = &quot;GCP Project ID&quot;
   type = &quot;string&quot;
@@ -196,13 +201,13 @@ variable &quot;gcp_region&quot; {
 variable &quot;gcp_credentials_file&quot; {
   description = &quot;Full path to the JSON credentials file&quot;
   type = &quot;string&quot;
-  default = &quot;&quot;
+  default = &quot;../gcp_compute_key.json&quot;
 }
 
 variable &quot;gcp_ssh_key&quot; {
   description = &quot;Full path to the SSH public key file&quot;
   type = &quot;string&quot;
-  default = &quot;&quot;
+  default = &quot;../../.ssh/sko19_ssh_key.pub&quot;
 }
 </code></pre>
 
@@ -221,6 +226,7 @@ variable &quot;gcp_ssh_key&quot; {
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
+<p>Copy and paste the output fields from the plan into a note or document on your laptop.  You will need this information later.</p>
 <h2 id="update-the-ssk-config">Update the SSK config</h2>
 <p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
 <pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
@@ -232,18 +238,21 @@ variable &quot;gcp_ssh_key&quot; {
 </code></pre>
 
 <p>SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few moments for the firewall to finish booting up.</p>
-<pre><code class="bash">$ ssh admin@&lt;INSTANCE&gt;.&lt;ZONE&gt;.&lt;REGION&gt;
+<pre><code class="bash">$ ssh admin@&lt;INSTANCE&gt;.&lt;ZONE&gt;.&lt;PROJECT&gt;
 </code></pre>
 
-<p>Set the administrative password for the VM-Series firewall.</p>
-<pre><code class="html">admin&gt; configure
-admin# set mgt-config users admin password
-admin# set password
-admin# commit
-admin# exit
-admin&gt; exit
+<hr />
+<p><strong>NOTE:</strong> If you receive a <code>Connection refused</code> response or are prompted for a password the VM-Series instance has not fully booted.  Hit Control-C and try again after a few moments.  Feel free to read the <a href="../terraform-background">Terraform Bankground</a> section to learn more about Terraform while you're waiting.</p>
+<hr />
+<p>Once successfully logged in and presented with a CLI prompt you must set the administrative password for the VM-Series firewall.</p>
+<pre><code class="html">admin@PA-VM&gt; configure
+admin@PA-VM# set mgt-config users admin password
+admin@PA-VM# commit
+admin@PA-VM# exit
+admin@PA-VM&gt; exit
 </code></pre>
 
+<p>Launch a separate web browser tab and log into the VM-Series web user interface using the external IP address displayed in the <code>terraform apply</code> output.</p>
 <p>You are now ready to begin the Terraform portion of the lab.</p>
               
             </div>
