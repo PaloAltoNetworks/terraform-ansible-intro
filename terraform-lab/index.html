@@ -360,14 +360,15 @@ $ terraform plan
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
+<p>Switch browser tabs to the web UI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
 <hr />
 <h2 id="task-3-cleanup">Task 3 - Cleanup</h2>
 <p>Terraform will clean up our config for us with the <code>terraform destroy</code> command. Run it to prepare for the Ansible portion of the lab:</p>
 <pre><code class="bash">$ terraform destroy
 </code></pre>
 
-<p>You're done with the Terraform portion of the lab.</p>
+<p>Confirm in the firewall UI that the security rules, objects, and network configs we've created have been removed.</p>
+<p>You're now done with the Terraform portion of the lab.</p>
               
             </div>
           </div>
