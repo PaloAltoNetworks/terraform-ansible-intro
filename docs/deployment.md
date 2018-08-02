@@ -22,7 +22,7 @@ Edit the file containing the Terraform variables.  These variable will be refere
 $ vi gcp_variables.tf
 ```
 
-Replace the default value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated.
+Replace the **default** value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated.
 
 ```yml
 variable "gcp_project_id" {
@@ -87,16 +87,16 @@ Use the `gcloud compute` command to get the hostname of the VM-Series firewall i
 $ gcloud compute instances list
 ```
 
-SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few moments for the firewall to finish booting up.
+SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few minutes for the firewall to finish booting up. If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted yet. Hit **Ctl-C** and wait few moments before trying again.
+
+---
+**NOTE:** Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
+
+---
 
 ```bash
 $ ssh admin@<INSTANCE>.<ZONE>.<PROJECT>
 ```
-
----
-**NOTE:** If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted yet.  Hit **Control-C** and wait few moments before trying again.  Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
-
----
 
 Once successfully logged in and presented with a CLI prompt you must set the administrative password for the VM-Series firewall.
 
