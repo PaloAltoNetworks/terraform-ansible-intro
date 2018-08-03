@@ -24,16 +24,16 @@ $ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 
 ## Task 2 - Basic Network Config
 
-Using a text editor such as **vim**, **emacs**, or **nano** edit the file called `inventory`.  This file will contains a list of hosts that Ansible will communicate with during execution.
+Create a new file called `inventory` with your text editor.  This file will contains a list of hosts and host groups that Ansible will communicate with during execution.
 
-Replace the value `127.0.0.1` with the external IP address of your VM-Series instance.
+Copy the following text into the `inventory` file but replace the value `127.0.0.1` with the external IP address of your VM-Series instance.
 
 ```yml
 [fw]
 127.0.0.1
 ```
 
-Next, create the file `vars.yml` and add the following valiables.  Fill in the blanks with the appropriate values from your VM-Series instance.
+Next, create the file `vars.yml` and add the following valiables.  Fill in the empty quotes with the appropriate values from your VM-Series instance.
 
 ```yml
 ip_address: ''
@@ -59,6 +59,7 @@ Each playbook needs the following header information to pull in the variables we
     include_vars: 'vars.yml'
     no_log: 'yes'
 ```
+
 ---
 **NOTE:** Ansible configuration files utilize a format known as YAML (Yet Another Markup Language). Spacing is *very* important when editing YAML files.  Please be sure when copying and pasting to include all spacing as well.  All of the task names and parameters should line up properly.
 
@@ -66,7 +67,7 @@ Each playbook needs the following header information to pull in the variables we
 
 ### Network Interfaces & Zones
 
-We're going to create the exact same configuration with Ansible as we did with Terraform.  Here are screenshots of the network interfaces and zones we need to create:
+We're going to recreate the same configuration from the Terraform lab in Ansible.  Here are examples of the network interfaces and zones we need to create:
 
 ![eth1/1](img/eth1.png)
 
@@ -99,13 +100,13 @@ Add the following to `network.yml`:
       commit: False
 ```
 
-Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html) for ethernet interfaces if you need.
+Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_interface_module.html) for details on the `panos_ethernet` module.
 
 Note that Ansible is a little different from Terraform.  We have to specify the **ip_address**, **username**, and **password** each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.
 
 ### Run the Playbook
 
-Your final, full `network.yml` playbook should look like this:
+The resulting `network.yml` playbook should look like this:
 
 ```yml
 - name: SKO2019 Ansible Playbook
@@ -147,7 +148,7 @@ Run your playbook with the following command:
 $ ansible-playbook -i inventory network.yml
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches what you want.  Because we specified `commit: False` for each module call in our playbook, the changes have only been made to the candidate configuration and have **not** been committed.
+Log in to the GUI of your firewall and verify that the configuration matches the examples above.  Because we specified `commit: False` for each module call in our playbook, the changes have only been made to the candidate configuration and have **not** been committed.
 
 If you get errors, indentation is most likely the problem.  Once you fix any errors, run the playbook again and the firewall should now have your desired config.
 
@@ -155,7 +156,7 @@ If you get errors, indentation is most likely the problem.  Once you fix any err
 
 ## Task 3 - Objects and Security Rule Creation
 
-Now we will create the same address object and security rules as in the Terraform portion.  Create a new file `rules.yml`, and copy in the header information from the network config steps:
+Create a new file `rules.yml`, and add the same header information from the network config task.
 
 ```yml
 - name: SKO2019 Ansible Playbook
@@ -172,7 +173,7 @@ Now we will create the same address object and security rules as in the Terrafor
     no_log: 'yes'
 ```
 
-Here is the address object we need to create:
+Here is an example of the address object we will create:
 
 ![Wordpress Server](img/wordpress.png)
 
@@ -190,11 +191,9 @@ Add the following to `rules.yml`:
       description: 'Internal server'
 ```
 
-Refer to the [module
-documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_object_module.html)
-for address objects if you need.
+Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_object_module.html) for more details on the `panos_object` module.
 
-Here are the security rules we need to create:
+Here is an example of the security rules we will create:
 
 ![Security Policy](img/security-policy.png)
 
@@ -237,6 +236,8 @@ Add the following to `rules.yml`:
       action: 'deny'
       commit: False
 ```
+
+Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/modules/panos_security_rule_module.html) for more details on the `panos_security_rule` module.
 
 ### Run the Playbook
 
@@ -309,6 +310,6 @@ Run your playbook with the following command:
 $ ansible-playbook -i inventory rules.yml
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches what you want.  Remember that your changes haven't been committed, and if you get errors, indentation is most likely the problem.
+Log in to the web UI of the firewall and verify that the configuration matches the examples above.  Remember that your changes haven't been committed.  If you get errors indentation is most likely the problem.
 
 You're done with the Ansible portion of the lab.

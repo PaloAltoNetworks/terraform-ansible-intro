@@ -16,7 +16,8 @@ The following are NOT goals of this lab:
 
 * A laptop with Internet connectivity
 * A standards-compliant web browser (Google Chrome recommended)
-* Proficiency with a Linux text editor (e.g., vim, nano, emacs, etc.)
+* Understanding of Linux operating system basics
+* Proficiency with a Linux text editor (e.g., vim, nano, or emacs)
 
 ## About This Lab
 

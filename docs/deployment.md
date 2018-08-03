@@ -16,13 +16,9 @@ Change into the `deployment` directory.
 $ cd deployment
 ```
 
-Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.
+Edit the file `gcp_variables.tf`.  This file contains Terraform variables that will be referenced in other Terraform plan files.
 
-```bash
-$ vi gcp_variables.tf
-```
-
-Replace the **default** value for the variable `gcp_project_id` with the GCP Project ID displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated.
+Replace the **default** value for the variable `gcp_project_id` with the **GCP Project ID** displayed in the Qwiklabs main page.  The `gcp_region`, `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated.
 
 ```yml
 variable "gcp_project_id" {
@@ -90,7 +86,7 @@ $ gcloud compute instances list
 SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few minutes for the firewall to finish booting up. If you receive a `Connection refused` response or are prompted for a password the VM-Series instance has not fully booted yet. Hit **Ctl-C** and wait few moments before trying again.
 
 ---
-**NOTE:** Feel free to read the [Terraform Bankground](terraform-background) section to learn more about Terraform while you're waiting.
+**NOTE:** Feel free to read the [Terraform Background](terraform-background) section to learn more about Terraform while you're waiting. :-)
 
 ---
 

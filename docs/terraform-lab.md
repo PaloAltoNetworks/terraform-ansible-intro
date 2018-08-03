@@ -14,7 +14,7 @@ Change into the `terraform` directory.  We'll use it for all of our Terraform fi
 $ cd ../terraform
 ```
 
-Open the file `panos_variables.tf` in a text editor such as **vim**, **emacs**, or **nano** and replace the default values of the varaibles `panos_hostname`, `panos_username`, and `panos_password` with the appropriate values from your VM-Series instance.
+Edit the file `panos_variables.tf` and replace the **default** values of the variables `panos_hostname`, `panos_username`, and `panos_password` with the appropriate values from your VM-Series instance.
 
 ```yml
 variable "panos_hostname" {
@@ -38,7 +38,7 @@ variable "panos_password" {
 
 Using your text editor create the file `panos_plan.tf`.  We will place our Terraform plan in this file.
 
-Start by defining the provider config, which will use the `panos` provider. Note that the hostname, username, and password fields refer to the variables we defined in the `panos_variables.tf` file.
+Start by defining the provider config, which will use the `panos` provider. Note that the `hostname`, `username`, and `password` fields refer to the variables we defined in the `panos_variables.tf` file.
 
 ```hcl
 provider "panos" {
@@ -50,13 +50,13 @@ provider "panos" {
 
 ### Network Interfaces
 
-Next, create the interfaces.  Here are screenshots of the interfaces we need to create:
+Next, we will create the interfaces resources.  Here are examples of the interfaces we will be creating:
 
 ![ethernet1/1](img/eth1.png)
 
 ![ethernet1/2](img/eth2.png)
 
-Add the following configuration to `panos_plan.tf`.  Note that the **ethernet1/2** interface omits the option to create the default route via DHCP.
+Add the following resources to `panos_plan.tf`.  Note that the **ethernet1/2** interface omits the option to create the default route via DHCP.
 
 ```hcl
 resource "panos_ethernet_interface" "eth1" {
@@ -75,17 +75,17 @@ resource "panos_ethernet_interface" "eth2" {
 }
 ```
 
-Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html) for ethernet interfaces for more info if you need.
+Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html) for more details on the `panos_ethernet_interface` resource.
 
 ### Zones
 
-Next, create zones for the interfaces we just added.  Here are screenshots of the zones we need to create:
+Next, we will create resources for security zones and reference the interfaces we just added.  Here are examples of the zones we need to create:
 
 ![L3-trust](img/l3-trust.png)
 
 ![L3-untrust](img/l3-untrust.png)
 
-Add the following configuration to `panos_plan.tf`.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.
+Add the following configuration to `panos_plan.tf`.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created *before* the zones themselves.
 
 ```hcl
 resource "panos_zone" "int" {
@@ -101,12 +101,11 @@ resource "panos_zone" "ext" {
 }
 ```
 
-Refer to the [provider
-documentation](https://www.terraform.io/docs/providers/panos/r/zone.html) for zones if you need.
+Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/zone.html) for more details on the `panos_zone` resource.
 
 ### Apply the Terraform Plan
 
-Your final, full `panos_plan.tf` file should look something like this:
+The resulting `panos_plan.tf` file should look like this:
 
 ```hcl
 provider "panos" {
@@ -143,26 +142,31 @@ resource "panos_zone" "ext" {
 }
 ```
 
-Let's apply the config to our firewall.  You need to run `terraform init` first to download all the providers we need, and then check your config with `terraform plan`:
+Let's apply this config to our firewall.  You first need to run `terraform init` to download all the providers we need.
 
 ```bash
 $ terraform init
+```
+
+We'll then validate the config with `terraform plan`.
+
+```bash
 $ terraform plan
 ```
 
-If there are no errors, go ahead and push your config updates the firewall:
+If there are no errors, go ahead and push your config updates to the firewall with `terraform apply`.
 
 ```bash
 $ terraform apply
 ```
 
-Log in to the GUI of your firewall and verify that the configuration matches what you want.  Note that because of the way Terraform currently functions, the changes have only been made to the candidate configuration and have **not** been committed.
+Log in to the web UI of your firewall and verify that the configuration matches the examples above.  Note that because of the way Terraform *currently* functions the changes have only been made to the candidate configuration and have **not** been committed.
 
 ---
 
 ## Task 2 - Objects and Security Rule Creation
 
-Next, we will create an address object and some security rules. Here is a screenshot of an address object we need to create:
+Next, we will create resources for an address object and some security rules. Here is an example of an address object we need to create:
 
 ![Wordpress Server](img/wordpress.png)
 
@@ -176,13 +180,13 @@ resource "panos_address_object" "wp" {
 }
 ```
 
-Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/address_object.html) for address objects if you need.
+Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/address_object.html) for more details on the `panos_address_object` resource.
 
-Now, here is a screenshot of security rules that we need to create:
+Now, here is an example of the security rules that we need to create:
 
 ![Security Policy](img/security-policy.png)
 
-Add the following to the bottom of your `panos_plan.tf` file.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.
+Add the following to your `panos_plan.tf` file.  Just like with the networking config, zones and objects are referenced by name so that Terraform knows they need to be created before our security rules.
 
 ```hcl
 resource "panos_security_rule_group" "policy" {
@@ -230,30 +234,30 @@ resource "panos_security_rule_group" "policy" {
 
 ### Apply the Terraform Plan
 
-Let's apply the config to our firewall.  We don't need to run `terraform init` again since the provider has already been initialized, so just check your config with `terraform plan`:
+Let's apply the config to our firewall.  We won't need to run `terraform init` again since the provider has already been initialized. So just check your config with `terraform plan`:
 
 ```bash
 $ terraform plan
 ```
 
-If there are no errors, go ahead and push your config updates the firewall:
+If there are no errors, go ahead and push your config updates to the firewall with `terraform apply`.
 
 ```bash
 $ terraform apply
 ```
 
-Switch browser tabs to the web UI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have **not** been committed.
+Switch browser tabs to the web UI of your firewall and verify that the configuration matches the examples above.  Again, the changes have only been made to the candidate configuration and have **not** been committed.
 
 ---
 
 ## Task 3 - Cleanup
 
-Terraform will clean up our config for us with the `terraform destroy` command. Run it to prepare for the Ansible portion of the lab:
+Terraform will clean up our firewall configs with the `terraform destroy` command. Run it to prepare for the Ansible portion of the lab:
 
 ```bash
 $ terraform destroy
 ```
 
-Confirm in the firewall UI that the security rules, objects, and network configs we've created have been removed.
+Confirm in the firewall UI that the security rules, objects, and network configs we created have been removed.
 
 You're now done with the Terraform portion of the lab.
