@@ -175,7 +175,7 @@
 <pre><code class="bash">$ cd ../terraform
 </code></pre>
 
-<p>Open the file <code>panos_variables.tf</code> in a text editor such as <strong>vim</strong>, <strong>emacs</strong>, or <strong>nano</strong> and replace the default values of the varaibles <code>panos_hostname</code>, <code>panos_username</code>, and <code>panos_password</code> with the appropriate values from your VM-Series instance.</p>
+<p>Edit the file <code>panos_variables.tf</code> and replace the <strong>default</strong> values of the variables <code>panos_hostname</code>, <code>panos_username</code>, and <code>panos_password</code> with the appropriate values from your VM-Series instance.</p>
 <pre><code class="yml">variable &quot;panos_hostname&quot; {
   description = &quot;The external IP address of the VM-Series instance&quot;
   type = &quot;string&quot;
@@ -196,7 +196,7 @@ variable &quot;panos_password&quot; {
 </code></pre>
 
 <p>Using your text editor create the file <code>panos_plan.tf</code>.  We will place our Terraform plan in this file.</p>
-<p>Start by defining the provider config, which will use the <code>panos</code> provider. Note that the hostname, username, and password fields refer to the variables we defined in the <code>panos_variables.tf</code> file.</p>
+<p>Start by defining the provider config, which will use the <code>panos</code> provider. Note that the <code>hostname</code>, <code>username</code>, and <code>password</code> fields refer to the variables we defined in the <code>panos_variables.tf</code> file.</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
     hostname = &quot;${var.panos_hostname}&quot;
     username = &quot;${var.panos_username}&quot;
@@ -205,10 +205,10 @@ variable &quot;panos_password&quot; {
 </code></pre>
 
 <h3 id="network-interfaces">Network Interfaces</h3>
-<p>Next, create the interfaces.  Here are screenshots of the interfaces we need to create:</p>
+<p>Next, we will create the interfaces resources.  Here are examples of the interfaces we will be creating:</p>
 <p><img alt="ethernet1/1" src="../img/eth1.png" /></p>
 <p><img alt="ethernet1/2" src="../img/eth2.png" /></p>
-<p>Add the following configuration to <code>panos_plan.tf</code>.  Note that the <strong>ethernet1/2</strong> interface omits the option to create the default route via DHCP.</p>
+<p>Add the following resources to <code>panos_plan.tf</code>.  Note that the <strong>ethernet1/2</strong> interface omits the option to create the default route via DHCP.</p>
 <pre><code class="hcl">resource &quot;panos_ethernet_interface&quot; &quot;eth1&quot; {
     name = &quot;ethernet1/1&quot;
     vsys = &quot;vsys1&quot;
@@ -225,12 +225,12 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 }
 </code></pre>
 
-<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider documentation</a> for ethernet interfaces for more info if you need.</p>
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider documentation</a> for more details on the <code>panos_ethernet_interface</code> resource.</p>
 <h3 id="zones">Zones</h3>
-<p>Next, create zones for the interfaces we just added.  Here are screenshots of the zones we need to create:</p>
+<p>Next, we will create resources for security zones and reference the interfaces we just added.  Here are examples of the zones we need to create:</p>
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
-<p>Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name, so that Terraform automatically knows that the interfaces need to be created before the zones themselves.</p>
+<p>Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created <em>before</em> the zones themselves.</p>
 <pre><code class="hcl">resource &quot;panos_zone&quot; &quot;int&quot; {
     name = &quot;L3-trust&quot;
     mode = &quot;layer3&quot;
@@ -244,10 +244,9 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 }
 </code></pre>
 
-<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/zone.html">provider
-documentation</a> for zones if you need.</p>
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/zone.html">provider documentation</a> for more details on the <code>panos_zone</code> resource.</p>
 <h3 id="apply-the-terraform-plan">Apply the Terraform Plan</h3>
-<p>Your final, full <code>panos_plan.tf</code> file should look something like this:</p>
+<p>The resulting <code>panos_plan.tf</code> file should look like this:</p>
 <pre><code class="hcl">provider &quot;panos&quot; {
     hostname = &quot;${var.panos_hostname}&quot;
     username = &quot;${var.panos_username}&quot;
@@ -282,19 +281,22 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 }
 </code></pre>
 
-<p>Let's apply the config to our firewall.  You need to run <code>terraform init</code> first to download all the providers we need, and then check your config with <code>terraform plan</code>:</p>
+<p>Let's apply this config to our firewall.  You first need to run <code>terraform init</code> to download all the providers we need.</p>
 <pre><code class="bash">$ terraform init
-$ terraform plan
 </code></pre>
 
-<p>If there are no errors, go ahead and push your config updates the firewall:</p>
+<p>We'll then validate the config with <code>terraform plan</code>.</p>
+<pre><code class="bash">$ terraform plan
+</code></pre>
+
+<p>If there are no errors, go ahead and push your config updates to the firewall with <code>terraform apply</code>.</p>
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Log in to the GUI of your firewall and verify that the configuration matches what you want.  Note that because of the way Terraform currently functions, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
+<p>Log in to the web UI of your firewall and verify that the configuration matches the examples above.  Note that because of the way Terraform <em>currently</em> functions the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
 <hr />
 <h2 id="task-2-objects-and-security-rule-creation">Task 2 - Objects and Security Rule Creation</h2>
-<p>Next, we will create an address object and some security rules. Here is a screenshot of an address object we need to create:</p>
+<p>Next, we will create resources for an address object and some security rules. Here is an example of an address object we need to create:</p>
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
 <p>Add the following to the bottom of the <code>panos_plan.tf</code> file:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
@@ -304,10 +306,10 @@ $ terraform plan
 }
 </code></pre>
 
-<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider documentation</a> for address objects if you need.</p>
-<p>Now, here is a screenshot of security rules that we need to create:</p>
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/address_object.html">provider documentation</a> for more details on the <code>panos_address_object</code> resource.</p>
+<p>Now, here is an example of the security rules that we need to create:</p>
 <p><img alt="Security Policy" src="../img/security-policy.png" /></p>
-<p>Add the following to the bottom of your <code>panos_plan.tf</code> file.  Just like with the networking config, zones and objects are referenced by name, so that Terraform knows they need to be created before our security rules.</p>
+<p>Add the following to your <code>panos_plan.tf</code> file.  Just like with the networking config, zones and objects are referenced by name so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
         name = &quot;Wordpress Traffic&quot;
@@ -352,22 +354,22 @@ $ terraform plan
 </code></pre>
 
 <h3 id="apply-the-terraform-plan_1">Apply the Terraform Plan</h3>
-<p>Let's apply the config to our firewall.  We don't need to run <code>terraform init</code> again since the provider has already been initialized, so just check your config with <code>terraform plan</code>:</p>
+<p>Let's apply the config to our firewall.  We won't need to run <code>terraform init</code> again since the provider has already been initialized. So just check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform plan
 </code></pre>
 
-<p>If there are no errors, go ahead and push your config updates the firewall:</p>
+<p>If there are no errors, go ahead and push your config updates to the firewall with <code>terraform apply</code>.</p>
 <pre><code class="bash">$ terraform apply
 </code></pre>
 
-<p>Switch browser tabs to the web UI of your firewall and verify that the configuration matches what you want.  Again, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
+<p>Switch browser tabs to the web UI of your firewall and verify that the configuration matches the examples above.  Again, the changes have only been made to the candidate configuration and have <strong>not</strong> been committed.</p>
 <hr />
 <h2 id="task-3-cleanup">Task 3 - Cleanup</h2>
-<p>Terraform will clean up our config for us with the <code>terraform destroy</code> command. Run it to prepare for the Ansible portion of the lab:</p>
+<p>Terraform will clean up our firewall configs with the <code>terraform destroy</code> command. Run it to prepare for the Ansible portion of the lab:</p>
 <pre><code class="bash">$ terraform destroy
 </code></pre>
 
-<p>Confirm in the firewall UI that the security rules, objects, and network configs we've created have been removed.</p>
+<p>Confirm in the firewall UI that the security rules, objects, and network configs we created have been removed.</p>
 <p>You're now done with the Terraform portion of the lab.</p>
               
             </div>

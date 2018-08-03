@@ -181,11 +181,8 @@
 <pre><code class="bash">$ cd deployment
 </code></pre>
 
-<p>Edit the file containing the Terraform variables.  These variable will be referenced in other Terraform plan files.</p>
-<pre><code class="bash">$ vi gcp_variables.tf
-</code></pre>
-
-<p>Replace the <strong>default</strong> value for the variable <code>gcp_project_id</code> with the GCP Project ID displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have been pre-populated.</p>
+<p>Edit the file <code>gcp_variables.tf</code>.  This file contains Terraform variables that will be referenced in other Terraform plan files.</p>
+<p>Replace the <strong>default</strong> value for the variable <code>gcp_project_id</code> with the <strong>GCP Project ID</strong> displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have been pre-populated.</p>
 <pre><code class="yml">variable &quot;gcp_project_id&quot; {
   description = &quot;GCP Project ID&quot;
   type = &quot;string&quot;
@@ -239,7 +236,7 @@ variable &quot;gcp_ssh_key&quot; {
 
 <p>SSH into the firewall using the fully qualified hostname of the instance.  You may need to wait a few minutes for the firewall to finish booting up. If you receive a <code>Connection refused</code> response or are prompted for a password the VM-Series instance has not fully booted yet. Hit <strong>Ctl-C</strong> and wait few moments before trying again.</p>
 <hr />
-<p><strong>NOTE:</strong> Feel free to read the <a href="../terraform-background">Terraform Bankground</a> section to learn more about Terraform while you're waiting.</p>
+<p><strong>NOTE:</strong> Feel free to read the <a href="../terraform-background">Terraform Background</a> section to learn more about Terraform while you're waiting. :-)</p>
 <hr />
 <pre><code class="bash">$ ssh admin@&lt;INSTANCE&gt;.&lt;ZONE&gt;.&lt;PROJECT&gt;
 </code></pre>
