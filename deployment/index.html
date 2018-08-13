@@ -79,7 +79,7 @@
         
             <li><a class="toctree-l4" href="#deploy-the-vm-series-firewall">Deploy the VM-Series firewall</a></li>
         
-            <li><a class="toctree-l4" href="#update-the-ssk-config">Update the SSK config</a></li>
+            <li><a class="toctree-l4" href="#update-the-ssh-config">Update the SSH config</a></li>
         
             <li><a class="toctree-l4" href="#set-the-firewall-administrator-password">Set the firewall administrator password</a></li>
         
@@ -224,7 +224,7 @@ variable &quot;gcp_ssh_key&quot; {
 </code></pre>
 
 <p>Copy and paste the output fields (in green) into a note or document on your laptop.  You will need this information later.</p>
-<h2 id="update-the-ssk-config">Update the SSK config</h2>
+<h2 id="update-the-ssh-config">Update the SSH config</h2>
 <p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
 <pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
 </code></pre>
