@@ -24,7 +24,7 @@ $ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 
 ## Task 2 - Basic Network Config
 
-Create a new file called `inventory` with your text editor.  This file will contains a list of hosts and host groups that Ansible will communicate with during execution.
+Edit the file called `inventory` with your text editor.  This file will contains a list of hosts and host groups that Ansible will communicate with during execution.
 
 Copy the following text into the `inventory` file but replace the value `127.0.0.1` with the external IP address of your VM-Series instance.
 

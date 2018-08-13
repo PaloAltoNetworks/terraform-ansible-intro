@@ -69,7 +69,7 @@ $ terraform apply
 ```
 Copy and paste the output fields (in green) into a note or document on your laptop.  You will need this information later.
 
-## Update the SSK config
+## Update the SSH config
 Use the following `gcloud compute` command to override the default GCP key management process and utilize our SSH key.
 
 ```bash
