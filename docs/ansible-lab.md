@@ -26,20 +26,28 @@ $ sudo ansible-galaxy install PaloAltoNetworks.paloaltonetworks
 
 Edit the file called `inventory` with your text editor.  This file will contains a list of hosts and host groups that Ansible will communicate with during execution.
 
-Copy the following text into the `inventory` file but replace the value `127.0.0.1` with the external IP address of your VM-Series instance.
+Fill in the blank `ip_address` value with the external IP address of your VM-Series instance.
 
 ```yml
-[fw]
-127.0.0.1
+---
+all:
+  hosts:
+    fw:
+      ansible_host: '127.0.0.1'
+      ip_address: ''
 ```
 
-Next, create the file `vars.yml` and add the following valiables.  Fill in the empty quotes with the appropriate values from your VM-Series instance.
+Next, edit the file `vars.yml` and fill in the blank values with the appropriate values from your VM-Series instance.
 
 ```yml
-ip_address: ''
+---
 username: ''
 password: ''
 ```
+---
+**NOTE:** It's a very poor security practice to store administrative credentials in cleartext files.  We're only doing so in this lab for the sake of simplicity. Normally, you would want to use Ansible's Vault functionality to encrypt sensitive variables and decrypt them when playbooks are being run.  More information on Ansible Vault may be found [here](https://docs.ansible.com/ansible/2.6/user_guide/vault.html).
+
+---
 
 Now, create the file `network.yml`.  This will be the playbook that holds the low level networking config for our firewall.
 

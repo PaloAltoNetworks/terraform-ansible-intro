@@ -1,2 +1,6 @@
-[fw]
-127.0.0.1
+---
+all:
+  hosts:
+    fw:
+      ansible_host: '127.0.0.1'
+      ip_address: ''
