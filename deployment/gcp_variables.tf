@@ -26,9 +26,9 @@ variable "gcp_project_id" {
 }
 
 variable "gcp_region" {
-  description = "Montréal, Quebec region"
+  description = "Council Bluffs, Iowa, USA region"
   type = "string"
-  default = "northamerica-northeast1"
+  default = "us-central1"
 }
 
 variable "gcp_credentials_file" {
