@@ -230,7 +230,10 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 <p>Now we have to associate these interfaces with the default virtual router.  Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created <em>before</em> the virtual router resource.</p>
 <pre><code class="hcl">resource &quot;panos_virtual_router&quot; &quot;vr&quot; {
     name = &quot;default&quot;
-    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;, &quot;${panos_ethernet_interface.eth2.name}&quot;]
+    interfaces = [
+        &quot;${panos_ethernet_interface.eth1.name}&quot;,
+        &quot;${panos_ethernet_interface.eth2.name}&quot;
+    ]
 }
 </code></pre>
 
@@ -279,7 +282,10 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 
 resource &quot;panos_virtual_router&quot; &quot;vr&quot; {
     name = &quot;default&quot;
-    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;, &quot;${panos_ethernet_interface.eth2.name}&quot;]
+    interfaces = [
+        &quot;${panos_ethernet_interface.eth1.name}&quot;,
+        &quot;${panos_ethernet_interface.eth2.name}&quot;
+    ]
 }
 
 resource &quot;panos_zone&quot; &quot;int&quot; {
