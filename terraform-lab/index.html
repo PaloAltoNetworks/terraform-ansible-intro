@@ -226,8 +226,17 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
 </code></pre>
 
 <p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html">provider documentation</a> for more details on the <code>panos_ethernet_interface</code> resource.</p>
+<h3 id="virtual-router">Virtual Router</h3>
+<p>Now we have to associate these interfaces with the default virtual router.  Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created <em>before</em> the virtual router resource.</p>
+<pre><code class="hcl">resource &quot;panos_virtual_router&quot; &quot;vr&quot; {
+    name = &quot;default&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;, &quot;${panos_ethernet_interface.eth2.name}&quot;]
+}
+</code></pre>
+
+<p>Refer to the <a href="https://www.terraform.io/docs/providers/panos/r/virtual_router.html">provider documentation</a> for more details on the <code>panos_virtual_router</code> resource.</p>
 <h3 id="zones">Zones</h3>
-<p>Next, we will create resources for security zones and reference the interfaces we just added.  Here are examples of the zones we need to create:</p>
+<p>Next, we will create resources for security zones and reference the interfaces we added.  Here are examples of the zones we need to create:</p>
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
 <p>Add the following configuration to <code>panos_plan.tf</code>.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created <em>before</em> the zones themselves.</p>
@@ -266,6 +275,11 @@ resource &quot;panos_ethernet_interface&quot; &quot;eth2&quot; {
     vsys = &quot;vsys1&quot;
     mode = &quot;layer3&quot;
     enable_dhcp = true
+}
+
+resource &quot;panos_virtual_router&quot; &quot;vr&quot; {
+    name = &quot;default&quot;
+    interfaces = [&quot;${panos_ethernet_interface.eth1.name}&quot;, &quot;${panos_ethernet_interface.eth2.name}&quot;]
 }
 
 resource &quot;panos_zone&quot; &quot;int&quot; {

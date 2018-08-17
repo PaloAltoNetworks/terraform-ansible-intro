@@ -215,10 +215,6 @@ $ ansible --version
 <pre><code class="bash">$ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/sko19_ssh_key
 </code></pre>
 
-<p>Ensure the file permissions for the SSH key are secure.</p>
-<pre><code class="bash">$ chmod 400 ~/.ssh/sko19_ssh_key
-</code></pre>
-
 <hr />
 <p><strong>NOTE:</strong> GCP has the ability to manage all of its own SSH keys and propagate them automatically to projects and instances.  However, the VM-Series is only able to make use of a single SSH key.  Rather than leverage GCP's SSH key management process, we've created our own SSH key and configured the Compute Engine to use our key exclusively.  When we deploy the VM-Series in the next activity we'll instruct the instance to also use the SSH key we've created.</p>
 <hr />
