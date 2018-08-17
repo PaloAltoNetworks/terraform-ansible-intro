@@ -67,12 +67,6 @@ Create an SSH key with an empty passphrase and save it in the `~/.ssh` directory
 $ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/sko19_ssh_key
 ```
 
-Ensure the file permissions for the SSH key are secure.
-
-```bash
-$ chmod 400 ~/.ssh/sko19_ssh_key
-```
-
 ---
 **NOTE:** GCP has the ability to manage all of its own SSH keys and propagate them automatically to projects and instances.  However, the VM-Series is only able to make use of a single SSH key.  Rather than leverage GCP's SSH key management process, we've created our own SSH key and configured the Compute Engine to use our key exclusively.  When we deploy the VM-Series in the next activity we'll instruct the instance to also use the SSH key we've created.
 

@@ -77,9 +77,21 @@ resource "panos_ethernet_interface" "eth2" {
 
 Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/ethernet_interface.html) for more details on the `panos_ethernet_interface` resource.
 
+### Virtual Router
+
+Now we have to associate these interfaces with the default virtual router.  Add the following configuration to `panos_plan.tf`.  The interfaces are referenced by name so that Terraform automatically knows that the interfaces will need to be created *before* the virtual router resource.
+
+```hcl
+resource "panos_virtual_router" "vr" {
+    name = "default"
+    interfaces = ["${panos_ethernet_interface.eth1.name}", "${panos_ethernet_interface.eth2.name}"]
+}
+```
+Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/virtual_router.html) for more details on the `panos_virtual_router` resource.
+
 ### Zones
 
-Next, we will create resources for security zones and reference the interfaces we just added.  Here are examples of the zones we need to create:
+Next, we will create resources for security zones and reference the interfaces we added.  Here are examples of the zones we need to create:
 
 ![L3-trust](img/l3-trust.png)
 
@@ -127,6 +139,11 @@ resource "panos_ethernet_interface" "eth2" {
     vsys = "vsys1"
     mode = "layer3"
     enable_dhcp = true
+}
+
+resource "panos_virtual_router" "vr" {
+    name = "default"
+    interfaces = ["${panos_ethernet_interface.eth1.name}", "${panos_ethernet_interface.eth2.name}"]
 }
 
 resource "panos_zone" "int" {
