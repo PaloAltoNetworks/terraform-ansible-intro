@@ -182,17 +182,24 @@
 <hr />
 <h2 id="task-2-basic-network-config">Task 2 - Basic Network Config</h2>
 <p>Edit the file called <code>inventory</code> with your text editor.  This file will contains a list of hosts and host groups that Ansible will communicate with during execution.</p>
-<p>Copy the following text into the <code>inventory</code> file but replace the value <code>127.0.0.1</code> with the external IP address of your VM-Series instance.</p>
-<pre><code class="yml">[fw]
-127.0.0.1
+<p>Fill in the blank <code>ip_address</code> value with the external IP address of your VM-Series instance.</p>
+<pre><code class="yml">---
+all:
+  hosts:
+    fw:
+      ansible_host: '127.0.0.1'
+      ip_address: ''
 </code></pre>
 
-<p>Next, create the file <code>vars.yml</code> and add the following valiables.  Fill in the empty quotes with the appropriate values from your VM-Series instance.</p>
-<pre><code class="yml">ip_address: ''
+<p>Next, edit the file <code>vars.yml</code> and fill in the blank values with the appropriate values from your VM-Series instance.</p>
+<pre><code class="yml">---
 username: ''
 password: ''
 </code></pre>
 
+<hr />
+<p><strong>NOTE:</strong> It's a very poor security practice to store administrative credentials in cleartext files.  We're only doing so in this lab for the sake of simplicity. Normally, you would want to use Ansible's Vault functionality to encrypt sensitive variables and decrypt them when playbooks are being run.  More information on Ansible Vault may be found <a href="https://docs.ansible.com/ansible/2.6/user_guide/vault.html">here</a>.</p>
+<hr />
 <p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the low level networking config for our firewall.</p>
 <p>Each playbook needs the following header information to pull in the variables we just defined.  Add the following to <code>network.yml</code>:</p>
 <pre><code class="yml">- name: SKO2019 Ansible Playbook
