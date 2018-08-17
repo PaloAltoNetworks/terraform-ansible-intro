@@ -84,7 +84,10 @@ Now we have to associate these interfaces with the default virtual router.  Add 
 ```hcl
 resource "panos_virtual_router" "vr" {
     name = "default"
-    interfaces = ["${panos_ethernet_interface.eth1.name}", "${panos_ethernet_interface.eth2.name}"]
+    interfaces = [
+        "${panos_ethernet_interface.eth1.name}",
+        "${panos_ethernet_interface.eth2.name}"
+    ]
 }
 ```
 Refer to the [provider documentation](https://www.terraform.io/docs/providers/panos/r/virtual_router.html) for more details on the `panos_virtual_router` resource.
@@ -143,7 +146,10 @@ resource "panos_ethernet_interface" "eth2" {
 
 resource "panos_virtual_router" "vr" {
     name = "default"
-    interfaces = ["${panos_ethernet_interface.eth1.name}", "${panos_ethernet_interface.eth2.name}"]
+    interfaces = [
+        "${panos_ethernet_interface.eth1.name}",
+        "${panos_ethernet_interface.eth2.name}"
+    ]
 }
 
 resource "panos_zone" "int" {
