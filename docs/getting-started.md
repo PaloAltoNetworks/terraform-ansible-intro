@@ -59,19 +59,19 @@ Select your country, opt out of email updates, and accept the updated Terms of S
 
 ## Create a new VM instance
 
-Scroll down in the left-hand navigation menu select **Compute Engine > VM instances**.
+Scroll down in the left-hand navigation menu and select **Compute Engine > VM instances**.
 ![Compute Engine](img/compute-eng.png)
 
 In the VM instances screen, click **Create** to being the VM creation process.
 ![Create VM](img/create-vm.png)
 
-Give the VM instance a name of your choice.  Select the **us-central1 (Iowa)** region and select any one of the four zones available.  Leave all other values as default.
+Give the VM instance a name of your choice.  Select the **us-central1 (Iowa)** region and select any one of the four zones available.
 ![Define VM](img/define-vm.png)
 
-Scroll down to the **Access Scopes** section and select **Allow full acces to all Cloud APIs**.  Then click **Create** to launch the VM instance.
+Scroll down to the **Access scopes** section and select **Allow full access to all Cloud APIs**.  Then click **Create** to launch the VM instance.
 ![Launch VM](img/launch-vm.png)
 
-Once the instance is up you can SSH into the device by clicking **SSH** in the instance list (You may need to click **HIDE INFO PANEL** in the upper left first).
+Once the VM instance is up you can connect to it by clicking **SSH** in the instance list (You may need to click **HIDE INFO PANEL** in the upper left first).
 ![SSH VM](img/ssh-vm.png)
 
 Google Cloud will create an SSH key pair and distribute it to the newly created VM instance. It will then open an SSH window into it.
