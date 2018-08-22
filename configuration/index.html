@@ -69,6 +69,8 @@
     
         <ul>
         
+            <li><a class="toctree-l4" href="#install-the-git-package">Install the git package</a></li>
+        
             <li><a class="toctree-l4" href="#install-terraform-and-ansible">Install Terraform and Ansible</a></li>
         
             <li><a class="toctree-l4" href="#enable-the-compute-engine-api">Enable the Compute Engine API</a></li>
@@ -168,15 +170,20 @@
                 <h1 id="configuration">Configuration</h1>
 <p>In this activity you will:</p>
 <ul>
+<li>Download the lab repo</li>
 <li>Install Terraform and Ansible</li>
-<li>Configure the Google Cloud SDK</li>
 <li>Enable the Compute Engine API</li>
 <li>Configure API credentials</li>
 <li>Configure SSH credentials</li>
 </ul>
 <hr />
-<p><strong>NOTE:</strong>  All of the commands listed within this activity should be executed within the Google Cloud Shell - <strong>not on your laptop</strong>.</p>
+<p><strong>NOTE:</strong>  All of the commands listed within this activity should be executed within the Google Cloud VM we just created - <strong>not on your laptop</strong>.</p>
 <hr />
+<h2 id="install-the-git-package">Install the git package</h2>
+<p>In the SSH sessions, type the following command to install the git package.</p>
+<pre><code class="bash">$ sudo apt-get install git
+</code></pre>
+
 <h2 id="install-terraform-and-ansible">Install Terraform and Ansible</h2>
 <p>Download the lab repository to your home directory.</p>
 <pre><code class="bash">$ git clone https://github.com/PaloAltoNetworks/terraform-ansible-intro

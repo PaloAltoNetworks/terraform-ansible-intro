@@ -71,7 +71,7 @@
         
             <li><a class="toctree-l4" href="#log-into-google-cloud-platform">Log into Google Cloud Platform</a></li>
         
-            <li><a class="toctree-l4" href="#launch-google-cloud-shell">Launch Google Cloud Shell</a></li>
+            <li><a class="toctree-l4" href="#create-a-new-vm-instance">Create a new VM instance</a></li>
         
         </ul>
     
@@ -168,8 +168,10 @@
                 <h1 id="getting-started">Getting Started</h1>
 <p>In this activity you will:</p>
 <ul>
+<li>Log into Qwiklabs</li>
 <li>Launch the lab in Qwiklabs</li>
-<li>Launch the Google Cloud Shell</li>
+<li>Create a Linux VM instance</li>
+<li>SSH into the Linux VM</li>
 </ul>
 <hr />
 <p><strong>WARNING:</strong> You must use the credentials provided by Qwiklabs for this lab.  Failure to do so may result in charges to your personal Google account.  You should either log out of Google entirely before proceeding or open an Icognito window in the Google Chrome web browser.</p>
@@ -180,7 +182,7 @@
 <pre><code class="html">https://paloaltonetworks.qwiklab.com
 </code></pre>
 
-<p>Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).
+<p>Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).  You must use your corporate email address for the username.
 <img alt="Qwiklabs login" src="../img/qwiklabs-login.png" /></p>
 <h2 id="launch-the-lab">Launch the lab</h2>
 <p>Confirm that the lab entitled <strong>Introduction to Terraform and Ansible</strong> is listed under <strong>In Progress</strong> on the welcome screen.</p>
@@ -202,19 +204,20 @@
 <img alt="Recovery options" src="../img/recovery.png" /></p>
 <p>Select your country, opt out of email updates, and accept the updated Terms of Service and click <strong>Accept</strong>.
 <img alt="Updated ToS" src="../img/updated-tos.png" /></p>
-<h2 id="launch-google-cloud-shell">Launch Google Cloud Shell</h2>
-<p>Click the menu icon in the upper left-hand corner of the Dashboard to hide the sidebar menu.
-<img alt="Menu bar" src="../img/menu.png" /></p>
-<p>In the upper right-hand corner of the Dashboard, click on the Cloud Shell icon.
-<img alt="Cloud Shell" src="../img/cloud-shell.png" /></p>
-<p>A welcome page is displayed when launching the Cloud Shell for the first time. Click <strong>Start Cloud Shell</strong> to proceed.
-<img alt="Cloud Shell" src="../img/cs-intro.png" /></p>
-<p>The Cloud Shell will appear at the bottom of the Dashboard.  Wait a few moments as it provisions and connects to the environment.
-<img alt="Bottom shell" src="../img/bottom-shell.png" /></p>
-<p>You can click on the <strong>Open in New Window</strong> icon in the Cloud Shell toolbar for a full-sized Cloud Shell display in a new browser tab.
-<img alt="New window" src="../img/new-window.png" /></p>
-<p>You are now ready to proceed with the lab configuration.
-<img alt="Ready to config" src="../img/ready-to-config.png" /></p>
+<h2 id="create-a-new-vm-instance">Create a new VM instance</h2>
+<p>Scroll down in the left-hand navigation menu select <strong>Compute Engine &gt; VM instances</strong>.
+<img alt="Compute Engine" src="../img/compute-eng.png" /></p>
+<p>In the VM instances screen, click <strong>Create</strong> to being the VM creation process.
+<img alt="Create VM" src="../img/create-vm.png" /></p>
+<p>Give the VM instance a name of your choice.  Select the <strong>us-central1 (Iowa)</strong> region and select any one of the four zones available.  Leave all other values as default.
+<img alt="Define VM" src="../img/define-vm.png" /></p>
+<p>Scroll down to the <strong>Access Scopes</strong> section and select <strong>Allow full acces to all Cloud APIs</strong>.  Then click <strong>Create</strong> to launch the VM instance.
+<img alt="Launch VM" src="../img/launch-vm.png" /></p>
+<p>Once the instance is up you can SSH into the device by clicking <strong>SSH</strong> in the instance list (You may need to click <strong>HIDE INFO PANEL</strong> in the upper left first).
+<img alt="SSH VM" src="../img/ssh-vm.png" /></p>
+<p>Google Cloud will create an SSH key pair and distribute it to the newly created VM instance. It will then open an SSH window into it.
+<img alt="Ready to config" src="../img/vm-ready.png" /></p>
+<p>You are now ready to proceed with the lab configuration!</p>
               
             </div>
           </div>
