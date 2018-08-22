@@ -15,10 +15,21 @@
 # limitations under the License.
 
 
+# Install zip, and pip
+function getTools() {
+
+    echo "Installing zip ..."
+    sudo apt-get -y install zip &> setup.log
+    echo " Done"
+    echo "Installing python-pip ..."
+    sudo apt-get -y install python-pip &> setup.log
+    echo " Done"
+}
+
 # Download and extract Terraform utility in the deployment directory.
 function getTerraform() {
   # Places terraform in /usr/local/bin dir.
-  local T_VERSION='0.11.7/terraform_0.11.7_linux_amd64'
+  local T_VERSION='0.11.7/terraform_0.11.8_linux_amd64'
   local T_URL="https://releases.hashicorp.com/terraform/${T_VERSION}.zip"
   local T_DIR=/usr/local/bin
   local T_ZIP="${T_DIR}/terraform.zip"
@@ -73,6 +84,7 @@ function getPyLibs() {
 }
 
 # Main program
+getTools
 getTerraform
 getAnsible
 getPyLibs

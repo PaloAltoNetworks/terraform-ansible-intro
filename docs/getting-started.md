@@ -2,8 +2,10 @@
 
 In this activity you will:
 
+* Log into Qwiklabs
 * Launch the lab in Qwiklabs
-* Launch the Google Cloud Shell
+* Create a Linux VM instance
+* SSH into the Linux VM
 
 ---
 **WARNING:** You must use the credentials provided by Qwiklabs for this lab.  Failure to do so may result in charges to your personal Google account.  You should either log out of Google entirely before proceeding or open an Icognito window in the Google Chrome web browser.
@@ -20,7 +22,7 @@ Navigate to the [Qwiklabs URL](https://paloaltonetworks.qwiklab.com) in your web
 https://paloaltonetworks.qwiklab.com
 ```
 
-Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).
+Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).  You must use your corporate email address for the username.
 ![Qwiklabs login](img/qwiklabs-login.png)
 
 ## Launch the lab
@@ -55,22 +57,24 @@ Since this is a temporary lab account you can skip adding account recovery optio
 Select your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__.
 ![Updated ToS](img/updated-tos.png)
 
-## Launch Google Cloud Shell
+## Create a new VM instance
 
-Click the menu icon in the upper left-hand corner of the Dashboard to hide the sidebar menu.
-![Menu bar](img/menu.png)
+Scroll down in the left-hand navigation menu select **Compute Engine > VM instances**.
+![Compute Engine](img/compute-eng.png)
 
-In the upper right-hand corner of the Dashboard, click on the Cloud Shell icon.
-![Cloud Shell](img/cloud-shell.png)
+In the VM instances screen, click **Create** to being the VM creation process.
+![Create VM](img/create-vm.png)
 
-A welcome page is displayed when launching the Cloud Shell for the first time. Click __Start Cloud Shell__ to proceed.
-![Cloud Shell](img/cs-intro.png)
+Give the VM instance a name of your choice.  Select the **us-central1 (Iowa)** region and select any one of the four zones available.  Leave all other values as default.
+![Define VM](img/define-vm.png)
 
-The Cloud Shell will appear at the bottom of the Dashboard.  Wait a few moments as it provisions and connects to the environment.
-![Bottom shell](img/bottom-shell.png)
+Scroll down to the **Access Scopes** section and select **Allow full acces to all Cloud APIs**.  Then click **Create** to launch the VM instance.
+![Launch VM](img/launch-vm.png)
 
-You can click on the __Open in New Window__ icon in the Cloud Shell toolbar for a full-sized Cloud Shell display in a new browser tab.
-![New window](img/new-window.png)
+Once the instance is up you can SSH into the device by clicking **SSH** in the instance list (You may need to click **HIDE INFO PANEL** in the upper left first).
+![SSH VM](img/ssh-vm.png)
 
-You are now ready to proceed with the lab configuration.
-![Ready to config](img/ready-to-config.png)
+Google Cloud will create an SSH key pair and distribute it to the newly created VM instance. It will then open an SSH window into it.
+![Ready to config](img/vm-ready.png)
+
+You are now ready to proceed with the lab configuration!

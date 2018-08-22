@@ -2,16 +2,24 @@
 
 In this activity you will:
 
+* Download the lab repo
 * Install Terraform and Ansible
-* Configure the Google Cloud SDK
 * Enable the Compute Engine API
 * Configure API credentials
 * Configure SSH credentials
 
 ---
-**NOTE:**  All of the commands listed within this activity should be executed within the Google Cloud Shell - __not on your laptop__.
+**NOTE:**  All of the commands listed within this activity should be executed within the Google Cloud VM we just created - __not on your laptop__.
 
 ---
+
+
+## Install the git package
+In the SSH sessions, type the following command to install the git package.
+
+```bash
+$ sudo apt-get install git
+```
 
 ## Install Terraform and Ansible
 Download the lab repository to your home directory.
