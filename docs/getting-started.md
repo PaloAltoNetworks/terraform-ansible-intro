@@ -57,7 +57,7 @@ Since this is a temporary lab account you can skip adding account recovery optio
 Select your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__.
 ![Updated ToS](img/updated-tos.png)
 
-## Create a new VM instance
+## Create a new Linux VM instance
 
 Scroll down in the left-hand navigation menu and select **Compute Engine > VM instances**.
 ![Compute Engine](img/compute-eng.png)
