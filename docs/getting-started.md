@@ -71,10 +71,10 @@ Give the VM instance a name of your choice.  Select the **us-central1 (Iowa)** r
 Scroll down to the **Access scopes** section and select **Allow full access to all Cloud APIs**.  Then click **Create** to launch the VM instance.
 ![Launch VM](img/launch-vm.png)
 
-Once the VM instance is up you can connect to it by clicking **SSH** in the instance list (You may need to click **HIDE INFO PANEL** in the upper left first).
+Once the Linux VM is up and running you can connect to it by clicking **SSH** in the instance list (You may need to click **HIDE INFO PANEL** in the upper left first).
 ![SSH VM](img/ssh-vm.png)
 
-Google Cloud will create an SSH key pair and distribute it to the newly created VM instance. It will then open an SSH window into it.
+Google Cloud will create an SSH key pair and distribute it to the newly created Linux VM. It will then open an SSH window into it.
 ![Ready to config](img/vm-ready.png)
 
 You are now ready to proceed with the lab configuration!
