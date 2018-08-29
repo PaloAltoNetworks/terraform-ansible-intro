@@ -22,6 +22,9 @@ The following are NOT goals of this lab:
 
 ## About This Lab
 * __Terraform:__ This lab will utilize Terraform for both deploying a VM-Series firewall instances into GCP as well as configuring it once it is deployed.  This will demonstrate the use of the [google](https://www.terraform.io/docs/providers/google/index.html) Terraform provider and its associated resources for the deployment and then the [panos](https://www.terraform.io/docs/providers/panos/index.html) Terraform provider for the configuration of the VM-Series firewall.
+
 * __Ansible:__ Once the firewall is fully configured we will back out all of the configurations made with Terraform and recreate them using the [ansible-pan](https://panwansible.readthedocs.io/en/latest/) modules in Ansible.  This will demonstrate the creation of Ansible playbooks and task definitions.
+
 * __Google Cloud Shell:__ This lab makes use of the Google Cloud Shell instead of deploying a separate VM hosting the Terraform and Ansible packages. Cloud Shell is an interactive shell environment for Google Cloud Platform. It makes it easy for you to manage your projects and resources without having to install the Google Cloud SDK and other tools on a separate host. With Cloud Shell, the Cloud SDK gcloud command-line tool and other utilities you need are always available when you need them.
+
 * __Google Cloud SDK:__ The initial configuration of the lab environment utilizes the Google Cloud SDK command line interface to perform tasks such as enabling APIs and establishing credentials.  These tasks could just as easily be accomplished using the GCP web console.  However, familiarity with the CLI commands is useful and presents opportunities for further scripting and automation.
