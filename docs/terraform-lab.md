@@ -165,7 +165,9 @@ resource "panos_zone" "ext" {
 }
 ```
 
-Let's apply this config to our firewall.  You first need to run `terraform init` to download all the providers we need.
+Save and exist the `panos_plan.tf` file.
+
+Let's apply this config to our firewall.  First you then need to run `terraform init` to download all the providers we need.
 
 ```bash
 $ terraform init
@@ -197,7 +199,7 @@ Add the following to the bottom of the `panos_plan.tf` file:
 
 ```hcl
 resource "panos_address_object" "wp" {
-    name = "WordPress server"
+    name = "wordpress server"
     description = "Internal server"
     value = "10.1.23.45"
 }
@@ -214,7 +216,7 @@ Add the following to your `panos_plan.tf` file.  Just like with the networking c
 ```hcl
 resource "panos_security_rule_group" "policy" {
     rule {
-        name = "WordPress Traffic"
+        name = "Wordpress Traffic"
         source_zones = ["${panos_zone.ext.name}"]
         source_addresses = ["any"]
         source_users = ["any"]
@@ -255,9 +257,11 @@ resource "panos_security_rule_group" "policy" {
 }
 ```
 
+Save and exist the `panos_plan.tf` file.
+
 ### Apply the Terraform Plan
 
-Let's apply the config to our firewall.  We won't need to run `terraform init` again since the provider has already been initialized. So just check your config with `terraform plan`:
+Let's apply the config to our firewall. We won't need to run `terraform init` again since the provider has already been initialized. So just check your config with `terraform plan`:
 
 ```bash
 $ terraform plan

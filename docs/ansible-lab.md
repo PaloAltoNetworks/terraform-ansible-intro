@@ -54,7 +54,7 @@ Now, create the file `network.yml`.  This will be the playbook that holds the lo
 Each playbook needs the following header information to pull in the variables we just defined.  Add the following to `network.yml`:
 
 ```yml
-- name: Ansible Playbook
+- name: Network Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -88,7 +88,7 @@ We're going to recreate the same configuration from the Terraform lab in Ansible
 Add the following to `network.yml`:
 
 ```yml
-  - name: "Configure eth1/1"
+  - name: Configure eth1/1
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -98,7 +98,7 @@ Add the following to `network.yml`:
       zone_name: 'L3-trust'
       commit: False
 
-  - name: "Configure eth1/2"
+  - name: Configure eth1/2
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -117,7 +117,7 @@ Note that Ansible is a little different from Terraform.  We have to specify the 
 The resulting `network.yml` playbook should look like this:
 
 ```yml
-- name: My Ansible Playbook
+- name: Network Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -150,7 +150,7 @@ The resulting `network.yml` playbook should look like this:
       commit: False
 ```
 
-Run your playbook with the following command:
+Save and exist the `network.yml` file.  Then run your playbook with the following command:
 
 ```bash
 $ ansible-playbook -i inventory network.yml
@@ -167,7 +167,7 @@ If you get errors, indentation is most likely the problem.  Once you fix any err
 Create a new file `rules.yml`, and add the same header information from the network config task.
 
 ```yml
-- name: SKO2019 Ansible Playbook
+- name: Rulebase Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -194,7 +194,7 @@ Add the following to `rules.yml`:
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'WordPress server'
+      addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
 ```
@@ -214,10 +214,10 @@ Add the following to `rules.yml`:
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'WordPress Traffic'
+      rule_name: 'Wordpress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['WordPress server']
+      destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
@@ -252,7 +252,7 @@ Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/
 Your final, full `rules.yml` playbook should look like this:
 
 ```yml
-- name: My Ansible Playbook
+- name: Rulebase Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -271,7 +271,7 @@ Your final, full `rules.yml` playbook should look like this:
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'WordPress server'
+      addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
 
@@ -281,10 +281,10 @@ Your final, full `rules.yml` playbook should look like this:
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'WordPress Traffic'
+      rule_name: 'Wordpress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['WordPress server']
+      destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
@@ -312,7 +312,7 @@ Your final, full `rules.yml` playbook should look like this:
       commit: False
 ```
 
-Run your playbook with the following command:
+Save and exit the `rules.yml` file.  Then run your playbook with the following command:
 
 ```bash
 $ ansible-playbook -i inventory rules.yml

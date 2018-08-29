@@ -15,11 +15,11 @@
 ### Playbooks
 
 Though Ansible allows you to execute ad hoc commands against your desired
-inventory, the better way to use Ansible is with Ansible playbooks. 
+inventory, the better way to use Ansible is with Ansible playbooks.
 Ansible playbooks are a list of configuration operations, or plays, to be
 performed.  Ansible playbooks are written in YAML, which you can find out
 more about
-[here](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html). 
+[here](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html).
 Playbooks are run from top to bottom, which means that if one configuration
 depends on another being present, you simply put the dependency higher in the
 playbook.  You can even tell Ansible to run another playbook from within the
@@ -58,7 +58,7 @@ parts of this below.
     include_vars: 'fw_creds.yml'
     no_log: 'yes'
 
-  - name: "Add interface management profile"
+  - name: Add interface management profile
     panos_management_profile:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -67,7 +67,7 @@ parts of this below.
       ssh: true
       commit: false
 
-  - name: "Configure eth1/1 and put it in zone L3-in"
+  - name: Configure eth1/1 and put it in zone L3-in
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -81,11 +81,11 @@ parts of this below.
 
 ### Hosts
 
-Ansible executes actions against an inventory.  If you’re going to run Ansible 
-in production, you’ll probably want to use the inventory file to organize your 
-firewalls and Panoramas into groups to make management easier.  For the 
-purposes of our lab, however, we just want to run the playbooks against a 
-single host.  So instead of putting the host in a hosts file, we’re going to 
+Ansible executes actions against an inventory.  If you’re going to run Ansible
+in production, you’ll probably want to use the inventory file to organize your
+firewalls and Panoramas into groups to make management easier.  For the
+purposes of our lab, however, we just want to run the playbooks against a
+single host.  So instead of putting the host in a hosts file, we’re going to
 use variables instead.
 
 If you desire, you can read more about Ansible inventory
@@ -93,16 +93,16 @@ If you desire, you can read more about Ansible inventory
 
 ### Connection
 
-Typically Ansible will ssh to a remote machine and perform commands as the 
-specified user account.  However, we don't want this for the Palo Alto Networks 
-Ansible modules, as the modules connect to our API.  Thus this should be set to 
+Typically Ansible will ssh to a remote machine and perform commands as the
+specified user account.  However, we don't want this for the Palo Alto Networks
+Ansible modules, as the modules connect to our API.  Thus this should be set to
 "local" as we want Ansible to initiate the connection locally.
 
 ### Gather Facts
 
-Ansible facts are just information about remote nodes.  In our case, we aren’t 
-going to use facts for anything, so we’re disabling them to ensure that our 
-Ansible invocations are run in a timely manner (this is would probably not be 
+Ansible facts are just information about remote nodes.  In our case, we aren’t
+going to use facts for anything, so we’re disabling them to ensure that our
+Ansible invocations are run in a timely manner (this is would probably not be
 disabled in production).
 
 If you want to read more about facts, you can find that info
@@ -110,31 +110,31 @@ If you want to read more about facts, you can find that info
 
 ### Roles
 
-Let’s discuss the "PaloAltoNetworks.paloaltonetworks" role that our playbook 
-is using.  Ansible comes with various Palo Alto Networks packages when you 
-`pip install ansible`, but updating these packages takes a lot of time and 
-effort.  In an effort to get new features to customers sooner, we've made 
-newer features available as an Ansible galaxy role.  Including this role in 
-our playbook means that Ansible will use the role’s code (the newest released 
-code) for the Ansible plays instead of the older code that's merged upstream 
+Let’s discuss the "PaloAltoNetworks.paloaltonetworks" role that our playbook
+is using.  Ansible comes with various Palo Alto Networks packages when you
+`pip install ansible`, but updating these packages takes a lot of time and
+effort.  In an effort to get new features to customers sooner, we've made
+newer features available as an Ansible galaxy role.  Including this role in
+our playbook means that Ansible will use the role’s code (the newest released
+code) for the Ansible plays instead of the older code that's merged upstream
 with Ansible.
 
 ### Tasks
 
-Each playbook contains a list of tasks to perform.  These are executed in 
-order, one at a time against the inventory.  Each task will have a "name", 
+Each playbook contains a list of tasks to perform.  These are executed in
+order, one at a time against the inventory.  Each task will have a "name",
 and this name is what shows up on the CLI when executing the Ansible playbook.
-Besides the name, you will specify the module to execute, and then an 
+Besides the name, you will specify the module to execute, and then an
 indented list of the values you want to pass in to that module.
 
 Knowing what you know about tasks, let’s take a look at that "include\_vars"
 task.  At this point, knowing what the format of tasks is, you can now
 identify "include\_vars" as a module invocation (documentation for
 "include\_vars" is
-[here](https://docs.ansible.com/ansible/latest/modules/include_vars_module.html)). 
+[here](https://docs.ansible.com/ansible/latest/modules/include_vars_module.html)).
 
 So what’s that `no_log` part?  This is simply to keep the authentication
-credentials safe without compromising the verbosity of our Ansible output. 
+credentials safe without compromising the verbosity of our Ansible output.
 You can read more about that
 [here](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-keep-secret-data-in-my-playbook)
 in the Ansible FAQs.
