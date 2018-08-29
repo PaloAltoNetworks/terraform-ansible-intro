@@ -65,20 +65,9 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#log-into-qwiklabs">Log into Qwiklabs</a></li>
-        
-            <li><a class="toctree-l4" href="#launch-the-lab">Launch the lab</a></li>
-        
             <li><a class="toctree-l4" href="#log-into-google-cloud-platform">Log into Google Cloud Platform</a></li>
         
-            <li><a class="toctree-l4" href="#create-a-new-linux-vm-instance">Create a new Linux VM instance</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#you-are-now-ready-to-proceed-with-the-lab-configuration">You are now ready to proceed with the lab configuration!</a></li>
-    
-        <ul>
+            <li><a class="toctree-l4" href="#launch-google-cloud-shell">Launch Google Cloud Shell</a></li>
         
             <li><a class="toctree-l4" href="#create-a-new-gcp-project">Create a new GCP project</a></li>
         
@@ -176,51 +165,11 @@
               
                 <h1 id="getting-started">Getting Started</h1>
 <p>In this activity you will:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<em> Log into Qwiklabs
-</em> Launch the lab in Qwiklabs
-<em> Create a Linux VM instance
-</em> SSH into the Linux VM</p>
-<hr />
-<p><strong>WARNING:</strong> You must use the credentials provided by Qwiklabs for this lab.  Failure to do so may result in charges to your personal Google account.  You should either log out of Google entirely before proceeding or open an Icognito window in the Google Chrome web browser.</p>
-<p><img alt="Chrome Incognito mode" src="../img/incognito.png" /></p>
-<hr />
-<h2 id="log-into-qwiklabs">Log into Qwiklabs</h2>
-<p>Navigate to the <a href="https://paloaltonetworks.qwiklab.com">Qwiklabs URL</a> in your web browser</p>
-<pre><code class="html">https://paloaltonetworks.qwiklab.com
-</code></pre>
-
-<p>Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).  You must use your corporate email address for the username.
-<img alt="Qwiklabs login" src="../img/qwiklabs-login.png" /></p>
-<h2 id="launch-the-lab">Launch the lab</h2>
-<p>Confirm that the lab entitled <strong>Introduction to Terraform and Ansible</strong> is listed under <strong>In Progress</strong> on the welcome screen.</p>
-<p>Click on the <strong>Introduction to Terraform and Ansible</strong> lab to add it to your <strong>My Learning</strong> inventory.
-<img alt="Select lab" src="../img/welcome.png" /></p>
-<p>Click on the <strong>Introduction to Terraform and Ansible</strong> lab in the <strong>My Learning</strong> page.
-<img alt="My Learning" src="../img/my-learning.png" /></p>
-<p>Click on <strong>Start Lab</strong> in the upper right corner of the main lab page.
-<img alt="Start lab" src="../img/start-lab.png" /></p>
-<p>Make note of the <strong>Username</strong>, <strong>Password</strong>, and <strong>GCP Project ID</strong> fields that are generated.
-<img alt="Connection details" src="../img/connection-details.png" />
-=======
-<em> Log into Google Cloud Platform
-</em> Launch the Google Cloud Shell
-* Create a new GCP project</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>post-sko</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<ul>
+<li>Log into Google Cloud Platform</li>
+<li>Launch the Google Cloud Shell</li>
+<li>Create a new GCP project</li>
+</ul>
 <h2 id="log-into-google-cloud-platform">Log into Google Cloud Platform</h2>
 <p>Using your web browser, navigate to <a href="https://console.cloud.google.com">https://console.cloud.google.com</a>.</p>
 <p>Log in using your Google Cloud Platform credentials.  If you do not have a GCP account you can create one at <a href="https://cloud.google.com/free">https://cloud.google.com/free</a>.
@@ -231,21 +180,17 @@
 <img alt="Recovery options" src="../img/recovery.png" /></p>
 <p>Select your country, opt out of email updates, and accept the updated Terms of Service and click <strong>Accept</strong>. <em>(New accounts only)</em>
 <img alt="Updated ToS" src="../img/updated-tos.png" /></p>
-<h2 id="create-a-new-linux-vm-instance">Create a new Linux VM instance</h2>
-<p>Scroll down in the left-hand navigation menu and select <strong>Compute Engine &gt; VM instances</strong>.
-<img alt="Compute Engine" src="../img/compute-eng.png" /></p>
-<p>In the VM instances screen, click <strong>Create</strong> to being the VM creation process.
-<img alt="Create VM" src="../img/create-vm.png" /></p>
-<p>Give the VM instance a name of your choice.  Select the <strong>us-central1 (Iowa)</strong> region and select any one of the four zones available.
-<img alt="Define VM" src="../img/define-vm.png" /></p>
-<p>Scroll down to the <strong>Access scopes</strong> section and select <strong>Allow full access to all Cloud APIs</strong>.  Then click <strong>Create</strong> to launch the VM instance.
-<img alt="Launch VM" src="../img/launch-vm.png" /></p>
-<p>Once the Linux VM is up and running you can connect to it by clicking <strong>SSH</strong> in the instance list (You may need to click <strong>HIDE INFO PANEL</strong> in the upper left first).
-<img alt="SSH VM" src="../img/ssh-vm.png" /></p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Google Cloud will create an SSH key pair and distribute it to the newly created Linux VM. It will then open an SSH window into it.
-<img alt="Ready to config" src="../img/vm-ready.png" /></p>
-<h1 id="you-are-now-ready-to-proceed-with-the-lab-configuration">You are now ready to proceed with the lab configuration!</h1>
+<h2 id="launch-google-cloud-shell">Launch Google Cloud Shell</h2>
+<p>Click the menu icon in the upper left-hand corner of the Dashboard to hide the sidebar menu.
+<img alt="Menu bar" src="../img/menu.png" /></p>
+<p>In the upper right-hand corner of the Dashboard, click on the Cloud Shell icon.
+<img alt="Cloud Shell" src="../img/cloud-shell.png" /></p>
+<p>A welcome page is displayed when launching the Cloud Shell for the first time. Click <strong>Start Cloud Shell</strong> to proceed.
+<img alt="Cloud Shell" src="../img/cs-intro.png" /></p>
+<p>The Cloud Shell will appear at the bottom of the Dashboard.  Wait a few moments as it provisions and connects to the environment.
+<img alt="Bottom shell" src="../img/bottom-shell.png" /></p>
+<p>You can click on the <strong>Open in New Window</strong> icon in the Cloud Shell toolbar for a full-sized Cloud Shell display in a new browser tab.
+<img alt="New window" src="../img/new-window.png" /></p>
 <p>You are now ready to use the Cloud Shell.</p>
 <p><img alt="Ready to config" src="../img/ready-to-config.png" /></p>
 <h2 id="create-a-new-gcp-project">Create a new GCP project</h2>
@@ -260,22 +205,6 @@ Google Cloud will create an SSH key pair and distribute it to the newly created 
 <p>Confirm the configuration details with the following <code>gcloud config</code> command.</p>
 <pre><code class="bash">$ gcloud config list
 </code></pre>
-
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>post-sko</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
               
             </div>
           </div>
