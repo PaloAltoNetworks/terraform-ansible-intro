@@ -180,11 +180,11 @@
 <h2 id="configuration-overview">Configuration Overview</h2>
 <h3 id="playbooks">Playbooks</h3>
 <p>Though Ansible allows you to execute ad hoc commands against your desired
-inventory, the better way to use Ansible is with Ansible playbooks. 
+inventory, the better way to use Ansible is with Ansible playbooks.
 Ansible playbooks are a list of configuration operations, or plays, to be
 performed.  Ansible playbooks are written in YAML, which you can find out
 more about
-<a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">here</a>. 
+<a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">here</a>.
 Playbooks are run from top to bottom, which means that if one configuration
 depends on another being present, you simply put the dependency higher in the
 playbook.  You can even tell Ansible to run another playbook from within the
@@ -215,7 +215,7 @@ parts of this below.</p>
     include_vars: 'fw_creds.yml'
     no_log: 'yes'
 
-  - name: &quot;Add interface management profile&quot;
+  - name: Add interface management profile
     panos_management_profile:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -224,7 +224,7 @@ parts of this below.</p>
       ssh: true
       commit: false
 
-  - name: &quot;Configure eth1/1 and put it in zone L3-in&quot;
+  - name: Configure eth1/1 and put it in zone L3-in
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -236,48 +236,48 @@ parts of this below.</p>
 
 <h2 id="terminology">Terminology</h2>
 <h3 id="hosts">Hosts</h3>
-<p>Ansible executes actions against an inventory.  If you’re going to run Ansible 
-in production, you’ll probably want to use the inventory file to organize your 
-firewalls and Panoramas into groups to make management easier.  For the 
-purposes of our lab, however, we just want to run the playbooks against a 
-single host.  So instead of putting the host in a hosts file, we’re going to 
+<p>Ansible executes actions against an inventory.  If you’re going to run Ansible
+in production, you’ll probably want to use the inventory file to organize your
+firewalls and Panoramas into groups to make management easier.  For the
+purposes of our lab, however, we just want to run the playbooks against a
+single host.  So instead of putting the host in a hosts file, we’re going to
 use variables instead.</p>
 <p>If you desire, you can read more about Ansible inventory
 <a href="http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">here</a>.</p>
 <h3 id="connection">Connection</h3>
-<p>Typically Ansible will ssh to a remote machine and perform commands as the 
-specified user account.  However, we don't want this for the Palo Alto Networks 
-Ansible modules, as the modules connect to our API.  Thus this should be set to 
+<p>Typically Ansible will ssh to a remote machine and perform commands as the
+specified user account.  However, we don't want this for the Palo Alto Networks
+Ansible modules, as the modules connect to our API.  Thus this should be set to
 "local" as we want Ansible to initiate the connection locally.</p>
 <h3 id="gather-facts">Gather Facts</h3>
-<p>Ansible facts are just information about remote nodes.  In our case, we aren’t 
-going to use facts for anything, so we’re disabling them to ensure that our 
-Ansible invocations are run in a timely manner (this is would probably not be 
+<p>Ansible facts are just information about remote nodes.  In our case, we aren’t
+going to use facts for anything, so we’re disabling them to ensure that our
+Ansible invocations are run in a timely manner (this is would probably not be
 disabled in production).</p>
 <p>If you want to read more about facts, you can find that info
 <a href="https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html#term-facts">here</a>.</p>
 <h3 id="roles">Roles</h3>
-<p>Let’s discuss the "PaloAltoNetworks.paloaltonetworks" role that our playbook 
-is using.  Ansible comes with various Palo Alto Networks packages when you 
-<code>pip install ansible</code>, but updating these packages takes a lot of time and 
-effort.  In an effort to get new features to customers sooner, we've made 
-newer features available as an Ansible galaxy role.  Including this role in 
-our playbook means that Ansible will use the role’s code (the newest released 
-code) for the Ansible plays instead of the older code that's merged upstream 
+<p>Let’s discuss the "PaloAltoNetworks.paloaltonetworks" role that our playbook
+is using.  Ansible comes with various Palo Alto Networks packages when you
+<code>pip install ansible</code>, but updating these packages takes a lot of time and
+effort.  In an effort to get new features to customers sooner, we've made
+newer features available as an Ansible galaxy role.  Including this role in
+our playbook means that Ansible will use the role’s code (the newest released
+code) for the Ansible plays instead of the older code that's merged upstream
 with Ansible.</p>
 <h3 id="tasks">Tasks</h3>
-<p>Each playbook contains a list of tasks to perform.  These are executed in 
-order, one at a time against the inventory.  Each task will have a "name", 
+<p>Each playbook contains a list of tasks to perform.  These are executed in
+order, one at a time against the inventory.  Each task will have a "name",
 and this name is what shows up on the CLI when executing the Ansible playbook.
-Besides the name, you will specify the module to execute, and then an 
+Besides the name, you will specify the module to execute, and then an
 indented list of the values you want to pass in to that module.</p>
 <p>Knowing what you know about tasks, let’s take a look at that "include_vars"
 task.  At this point, knowing what the format of tasks is, you can now
 identify "include_vars" as a module invocation (documentation for
 "include_vars" is
-<a href="https://docs.ansible.com/ansible/latest/modules/include_vars_module.html">here</a>). </p>
+<a href="https://docs.ansible.com/ansible/latest/modules/include_vars_module.html">here</a>).</p>
 <p>So what’s that <code>no_log</code> part?  This is simply to keep the authentication
-credentials safe without compromising the verbosity of our Ansible output. 
+credentials safe without compromising the verbosity of our Ansible output.
 You can read more about that
 <a href="https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-keep-secret-data-in-my-playbook">here</a>
 in the Ansible FAQs.</p>

@@ -301,7 +301,8 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 }
 </code></pre>
 
-<p>Let's apply this config to our firewall.  You first need to run <code>terraform init</code> to download all the providers we need.</p>
+<p>Save and exist the <code>panos_plan.tf</code> file.</p>
+<p>Let's apply this config to our firewall.  First you then need to run <code>terraform init</code> to download all the providers we need.</p>
 <pre><code class="bash">$ terraform init
 </code></pre>
 
@@ -320,7 +321,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
 <p>Add the following to the bottom of the <code>panos_plan.tf</code> file:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
-    name = &quot;WordPress server&quot;
+    name = &quot;wordpress server&quot;
     description = &quot;Internal server&quot;
     value = &quot;10.1.23.45&quot;
 }
@@ -332,7 +333,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 <p>Add the following to your <code>panos_plan.tf</code> file.  Just like with the networking config, zones and objects are referenced by name so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
-        name = &quot;WordPress Traffic&quot;
+        name = &quot;Wordpress Traffic&quot;
         source_zones = [&quot;${panos_zone.ext.name}&quot;]
         source_addresses = [&quot;any&quot;]
         source_users = [&quot;any&quot;]
@@ -373,8 +374,9 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 }
 </code></pre>
 
+<p>Save and exist the <code>panos_plan.tf</code> file.</p>
 <h3 id="apply-the-terraform-plan_1">Apply the Terraform Plan</h3>
-<p>Let's apply the config to our firewall.  We won't need to run <code>terraform init</code> again since the provider has already been initialized. So just check your config with <code>terraform plan</code>:</p>
+<p>Let's apply the config to our firewall. We won't need to run <code>terraform init</code> again since the provider has already been initialized. So just check your config with <code>terraform plan</code>:</p>
 <pre><code class="bash">$ terraform plan
 </code></pre>
 

@@ -202,7 +202,7 @@ password: ''
 <hr />
 <p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the low level networking config for our firewall.</p>
 <p>Each playbook needs the following header information to pull in the variables we just defined.  Add the following to <code>network.yml</code>:</p>
-<pre><code class="yml">- name: Ansible Playbook
+<pre><code class="yml">- name: Network Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -226,7 +226,7 @@ password: ''
 <p><img alt="L3-trust" src="../img/l3-trust.png" /></p>
 <p><img alt="L3-untrust" src="../img/l3-untrust.png" /></p>
 <p>Add the following to <code>network.yml</code>:</p>
-<pre><code class="yml">  - name: &quot;Configure eth1/1&quot;
+<pre><code class="yml">  - name: Configure eth1/1
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -236,7 +236,7 @@ password: ''
       zone_name: 'L3-trust'
       commit: False
 
-  - name: &quot;Configure eth1/2&quot;
+  - name: Configure eth1/2
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -250,7 +250,7 @@ password: ''
 <p>Note that Ansible is a little different from Terraform.  We have to specify the <strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.</p>
 <h3 id="run-the-playbook">Run the Playbook</h3>
 <p>The resulting <code>network.yml</code> playbook should look like this:</p>
-<pre><code class="yml">- name: My Ansible Playbook
+<pre><code class="yml">- name: Network Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -283,7 +283,7 @@ password: ''
       commit: False
 </code></pre>
 
-<p>Run your playbook with the following command:</p>
+<p>Save and exist the <code>network.yml</code> file.  Then run your playbook with the following command:</p>
 <pre><code class="bash">$ ansible-playbook -i inventory network.yml
 </code></pre>
 
@@ -292,7 +292,7 @@ password: ''
 <hr />
 <h2 id="task-3-objects-and-security-rule-creation">Task 3 - Objects and Security Rule Creation</h2>
 <p>Create a new file <code>rules.yml</code>, and add the same header information from the network config task.</p>
-<pre><code class="yml">- name: SKO2019 Ansible Playbook
+<pre><code class="yml">- name: Rulebase Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -315,7 +315,7 @@ password: ''
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'WordPress server'
+      addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
 </code></pre>
@@ -330,10 +330,10 @@ password: ''
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'WordPress Traffic'
+      rule_name: 'Wordpress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['WordPress server']
+      destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
@@ -364,7 +364,7 @@ password: ''
 <p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_security_rule_module.html">module documentation</a> for more details on the <code>panos_security_rule</code> module.</p>
 <h3 id="run-the-playbook_1">Run the Playbook</h3>
 <p>Your final, full <code>rules.yml</code> playbook should look like this:</p>
-<pre><code class="yml">- name: My Ansible Playbook
+<pre><code class="yml">- name: Rulebase Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -383,7 +383,7 @@ password: ''
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'WordPress server'
+      addressobject: 'wordpress server'
       address: '10.1.23.45'
       description: 'Internal server'
 
@@ -393,10 +393,10 @@ password: ''
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'WordPress Traffic'
+      rule_name: 'Wordpress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['WordPress server']
+      destination_ip: ['wordpress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
@@ -424,7 +424,7 @@ password: ''
       commit: False
 </code></pre>
 
-<p>Run your playbook with the following command:</p>
+<p>Save and exit the <code>rules.yml</code> file.  Then run your playbook with the following command:</p>
 <pre><code class="bash">$ ansible-playbook -i inventory rules.yml
 </code></pre>
 
