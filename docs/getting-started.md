@@ -2,57 +2,24 @@
 
 In this activity you will:
 
-* Launch the lab in Qwiklabs
+* Log into Google Cloud Platform
 * Launch the Google Cloud Shell
-
----
-**WARNING:** You must use the credentials provided by Qwiklabs for this lab.  Failure to do so may result in charges to your personal Google account.  You should either log out of Google entirely before proceeding or open an Icognito window in the Google Chrome web browser.
-
-![Chrome Incognito mode](img/incognito.png)
-
----
-
-## Log into Qwiklabs
-
-Navigate to the [Qwiklabs URL](https://paloaltonetworks.qwiklab.com) in your web browser
-
-```html
-https://paloaltonetworks.qwiklab.com
-```
-
-Log in with your Qwiklabs credentials (sign up if you are new to Qwiklabs).
-![Qwiklabs login](img/qwiklabs-login.png)
-
-## Launch the lab
-
-Confirm that the lab entitled __Introduction to Terraform and Ansible__ is listed under __In Progress__ on the welcome screen.
-
-Click on the __Introduction to Terraform and Ansible__ lab to add it to your __My Learning__ inventory.
-![Select lab](img/welcome.png)
-
-Click on the __Introduction to Terraform and Ansible__ lab in the __My Learning__ page.
-![My Learning](img/my-learning.png)
-
-Click on __Start Lab__ in the upper right corner of the main lab page.
-![Start lab](img/start-lab.png)
-
-Make note of the __Username__, __Password__, and __GCP Project ID__ fields that are generated.
-![Connection details](img/connection-details.png)
+* Create a new GCP project
 
 ## Log into Google Cloud Platform
 
-Click on the __Open Google Console__ button located under the __Connection Details__.  A new browser tab will open and take you to the Google login page.
+Using your web browser, navigate to [https://console.cloud.google.com](https://console.cloud.google.com).
 
-Log in using the credentials provided on the Qwiklabs launch page for this specific lab.
+Log in using your Google Cloud Platform credentials.  If you do not have a GCP account you can create one at [https://cloud.google.com/free](https://cloud.google.com/free).
 ![Google login](img/gcp-login.png)
 
-Click __Accept__ on the logon banner page to accept the Terms of Service.
+Click __Accept__ on the logon banner page to accept the Terms of Service. *(New accounts only)*
 ![Banner page](img/banner-page.png)
 
-Since this is a temporary lab account you can skip adding account recovery options by clicking __Done__.
+Update your account recovery details and click __Done__. *(New accounts only)*
 ![Recovery options](img/recovery.png)
 
-Select your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__.
+Select your country, opt out of email updates, and accept the updated Terms of Service and click __Accept__. *(New accounts only)*
 ![Updated ToS](img/updated-tos.png)
 
 ## Launch Google Cloud Shell
@@ -72,5 +39,26 @@ The Cloud Shell will appear at the bottom of the Dashboard.  Wait a few moments 
 You can click on the __Open in New Window__ icon in the Cloud Shell toolbar for a full-sized Cloud Shell display in a new browser tab.
 ![New window](img/new-window.png)
 
-You are now ready to proceed with the lab configuration.
+You are now ready to use the Cloud Shell.
+
 ![Ready to config](img/ready-to-config.png)
+
+## Create a new GCP project
+
+In the Cloud Shell window, create a new project using the following `gcloud projects` command.
+
+```bash
+$ gcloud projects create terraform-ansible-lab
+```
+
+Then we'll need to change the GCP configuration to utilize this project with the following `gcloud config` command.
+
+```bash
+$ gcloud config set project terraform-ansible-lab
+```
+
+Confirm the configuration details with the following `gcloud config` command.
+
+```bash
+$ gcloud config list
+```
