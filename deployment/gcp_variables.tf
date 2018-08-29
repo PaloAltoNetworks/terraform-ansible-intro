@@ -26,9 +26,9 @@ variable "gcp_project_id" {
 }
 
 variable "gcp_region" {
-  description = "Council Bluffs, Iowa, USA region"
+  description = ""
   type = "string"
-  default = "us-central1"
+  default = ""
 }
 
 variable "gcp_credentials_file" {
@@ -40,5 +40,5 @@ variable "gcp_credentials_file" {
 variable "gcp_ssh_key" {
     description = "Full path to the SSH public key file"
     type = "string"
-    default = "../../.ssh/sko19_ssh_key.pub"
+    default = "../../.ssh/lab_ssh_key.pub"
 }

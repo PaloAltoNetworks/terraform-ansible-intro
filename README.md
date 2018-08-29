@@ -1,6 +1,6 @@
-# Terraform / Ansible Introductory Course
+# Terraform & Ansible Introductory Lab
 
-Welcome to this introductory course covering Terraform and Ansible basics.
+Welcome to this introductory hands-on lab covering Terraform and Ansible basics.
 
 
 ## Goals
@@ -11,16 +11,6 @@ Welcome to this introductory course covering Terraform and Ansible basics.
 * Learn how to use the [Ansible modules](http://panwansible.readthedocs.io/en/latest/)
 
 
-## Table of Contents
+## Lab Guide
 
-1. [Setup](docs/setup.md)
-   * [Google Cloud Platform CLI](docs/gcp-cli-setup.md)
-1. Terraform
-   1. [Overview and Terminology](docs/terraform-basics.md)
-   1. [Terraform Guided Example](docs/example-terraform.md)
-   1. [Terraform Lab](docs/lab-terraform.md)
-1. Ansible
-   1. [Overview and Terminology](docs/ansible-basics.md)
-   1. [Ansible Guided Example](docs/example-ansible.md)
-   1. [Ansible Lab](docs/lab-ansible.md)
-1. [Comparing the Two](docs/comparison.md)
+The lastest version of the online lab guide may be found [here](https://paloaltonetworks.github.io/terraform-ansible-intro/)

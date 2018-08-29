@@ -72,7 +72,7 @@ $ cat gcp_compute_key.json
 Create an SSH key with an empty passphrase and save it in the `~/.ssh` directory.
 
 ```bash
-$ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/sko19_ssh_key
+$ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
 ```
 
 ---

@@ -20,9 +20,10 @@ Tell Terraform to destroy the contents of its plan files.
 $ terraform destroy
 ~~~
 
----
-**NOTE:** Qwiklabs would normally handle this for you once the lab is completed but the process is illustrated here as a helpful reminder. Also note that this `terraform destroy` command is specific to the deployment rather than the one we did in the [Terraform Lab](terraform-lab.md), which destroyed our firewall configs.
+Delete the GCP project with the following `gcloud projects` command.
 
----
+~~~bash
+$ gcloud projects delete terraform-ansible-lab
+~~~
 
 

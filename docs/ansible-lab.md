@@ -54,7 +54,7 @@ Now, create the file `network.yml`.  This will be the playbook that holds the lo
 Each playbook needs the following header information to pull in the variables we just defined.  Add the following to `network.yml`:
 
 ```yml
-- name: SKO2019 Ansible Playbook
+- name: Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -117,7 +117,7 @@ Note that Ansible is a little different from Terraform.  We have to specify the 
 The resulting `network.yml` playbook should look like this:
 
 ```yml
-- name: SKO2019 Ansible Playbook
+- name: My Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -130,7 +130,7 @@ The resulting `network.yml` playbook should look like this:
     include_vars: 'vars.yml'
     no_log: 'yes'
 
-  - name: "Configure eth1/1"
+  - name: Configure eth1/1
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -140,7 +140,7 @@ The resulting `network.yml` playbook should look like this:
       zone_name: 'L3-trust'
       commit: False
 
-  - name: "Configure eth1/2"
+  - name: Configure eth1/2
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -183,18 +183,18 @@ Create a new file `rules.yml`, and add the same header information from the netw
 
 Here is an example of the address object we will create:
 
-![Wordpress Server](img/wordpress.png)
+![WordPress Server](img/wordpress.png)
 
 Add the following to `rules.yml`:
 
 ```yml
-  - name: "Add address object for wordpress server"
+  - name: Add address object for WordPress server
     panos_object:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'wordpress server'
+      addressobject: 'WordPress server'
       address: '10.1.23.45'
       description: 'Internal server'
 ```
@@ -208,21 +208,21 @@ Here is an example of the security rules we will create:
 Add the following to `rules.yml`:
 
 ```yml
-  - name: "Add Wordpress Traffic rule"
+  - name: Add WordPress Traffic rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'Wordpress Traffic'
+      rule_name: 'WordPress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['wordpress server']
+      destination_ip: ['WordPress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
 
-  - name: "Add Outbound rule"
+  - name: Add Outbound rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -234,7 +234,7 @@ Add the following to `rules.yml`:
       action: 'allow'
       commit: False
 
-  - name: "Add Default Deny rule"
+  - name: Add Default Deny rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -252,7 +252,7 @@ Refer to the [module documentation](http://panwansible.readthedocs.io/en/latest/
 Your final, full `rules.yml` playbook should look like this:
 
 ```yml
-- name: SKO2019 Ansible Playbook
+- name: My Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -265,31 +265,31 @@ Your final, full `rules.yml` playbook should look like this:
     include_vars: 'vars.yml'
     no_log: 'yes'
 
-  - name: "Add address object for wordpress server"
+  - name: Add address object for WordPress server
     panos_object:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'wordpress server'
+      addressobject: 'WordPress server'
       address: '10.1.23.45'
       description: 'Internal server'
 
-  - name: "Add Wordpress Traffic rule"
+  - name: Add WordPress Traffic rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'Wordpress Traffic'
+      rule_name: 'WordPress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['wordpress server']
+      destination_ip: ['WordPress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
 
-  - name: "Add Outbound rule"
+  - name: Add Outbound rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -301,7 +301,7 @@ Your final, full `rules.yml` playbook should look like this:
       action: 'allow'
       commit: False
 
-  - name: "Add Default Deny rule"
+  - name: Add Default Deny rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'

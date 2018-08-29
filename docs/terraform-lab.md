@@ -197,7 +197,7 @@ Add the following to the bottom of the `panos_plan.tf` file:
 
 ```hcl
 resource "panos_address_object" "wp" {
-    name = "wordpress server"
+    name = "WordPress server"
     description = "Internal server"
     value = "10.1.23.45"
 }
@@ -214,7 +214,7 @@ Add the following to your `panos_plan.tf` file.  Just like with the networking c
 ```hcl
 resource "panos_security_rule_group" "policy" {
     rule {
-        name = "Wordpress Traffic"
+        name = "WordPress Traffic"
         source_zones = ["${panos_zone.ext.name}"]
         source_addresses = ["any"]
         source_users = ["any"]
