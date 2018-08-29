@@ -76,6 +76,15 @@
         </ul>
     
 
+    <li class="toctree-l3"><a href="#you-are-now-ready-to-proceed-with-the-lab-configuration">You are now ready to proceed with the lab configuration!</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#create-a-new-gcp-project">Create a new GCP project</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -167,12 +176,11 @@
               
                 <h1 id="getting-started">Getting Started</h1>
 <p>In this activity you will:</p>
-<ul>
-<li>Log into Qwiklabs</li>
-<li>Launch the lab in Qwiklabs</li>
-<li>Create a Linux VM instance</li>
-<li>SSH into the Linux VM</li>
-</ul>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<em> Log into Qwiklabs
+</em> Launch the lab in Qwiklabs
+<em> Create a Linux VM instance
+</em> SSH into the Linux VM</p>
 <hr />
 <p><strong>WARNING:</strong> You must use the credentials provided by Qwiklabs for this lab.  Failure to do so may result in charges to your personal Google account.  You should either log out of Google entirely before proceeding or open an Icognito window in the Google Chrome web browser.</p>
 <p><img alt="Chrome Incognito mode" src="../img/incognito.png" /></p>
@@ -193,16 +201,35 @@
 <p>Click on <strong>Start Lab</strong> in the upper right corner of the main lab page.
 <img alt="Start lab" src="../img/start-lab.png" /></p>
 <p>Make note of the <strong>Username</strong>, <strong>Password</strong>, and <strong>GCP Project ID</strong> fields that are generated.
-<img alt="Connection details" src="../img/connection-details.png" /></p>
+<img alt="Connection details" src="../img/connection-details.png" />
+=======
+<em> Log into Google Cloud Platform
+</em> Launch the Google Cloud Shell
+* Create a new GCP project</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>post-sko</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <h2 id="log-into-google-cloud-platform">Log into Google Cloud Platform</h2>
-<p>Click on the <strong>Open Google Console</strong> button located under the <strong>Connection Details</strong>.  A new browser tab will open and take you to the Google login page.</p>
-<p>Log in using the credentials provided on the Qwiklabs launch page for this specific lab.
+<p>Using your web browser, navigate to <a href="https://console.cloud.google.com">https://console.cloud.google.com</a>.</p>
+<p>Log in using your Google Cloud Platform credentials.  If you do not have a GCP account you can create one at <a href="https://cloud.google.com/free">https://cloud.google.com/free</a>.
 <img alt="Google login" src="../img/gcp-login.png" /></p>
-<p>Click <strong>Accept</strong> on the logon banner page to accept the Terms of Service.
+<p>Click <strong>Accept</strong> on the logon banner page to accept the Terms of Service. <em>(New accounts only)</em>
 <img alt="Banner page" src="../img/banner-page.png" /></p>
-<p>Since this is a temporary lab account you can skip adding account recovery options by clicking <strong>Done</strong>.
+<p>Update your account recovery details and click <strong>Done</strong>. <em>(New accounts only)</em>
 <img alt="Recovery options" src="../img/recovery.png" /></p>
-<p>Select your country, opt out of email updates, and accept the updated Terms of Service and click <strong>Accept</strong>.
+<p>Select your country, opt out of email updates, and accept the updated Terms of Service and click <strong>Accept</strong>. <em>(New accounts only)</em>
 <img alt="Updated ToS" src="../img/updated-tos.png" /></p>
 <h2 id="create-a-new-linux-vm-instance">Create a new Linux VM instance</h2>
 <p>Scroll down in the left-hand navigation menu and select <strong>Compute Engine &gt; VM instances</strong>.
@@ -215,9 +242,40 @@
 <img alt="Launch VM" src="../img/launch-vm.png" /></p>
 <p>Once the Linux VM is up and running you can connect to it by clicking <strong>SSH</strong> in the instance list (You may need to click <strong>HIDE INFO PANEL</strong> in the upper left first).
 <img alt="SSH VM" src="../img/ssh-vm.png" /></p>
-<p>Google Cloud will create an SSH key pair and distribute it to the newly created Linux VM. It will then open an SSH window into it.
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Google Cloud will create an SSH key pair and distribute it to the newly created Linux VM. It will then open an SSH window into it.
 <img alt="Ready to config" src="../img/vm-ready.png" /></p>
-<p>You are now ready to proceed with the lab configuration!</p>
+<h1 id="you-are-now-ready-to-proceed-with-the-lab-configuration">You are now ready to proceed with the lab configuration!</h1>
+<p>You are now ready to use the Cloud Shell.</p>
+<p><img alt="Ready to config" src="../img/ready-to-config.png" /></p>
+<h2 id="create-a-new-gcp-project">Create a new GCP project</h2>
+<p>In the Cloud Shell window, create a new project using the following <code>gcloud projects</code> command.</p>
+<pre><code class="bash">$ gcloud projects create terraform-ansible-lab
+</code></pre>
+
+<p>Then we'll need to change the GCP configuration to utilize this project with the following <code>gcloud config</code> command.</p>
+<pre><code class="bash">$ gcloud config set project terraform-ansible-lab
+</code></pre>
+
+<p>Confirm the configuration details with the following <code>gcloud config</code> command.</p>
+<pre><code class="bash">$ gcloud config list
+</code></pre>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>post-sko</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
               
             </div>
           </div>

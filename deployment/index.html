@@ -182,7 +182,8 @@
 </code></pre>
 
 <p>Edit the file <code>gcp_variables.tf</code>.  This file contains Terraform variables that will be referenced in other Terraform plan files.</p>
-<p>Replace the <strong>default</strong> value for the variable <code>gcp_project_id</code> with the <strong>GCP Project ID</strong> displayed in the Qwiklabs main page.  The <code>gcp_region</code>, <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have been pre-populated.</p>
+<p>Replace the <strong>default</strong> value for the variable <code>gcp_project_id</code> with the GCP project you created previously.  Fill in the <code>gcp_region</code> variable's <strong>description</strong> and <strong>default</strong> values with your region of choice.  The current list of available GCP regions may be found at <a href="https://cloud.google.com/about/locations/">https://cloud.google.com/about/locations/</a>.</p>
+<p>The <code>gcp_credentials_file</code>, and <code>gcp_ssh_key</code> variables have been pre-populated for you.</p>
 <pre><code class="yml">variable &quot;gcp_project_id&quot; {
   description = &quot;GCP Project ID&quot;
   type = &quot;string&quot;
@@ -190,9 +191,9 @@
 }
 
 variable &quot;gcp_region&quot; {
-  description = &quot;Council Bluffs, Iowa, USA region&quot;
+  description = &quot;&quot;
   type = &quot;string&quot;
-  default = &quot;us-central1&quot;
+  default = &quot;&quot;
 }
 
 variable &quot;gcp_credentials_file&quot; {
@@ -204,7 +205,7 @@ variable &quot;gcp_credentials_file&quot; {
 variable &quot;gcp_ssh_key&quot; {
   description = &quot;Full path to the SSH public key file&quot;
   type = &quot;string&quot;
-  default = &quot;../../.ssh/sko19_ssh_key.pub&quot;
+  default = &quot;../../.ssh/lab_ssh_key.pub&quot;
 }
 </code></pre>
 
@@ -226,7 +227,7 @@ variable &quot;gcp_ssh_key&quot; {
 <p>Copy and paste the output fields (in green) into a note or document on your laptop.  You will need this information later.</p>
 <h2 id="update-the-ssh-config">Update the SSH config</h2>
 <p>Use the following <code>gcloud compute</code> command to override the default GCP key management process and utilize our SSH key.</p>
-<pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/sko19_ssh_key
+<pre><code class="bash">$ gcloud compute config-ssh --ssh-key-file=~/.ssh/lab_ssh_key
 </code></pre>
 
 <h2 id="set-the-firewall-administrator-password">Set the firewall administrator password</h2>

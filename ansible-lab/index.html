@@ -202,7 +202,7 @@ password: ''
 <hr />
 <p>Now, create the file <code>network.yml</code>.  This will be the playbook that holds the low level networking config for our firewall.</p>
 <p>Each playbook needs the following header information to pull in the variables we just defined.  Add the following to <code>network.yml</code>:</p>
-<pre><code class="yml">- name: SKO2019 Ansible Playbook
+<pre><code class="yml">- name: Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -250,7 +250,7 @@ password: ''
 <p>Note that Ansible is a little different from Terraform.  We have to specify the <strong>ip_address</strong>, <strong>username</strong>, and <strong>password</strong> each time because each module executes independently.  Also, we don't have to create the zones as a separate step because they will be created for us if they don't exist.</p>
 <h3 id="run-the-playbook">Run the Playbook</h3>
 <p>The resulting <code>network.yml</code> playbook should look like this:</p>
-<pre><code class="yml">- name: SKO2019 Ansible Playbook
+<pre><code class="yml">- name: My Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -263,7 +263,7 @@ password: ''
     include_vars: 'vars.yml'
     no_log: 'yes'
 
-  - name: &quot;Configure eth1/1&quot;
+  - name: Configure eth1/1
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -273,7 +273,7 @@ password: ''
       zone_name: 'L3-trust'
       commit: False
 
-  - name: &quot;Configure eth1/2&quot;
+  - name: Configure eth1/2
     panos_interface:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -307,15 +307,15 @@ password: ''
 </code></pre>
 
 <p>Here is an example of the address object we will create:</p>
-<p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
+<p><img alt="WordPress Server" src="../img/wordpress.png" /></p>
 <p>Add the following to <code>rules.yml</code>:</p>
-<pre><code class="yml">  - name: &quot;Add address object for wordpress server&quot;
+<pre><code class="yml">  - name: Add address object for WordPress server
     panos_object:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'wordpress server'
+      addressobject: 'WordPress server'
       address: '10.1.23.45'
       description: 'Internal server'
 </code></pre>
@@ -324,21 +324,21 @@ password: ''
 <p>Here is an example of the security rules we will create:</p>
 <p><img alt="Security Policy" src="../img/security-policy.png" /></p>
 <p>Add the following to <code>rules.yml</code>:</p>
-<pre><code class="yml">  - name: &quot;Add Wordpress Traffic rule&quot;
+<pre><code class="yml">  - name: Add WordPress Traffic rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'Wordpress Traffic'
+      rule_name: 'WordPress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['wordpress server']
+      destination_ip: ['WordPress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
 
-  - name: &quot;Add Outbound rule&quot;
+  - name: Add Outbound rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -350,7 +350,7 @@ password: ''
       action: 'allow'
       commit: False
 
-  - name: &quot;Add Default Deny rule&quot;
+  - name: Add Default Deny rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -364,7 +364,7 @@ password: ''
 <p>Refer to the <a href="http://panwansible.readthedocs.io/en/latest/modules/panos_security_rule_module.html">module documentation</a> for more details on the <code>panos_security_rule</code> module.</p>
 <h3 id="run-the-playbook_1">Run the Playbook</h3>
 <p>Your final, full <code>rules.yml</code> playbook should look like this:</p>
-<pre><code class="yml">- name: SKO2019 Ansible Playbook
+<pre><code class="yml">- name: My Ansible Playbook
   hosts: fw
   connection: local
   gather_facts: false
@@ -377,31 +377,31 @@ password: ''
     include_vars: 'vars.yml'
     no_log: 'yes'
 
-  - name: &quot;Add address object for wordpress server&quot;
+  - name: Add address object for WordPress server
     panos_object:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      addressobject: 'wordpress server'
+      addressobject: 'WordPress server'
       address: '10.1.23.45'
       description: 'Internal server'
 
-  - name: &quot;Add Wordpress Traffic rule&quot;
+  - name: Add WordPress Traffic rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       operation: 'add'
-      rule_name: 'Wordpress Traffic'
+      rule_name: 'WordPress Traffic'
       source_zone: ['L3-untrust']
       destination_zone: ['L3-trust']
-      destination_ip: ['wordpress server']
+      destination_ip: ['WordPress server']
       application: ['web-browsing']
       action: 'allow'
       commit: False
 
-  - name: &quot;Add Outbound rule&quot;
+  - name: Add Outbound rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
@@ -413,7 +413,7 @@ password: ''
       action: 'allow'
       commit: False
 
-  - name: &quot;Add Default Deny rule&quot;
+  - name: Add Default Deny rule
     panos_security_rule:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'

@@ -61,6 +61,9 @@
     <li class="toctree-l2"><a href="#about-this-lab">About This Lab</a></li>
     
 
+    <li class="toctree-l2"><a href="#qwiklabs-this-lab-is-launched-using-qwiklabs-which-is-an-online-learning-environment-that-provides-access-to-the-actual-environment-you-want-to-learn-about-not-a-simulation-or-demo-environment-qwiklabs-will-establish-a-temporary-account-in-google-cloud-platform-and-create-a-new-gcp-project-to-use-however-this-lab-may-also-be-used-outside-of-qwiklabs-if-you-have-a-have-a-gcp-account">* Qwiklabs: This lab is launched using Qwiklabs, which is an online learning environment that provides access to the actual environment you want to learn about, not a simulation or demo environment. Qwiklabs will establish a temporary account in Google Cloud Platform and create a new GCP project to use.  However, this lab may also be used outside of Qwiklabs if you have a have a GCP account.</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -155,7 +158,7 @@
           <div role="main">
             <div class="section">
               
-                <p><img alt="SKO2019 Title" src="./img/sko2019-logo.png" /></p>
+                <p><img alt="Terraform &amp; Ansible Introduction" src="./img/pan-logo-badge-blue-dark-kick-up.png" /></p>
 <h2 id="introduction">Introduction</h2>
 <p>Welcome to the Terraform &amp; Ansible Introduction lab!</p>
 <p>In this lab we will deploy a VM-Series firewall in <a href="https://cloud.google.com">Google Cloud Platform</a> (GCP) using Terraform.  Once deployed, we will then use <a href="https://www.terraform.io">Terraform</a> and <a href="https://www.ansible.com">Ansible</a> to manage the configuration of the firewall.  This will include hands-on definition of Terraform plans and Ansible playbooks while exploring the functionality of the Palo Alto Networks Ansible modules and Terraform provider.</p>
@@ -171,13 +174,33 @@
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li>A laptop with Internet connectivity</li>
+<li>A Google Cloud Platform <a href="https://cloud.google.com/free">account</a></li>
 <li>A standards-compliant web browser (Google Chrome recommended)</li>
 <li>Understanding of Linux operating system basics</li>
 <li>Proficiency with a Linux text editor (e.g., vim, nano, or emacs)</li>
 </ul>
 <h2 id="about-this-lab">About This Lab</h2>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="qwiklabs-this-lab-is-launched-using-qwiklabs-which-is-an-online-learning-environment-that-provides-access-to-the-actual-environment-you-want-to-learn-about-not-a-simulation-or-demo-environment-qwiklabs-will-establish-a-temporary-account-in-google-cloud-platform-and-create-a-new-gcp-project-to-use-however-this-lab-may-also-be-used-outside-of-qwiklabs-if-you-have-a-have-a-gcp-account">* <strong>Qwiklabs:</strong> This lab is launched using Qwiklabs, which is an online learning environment that provides access to the actual environment you want to learn about, not a simulation or demo environment. Qwiklabs will establish a temporary account in Google Cloud Platform and create a new GCP project to use.  However, this lab may also be used outside of Qwiklabs if you have a have a <a href="https://cloud.google.com/free">GCP account</a>.</h1>
 <ul>
-<li><strong>Qwiklabs:</strong> This lab is launched using Qwiklabs, which is an online learning environment that provides access to the actual environment you want to learn about, not a simulation or demo environment. Qwiklabs will establish a temporary account in Google Cloud Platform and create a new GCP project to use.  However, this lab may also be used outside of Qwiklabs if you have a have a <a href="https://cloud.google.com/free">GCP account</a>.</li>
+<li><strong>Terraform:</strong> This lab will utilize Terraform for both deploying a VM-Series firewall instances into GCP as well as configuring it once it is deployed.  This will demonstrate the use of the <a href="https://www.terraform.io/docs/providers/google/index.html">google</a> Terraform provider and its associated resources for the deployment and then the <a href="https://www.terraform.io/docs/providers/panos/index.html">panos</a> Terraform provider for the configuration of the VM-Series firewall.</li>
+<li><strong>Ansible:</strong> Once the firewall is fully configured we will back out all of the configurations made with Terraform and recreate them using the <a href="https://panwansible.readthedocs.io/en/latest/">ansible-pan</a> modules in Ansible.  This will demonstrate the creation of Ansible playbooks and task definitions.</li>
+<li><strong>Google Cloud Shell:</strong> This lab makes use of the Google Cloud Shell instead of deploying a separate VM hosting the Terraform and Ansible packages. Cloud Shell is an interactive shell environment for Google Cloud Platform. It makes it easy for you to manage your projects and resources without having to install the Google Cloud SDK and other tools on a separate host. With Cloud Shell, the Cloud SDK gcloud command-line tool and other utilities you need are always available when you need them.<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>post-sko</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
 <li><strong>Google Cloud SDK:</strong> The initial configuration of the lab environment utilizes the Google Cloud SDK command line interface to perform tasks such as enabling APIs and establishing credentials.  These tasks could just as easily be accomplished using the GCP web console.  However, familiarity with the CLI commands is useful and presents opportunities for further scripting and automation.</li>
 </ul>
               
@@ -229,5 +252,5 @@
 
 <!--
 MkDocs version : 0.17.5
-Build Date UTC : 2018-08-22 11:43:21
+Build Date UTC : 2018-08-29 21:56:42
 -->

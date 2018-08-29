@@ -320,7 +320,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 <p><img alt="Wordpress Server" src="../img/wordpress.png" /></p>
 <p>Add the following to the bottom of the <code>panos_plan.tf</code> file:</p>
 <pre><code class="hcl">resource &quot;panos_address_object&quot; &quot;wp&quot; {
-    name = &quot;wordpress server&quot;
+    name = &quot;WordPress server&quot;
     description = &quot;Internal server&quot;
     value = &quot;10.1.23.45&quot;
 }
@@ -332,7 +332,7 @@ resource &quot;panos_zone&quot; &quot;ext&quot; {
 <p>Add the following to your <code>panos_plan.tf</code> file.  Just like with the networking config, zones and objects are referenced by name so that Terraform knows they need to be created before our security rules.</p>
 <pre><code class="hcl">resource &quot;panos_security_rule_group&quot; &quot;policy&quot; {
     rule {
-        name = &quot;Wordpress Traffic&quot;
+        name = &quot;WordPress Traffic&quot;
         source_zones = [&quot;${panos_zone.ext.name}&quot;]
         source_addresses = [&quot;any&quot;]
         source_users = [&quot;any&quot;]
