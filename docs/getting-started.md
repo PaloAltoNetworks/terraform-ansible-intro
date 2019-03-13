@@ -44,7 +44,7 @@ You are now ready to use the Cloud Shell.
 ![Ready to config](img/ready-to-config.png)
 
 ## Create a new GCP project
-**Note**: If using Qwiklabs a Project is already created for you.
+**Note**: If using Qwiklabs a Project is already created for you. You can skip this step.
 
 In the Cloud Shell window, create a new project using the following `gcloud projects` command.
 
