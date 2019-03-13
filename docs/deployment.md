@@ -18,7 +18,7 @@ $ cd deployment
 
 Edit the file `gcp_variables.tf`.  This file contains Terraform variables that will be referenced in other Terraform plan files.
 
-Replace the **default** value for the variable `gcp_project_id` with the GCP project you created previously.  Fill in the `gcp_region` variable's **description** and **default** values with your region of choice.  The current list of available GCP regions may be found at [https://cloud.google.com/about/locations/](https://cloud.google.com/about/locations/).
+Replace the **default** value for the variable `gcp_project_id` with the GCP project you are using.  Fill in the `gcp_region` variable's **description** and **default** values with your region of choice.  The current list of available GCP regions may be found at [https://cloud.google.com/about/locations/](https://cloud.google.com/about/locations/).
 
 The `gcp_credentials_file`, and `gcp_ssh_key` variables have been pre-populated for you.
 
