@@ -21,6 +21,7 @@ $ terraform destroy
 ~~~
 
 Delete the GCP project with the following `gcloud projects` command.
+**Note**: For Qwiklabs deployments the project will be deleted automatically when the lab is exited
 
 ~~~bash
 $ gcloud projects delete terraform-ansible-lab
