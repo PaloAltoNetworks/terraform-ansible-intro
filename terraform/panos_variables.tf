@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-
 /*
  * Terraform variable declarations for the VM-Series instance.
  */
 
 variable "panos_hostname" {
   description = "The external IP address of the VM-Series instance"
-  type = "string"
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "panos_username" {
   description = "Username of the VM-Series administrator"
-  type = "string"
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "panos_password" {
   description = "Password of the VM-Series administrator"
-  type = "string"
-  default = ""
+  type        = string
+  default     = ""
 }
+
 

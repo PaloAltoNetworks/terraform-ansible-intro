@@ -14,34 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-# Download and extract Terraform utility in the deployment directory.
-function getTerraform() {
-  # Places terraform in /usr/local/bin dir.
-  local T_VERSION='0.11.7/terraform_0.11.7_linux_amd64'
-  local T_URL="https://releases.hashicorp.com/terraform/${T_VERSION}.zip"
-  local T_DIR=/usr/local/bin
-  local T_ZIP="${T_DIR}/terraform.zip"
-  local T_EXE="${T_DIR}/terraform"
-
-  if [ -e ${T_EXE} ]; then
-    echo "${T_EXE} already exists. Exiting."
-    return 0
-  fi
-  echo -n "Installing Terraform ..."
-  pushd ${T_DIR} > /dev/null
-  sudo curl -s -o "${T_ZIP}" "${T_URL}"
-  sudo unzip -q "${T_ZIP}"
-  sudo rm "${T_ZIP}"
-  popd > /dev/null
-
-  if [ -e ${T_EXE} ]; then
-    echo " Done"
-  else
-    echo " Could not retrieve ${T_EXE}."
-  fi
-}
-
 # Install Ansible package from apt repository.
 function getAnsible() {
   local A_EXE="/usr/bin/ansible"
@@ -73,6 +45,6 @@ function getPyLibs() {
 }
 
 # Main program
-getTerraform
 getAnsible
 getPyLibs
+
