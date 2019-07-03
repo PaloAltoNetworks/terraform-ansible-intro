@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-
 /*
  * Terraform main configuration file (with provider definitions).
  */
 
 provider "google" {
-  project = "${var.gcp_project_id}"
-  region = "${var.gcp_region}"
-  credentials = "${file("${var.gcp_credentials_file}")}"
+  project     = var.gcp_project_id
+  region      = var.gcp_region
+  credentials = file(var.gcp_credentials_file)
 }
+
